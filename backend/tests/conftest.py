@@ -15,6 +15,11 @@ _TEST_DB_URL = os.getenv(
     "sqlite:///" + os.path.abspath(_TEST_DB_FILE).replace("\\", "/"),
 )
 os.environ["DATABASE_URL"] = _TEST_DB_URL
+# The file this session owns. Taken from the URL, not the default path: a child pytest
+# session (see test_phase51 `_run_pytest`) passes its own private URL and must never
+# delete the parent session's database file.
+if _TEST_DB_URL.startswith("sqlite:///"):
+    _TEST_DB_FILE = _TEST_DB_URL[len("sqlite:///") :]
 
 # Test storage isolation. Uploaded dataset files and trained model artefacts go to a
 # throwaway folder as well. The suite used to share the development app's ../dataset

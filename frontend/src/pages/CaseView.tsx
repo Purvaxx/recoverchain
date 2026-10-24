@@ -207,8 +207,9 @@ export default function CaseView() {
                                         <>
                                             {' '}
                                             ·{' '}
-                                            {CONFIDENCE_LABEL[c.ml_shadow_prediction.confidence_tier] ||
-                                                c.ml_shadow_prediction.confidence_tier}
+                                            {CONFIDENCE_LABEL[
+                                                c.ml_shadow_prediction.confidence_tier
+                                            ] || c.ml_shadow_prediction.confidence_tier}
                                         </>
                                     )}
                                 </span>
@@ -223,7 +224,8 @@ export default function CaseView() {
                                 {c.ml_shadow_prediction.explanation
                                     .filter(
                                         (e: any) =>
-                                            e.contribution !== null && Math.abs(e.contribution) >= 0.005
+                                            e.contribution !== null &&
+                                            Math.abs(e.contribution) >= 0.005,
                                     )
                                     .slice(0, 3)
                                     .map((e: any) => `${e.feature} ${e.direction} it`)
@@ -269,8 +271,7 @@ export default function CaseView() {
                                 <span className="text-slate-500">
                                     · policy{' '}
                                     {trace.stages.revalidation.revalidations?.slice(-1)[0]
-                                        ?.policy_version ||
-                                        trace.stages.policy?.policy_version}
+                                        ?.policy_version || trace.stages.policy?.policy_version}
                                 </span>
                             </Line>
                         )}
@@ -337,7 +338,10 @@ export default function CaseView() {
             </Card>
 
             {trace?.stages && (
-                <Card title="Trace" subtitle="Read-only reconstruction — stages that did not happen say so">
+                <Card
+                    title="Trace"
+                    subtitle="Read-only reconstruction — stages that did not happen say so"
+                >
                     <ol className="space-y-2 text-sm">
                         {[
                             ['agent', 'Agent'],
