@@ -36,6 +36,7 @@ ml/models/registry/
 backend/ml/models/registry/
 **/ml/models/registry/
 *.joblib
+!backend/ml/models/recovery_registry/*.joblib
 
 # ---- Large / throwaway datasets (JSON metadata & manifests stay tracked) ----
 /dataset/
