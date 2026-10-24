@@ -147,7 +147,10 @@ export default function S07Analysis({ ctx, patch, next, setAction }: StepProps) 
                     </div>
                     <ul className="mt-2 space-y-1 text-sm text-[--muted]">
                         {pred.explanation
-                            .filter((c: any) => c.contribution !== null && Math.abs(c.contribution) >= 0.005)
+                            .filter(
+                                (c: any) =>
+                                    c.contribution !== null && Math.abs(c.contribution) >= 0.005,
+                            )
                             .slice(0, 3)
                             .map((c: any) => (
                                 <li key={c.feature}>

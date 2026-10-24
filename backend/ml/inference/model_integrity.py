@@ -17,7 +17,7 @@ import hashlib
 import json
 import os
 from dataclasses import dataclass, field
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 CANONICAL_TASK = "recovery-probability"
 CANONICAL_TARGET = "recovery_success"
@@ -134,7 +134,9 @@ def verify_artifact(registry_dir: str, metadata_path: str) -> IntegrityResult:
         return _fail("UNKNOWN_MODEL_TYPE", str(meta.get("selected_model")), passed, meta)
     stored_path = meta.get("artifact_path")
     expected_name = f"{model_id}_model.joblib"
-    if stored_path and Path(stored_path).name != expected_name:
+    # Metadata written on Windows stores backslash paths, which Path() on Linux would not
+    # split; compare the bare file name on either separator.
+    if stored_path and PureWindowsPath(stored_path).name != expected_name:
         return _fail(
             "REGISTRY_INCONSISTENT",
             "artifact_path file name != <model_id>_model.joblib",

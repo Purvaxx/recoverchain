@@ -423,11 +423,15 @@ export default function Insights() {
                             <div>
                                 <div className="text-xs text-[--faint]">Calibration</div>
                                 <div className="mt-0.5 font-medium">
-                                    {monitoring.champion?.calibrated ? 'Calibrated' : 'Not calibrated'}
+                                    {monitoring.champion?.calibrated
+                                        ? 'Calibrated'
+                                        : 'Not calibrated'}
                                 </div>
                             </div>
                             <div>
-                                <div className="text-xs text-[--faint]">Drift vs. training data</div>
+                                <div className="text-xs text-[--faint]">
+                                    Drift vs. training data
+                                </div>
                                 <div className="mt-0.5 font-medium">
                                     {monitoring.champion?.last_known_train_test_drift === true
                                         ? 'Drift detected at training time'
@@ -443,13 +447,17 @@ export default function Insights() {
                                 </div>
                             </div>
                             <div>
-                                <div className="text-xs text-[--faint]">Production-validation status</div>
+                                <div className="text-xs text-[--faint]">
+                                    Production-validation status
+                                </div>
                                 <div className="mt-0.5 font-medium">
                                     {monitoring.production_validation_status}
                                 </div>
                             </div>
                             <div>
-                                <div className="text-xs text-[--faint]">Prediction-vs-reality evidence</div>
+                                <div className="text-xs text-[--faint]">
+                                    Prediction-vs-reality evidence
+                                </div>
                                 <div className="mt-0.5 font-medium">
                                     {monitoring.prediction_vs_reality.status === 'COMPUTED'
                                         ? `${monitoring.prediction_vs_reality.n} matched cases`
@@ -458,7 +466,9 @@ export default function Insights() {
                             </div>
                             <div>
                                 <div className="text-xs text-[--faint]">Next-best-action model</div>
-                                <div className="mt-0.5 font-medium">{monitoring.nba_model_status}</div>
+                                <div className="mt-0.5 font-medium">
+                                    {monitoring.nba_model_status}
+                                </div>
                             </div>
                         </div>
                         <p className="mt-3 text-xs text-[--faint]">
