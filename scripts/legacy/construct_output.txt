@@ -1,0 +1,116 @@
+﻿================================================================================
+Constructing billing_recovery_v1
+================================================================================
+Raw rows: 4424748
+After exact dedup: 4019776
+After subscriber-month dedup (keep highest total): 3601892
+
+Target distribution:
+target_recovered
+1    3430107
+0     171785
+Name: count, dtype: int64
+target_recovered
+1    0.9523
+0    0.0477
+Name: proportion, dtype: float64
+
+Final billing dataset shape: (3601892, 19)
+Missingness:
+subscriber_id              0
+year_month                 0
+bill_amount_excl_late      0
+base_charge_usd            0
+data_overage_usd           0
+intl_roaming_usd           0
+tax_usd                    0
+has_overage                0
+has_roaming                0
+bill_seq                   0
+prior_failures             0
+prior_unpaid               0
+prior_late                 0
+prior_ontime               0
+prior_nonrecovery_count    0
+prior_nonrecovery_rate     0
+prior_late_rate            0
+prior_avg_amount           0
+target_recovered           0
+dtype: int64
+
+Temporal split:
+              count    mean
+split                      
+test         930267  0.9523
+train       1872859  0.9522
+validation   798766  0.9527
+
+Saved to: backend/evaluation/datasets\billing_recovery_v1.csv
+
+================================================================================
+Constructing ar_recovery_v1
+================================================================================
+Raw rows: 2466
+
+Target distribution (is_late):
+target_late
+0    1589
+1     877
+Name: count, dtype: int64
+target_late
+0    0.6444
+1    0.3556
+Name: proportion, dtype: float64
+
+Final AR dataset shape: (2466, 16)
+Missingness:
+customerID             0
+invoiceNumber          0
+InvoiceDate            0
+DueDate                0
+InvoiceAmount          0
+countryCode            0
+is_disputed            0
+payment_window_days    0
+invoice_seq            0
+prior_late_count       0
+prior_invoice_count    0
+prior_late_rate        0
+prior_avg_amount       0
+prior_disputes         0
+is_paperless           0
+target_late            0
+dtype: int64
+
+Temporal split:
+            count    mean
+split                    
+test          429  0.2774
+train        1594  0.3858
+validation    443  0.3228
+
+Saved to: backend/evaluation/datasets\ar_recovery_v1.csv
+
+================================================================================
+DATASET JOINABILITY ANALYSIS
+================================================================================
+billing.csv: Telecom subscription billing. Entity = subscriber-month.
+WA_Fn: Accounts receivable invoices. Entity = invoice.
+
+JOIN KEY CANDIDATES:
+  - billing.subscriber_id vs WA_Fn.customerID: INCOMPATIBLE
+    billing uses SUB0000001 format, WA_Fn uses 0379-NEVHP format.
+    Different ID namespaces, different industries (telecom vs generic AR).
+  - No shared temporal key (billing=2025-2026, WA_Fn=2012-2013)
+  - No shared domain (telecom billing vs enterprise invoicing)
+
+DECISION: DO NOT JOIN. Keep as separate training datasets.
+REASON: Different entity types, different time periods, different industries,
+        no shared identifiers. Forcing a join would be scientifically invalid.
+
+================================================================================
+Writing metadata
+================================================================================
+Metadata files written.
+
+DONE ù No models trained.

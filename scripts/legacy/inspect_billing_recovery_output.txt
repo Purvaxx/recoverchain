@@ -1,0 +1,56 @@
+﻿Loading billing.csv (first 1M rows)...
+Loaded shape: (1000000, 10)
+
+Exact duplicates dropped: 91416
+Rows after dedup: 908584
+
+--- Payment Status after dedup ---
+payment_status
+Paid On Time    767247
+Paid Late        93511
+Failed           29727
+Unpaid           18099
+Name: count, dtype: int64
+payment_status
+Paid On Time    0.8444
+Paid Late       0.1029
+Failed          0.0327
+Unpaid          0.0199
+Name: proportion, dtype: float64
+
+--- Binary Recovery Target ---
+Recovered (1): 860758 (94.74%)
+Not Recovered (0): 47826 (5.26%)
+
+--- Subscriber payment history ---
+Rows with 3+ prior bills: 600415
+
+Recovery rate by prior non-recovery history:
+                    mean   count
+history_bucket                  
+0%              0.947836  438810
+1-10%           0.910009    5845
+10-20%          0.939903   89206
+20-50%          0.940380   64207
+50-100%         0.935236    2347
+
+--- late_fee_usd as a signal ---
+Mean late_fee (recovered): 0.65
+Mean late_fee (not recovered): 0.60
+
+--- Feature correlation with target ---
+  base_charge_usd: correlation = -0.0020
+  data_overage_usd: correlation = 0.0058
+  intl_roaming_usd: correlation = 0.0050
+  tax_usd: correlation = -0.0020
+  late_fee_usd: correlation = 0.0040
+  total_billed_usd: correlation = -0.0010
+
+--- days_to_payment LEAKAGE CHECK ---
+days_to_payment distribution by status:
+  Paid On Time: mean=0.0, min=0, max=0
+  Failed: mean=21.6, min=0, max=59
+  Paid Late: mean=23.7, min=1, max=59
+  Unpaid: mean=23.5, min=1, max=59
+
+DONE

@@ -1,0 +1,69 @@
+﻿================================================================================
+CONSTRUCTED BILLING DATASET VALIDATION
+================================================================================
+Loaded sample: (200000, 20)
+Columns: ['subscriber_id', 'year_month', 'bill_amount_excl_late', 'base_charge_usd', 'data_overage_usd', 'intl_roaming_usd', 'tax_usd', 'has_overage', 'has_roaming', 'bill_seq', 'prior_failures', 'prior_unpaid', 'prior_late', 'prior_ontime', 'prior_nonrecovery_count', 'prior_nonrecovery_rate', 'prior_late_rate', 'prior_avg_amount', 'target_recovered', 'split']
+  Leakage column 'payment_status': absent (ok)
+  Leakage column 'days_to_payment': absent (ok)
+  Leakage column 'late_fee_usd': absent (ok)
+  Leakage column 'total_billed_usd': absent (ok)
+
+Target distribution (sample):
+target_recovered
+1    190448
+0      9552
+Name: count, dtype: int64
+target_recovered
+1    0.9522
+0    0.0478
+Name: proportion, dtype: float64
+
+--- ENTITY LEAKAGE ---
+Subscribers in train: 19535
+Subscribers in validation: 22786
+Subscribers in test: 27916
+Overlap train-val: 19535
+Overlap train-test: 19534
+Overlap val-test: 22785
+
+--- HISTORY FEATURE VERIFICATION ---
+
+Subscriber SUB0000001:
+  year_month  bill_seq  prior_failures  prior_unpaid  prior_nonrecovery_count  prior_nonrecovery_rate  target_recovered
+0    2025-11         0               0             0                        0                    -1.0                 1
+1    2025-12         1               0             0                        0                     0.0                 1
+2    2026-01         2               0             0                        0                     0.0                 1
+3    2026-03         3               0             0                        0                     0.0                 1
+4    2026-04         4               0             0                        0                     0.0                 1
+5    2026-05         5               0             0                        0                     0.0                 1
+  seq=0: prior_nonrecovery_count=0 OK
+  seq=1: prior_nonrecovery_count=0 OK
+  seq=2: prior_nonrecovery_count=0 OK
+  seq=3: prior_nonrecovery_count=0 OK
+  seq=4: prior_nonrecovery_count=0 OK
+  seq=5: prior_nonrecovery_count=0 OK
+
+--- DEDUPLICATION CHECK ---
+Duplicate subscriber-months in constructed data: 0
+
+--- BILL AMOUNT CHECK ---
+bill_amount_excl_late mismatches: 0
+
+--- VALUE RANGES ---
+  bill_amount_excl_late: min=10.85, max=278.74, negatives=0
+  base_charge_usd: min=10.00, max=246.73, negatives=0
+  data_overage_usd: min=0.00, max=22.73, negatives=0
+  intl_roaming_usd: min=0.00, max=86.52, negatives=0
+  tax_usd: min=0.85, max=20.97, negatives=0
+
+--- HISTORY SANITY ---
+First observations (bill_seq=0): 27917
+  prior_nonrecovery_rate == -1: 27917
+  prior_failures == 0: 27917
+  prior_late_rate == -1: 27917
+
+Later observations (bill_seq > 0): 172083
+  prior_nonrecovery_rate: min=0.0000, max=1.0000
+  Out of [0,1] range: 0
+
+DONE

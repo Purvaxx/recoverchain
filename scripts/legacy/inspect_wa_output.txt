@@ -1,0 +1,49 @@
+﻿================================================================================
+WA_Fn ù RECOVERY SEMANTICS AUDIT
+================================================================================
+
+SettledDate non-null: 2466 / 2466
+ALL INVOICES SETTLED: YES
+
+--- DaysLate as potential target ---
+On-time (DaysLate == 0): 1589 (64.4%)
+Late (DaysLate > 0):    877 (35.6%)
+Mean DaysLate when late: 9.7
+Max DaysLate: 45
+
+--- Disputed vs Late ---
+          On Time  Late  Total
+Disputed                      
+No           1411   494   1905
+Yes           178   383    561
+All          1589   877   2466
+
+--- InvoiceAmount vs DaysLate ---
+Mean amount (on-time): 58.99
+Mean amount (late):    61.53
+
+--- countryCode vs DaysLate > 0 ---
+             On Time %  Late %
+countryCode                   
+391              0.745   0.255
+406              0.585   0.415
+770              0.613   0.387
+818              0.587   0.413
+897              0.669   0.331
+
+--- PaperlessBill vs Late ---
+               On Time %  Late %
+PaperlessBill                   
+Electronic         0.725   0.275
+Paper              0.568   0.432
+
+--- Customer history potential ---
+Customers with history (>= 5 invoices): 100
+Mean prior_late_rate (where available): 0.392
+
+--- Prior late rate vs current lateness ---
+Rows with 3+ prior invoices: 2166
+Late rate when prior_late_rate == 0: 0.054
+Late rate when prior_late_rate > 0.3: 0.605
+
+DONE

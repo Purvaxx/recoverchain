@@ -1,0 +1,971 @@
+<title>RecoverChain Project Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+
+<style>
+  :root {
+    --paper:#f5f6f4; --surface:#ffffff; --surface-2:#eef1ee;
+    --ink:#1a2023; --muted:#57636a; --faint:#8b959b;
+    --line:#e3e7e4; --line-strong:#cfd6d1;
+    --accent:#12684d; --accent-ink:#0c4a37; --accent-weak:#e6f0ea;
+    --warn:#8a5a00; --warn-weak:#f6ecd8;
+    --danger:#9e3b2c; --danger-weak:#f6e3df;
+    --shadow:0 1px 2px rgba(20,30,25,.04), 0 8px 24px -12px rgba(20,30,25,.12);
+    --measure:68ch;
+    --serif:"Newsreader", Georgia, "Times New Roman", serif;
+    --sans:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:#13171a; --surface:#1b2124; --surface-2:#222a2d;
+      --ink:#e8eae7; --muted:#9ba5a4; --faint:#6c7679;
+      --line:#2b3336; --line-strong:#3a4448;
+      --accent:#5cbf95; --accent-ink:#8fd6b6; --accent-weak:#1a2b26;
+      --warn:#d3a15a; --warn-weak:#2c2517;
+      --danger:#dd8073; --danger-weak:#2f1f1d;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#13171a; --surface:#1b2124; --surface-2:#222a2d;
+    --ink:#e8eae7; --muted:#9ba5a4; --faint:#6c7679;
+    --line:#2b3336; --line-strong:#3a4448;
+    --accent:#5cbf95; --accent-ink:#8fd6b6; --accent-weak:#1a2b26;
+    --warn:#d3a15a; --warn-weak:#2c2517;
+    --danger:#dd8073; --danger-weak:#2f1f1d;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.5);
+  }
+
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; scroll-padding-top:2rem; }
+  body {
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:16px; line-height:1.62;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+
+  .wrap {
+    max-width:1180px; margin:0 auto; padding:0 clamp(1.1rem, 4vw, 3rem);
+    display:grid; grid-template-columns:1fr; gap:0;
+  }
+  @media (min-width:1040px) {
+    .wrap { grid-template-columns:232px minmax(0,1fr); gap:clamp(2rem,5vw,4.5rem); align-items:start; }
+  }
+
+  /* ---- table of contents ---- */
+  .toc { position:sticky; top:0; align-self:start; padding:2rem 0 3rem; font-family:var(--mono); }
+  @media (max-width:1039px) {
+    .toc { position:static; border-bottom:1px solid var(--line); margin-bottom:2rem; }
+  }
+  .toc h2 {
+    font-family:var(--mono); font-size:.68rem; font-weight:600; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--faint); margin:0 0 1rem;
+  }
+  .toc ol { list-style:none; margin:0; padding:0; counter-reset:toc; }
+  .toc li { margin:.15rem 0; }
+  .toc a {
+    display:flex; gap:.6rem; padding:.32rem .5rem; border-radius:5px;
+    color:var(--muted); text-decoration:none; font-size:.78rem; line-height:1.3;
+    transition:background .12s, color .12s;
+  }
+  .toc a .n { color:var(--faint); font-variant-numeric:tabular-nums; flex:none; }
+  .toc a:hover { background:var(--accent-weak); color:var(--ink); }
+  .toc a.sub { padding-left:2rem; font-size:.74rem; }
+
+  main { padding:2rem 0 6rem; min-width:0; }
+
+  /* ---- title block ---- */
+  .masthead { border-bottom:2px solid var(--ink); padding-bottom:1.6rem; margin-bottom:2.5rem; }
+  .eyebrow {
+    font-family:var(--mono); font-size:.7rem; font-weight:600; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--accent); margin:0 0 .9rem;
+  }
+  .masthead h1 {
+    font-family:var(--serif); font-weight:600; font-size:clamp(2.3rem, 6vw, 3.5rem);
+    line-height:1.04; letter-spacing:-.015em; margin:0 0 .5rem; text-wrap:balance;
+  }
+  .masthead .lede {
+    font-family:var(--serif); font-size:clamp(1.05rem,2.4vw,1.3rem); font-style:italic;
+    color:var(--muted); margin:.4rem 0 1.4rem; max-width:52ch; line-height:1.45;
+  }
+  .metastrip {
+    display:flex; flex-wrap:wrap; gap:.4rem .5rem; font-family:var(--mono); font-size:.72rem;
+  }
+  .metastrip span {
+    border:1px solid var(--line-strong); border-radius:4px; padding:.2rem .5rem;
+    color:var(--muted); background:var(--surface);
+  }
+  .metastrip span b { color:var(--ink); font-weight:600; }
+
+  /* ---- sections ---- */
+  section { margin:0 0 3.4rem; scroll-margin-top:1.5rem; }
+  .sec-head { margin:0 0 1.3rem; padding-top:1rem; border-top:1px solid var(--line); }
+  .sec-head .kicker {
+    font-family:var(--mono); font-size:.68rem; font-weight:600; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--faint); display:block; margin-bottom:.5rem;
+  }
+  h2.sec-title {
+    font-family:var(--serif); font-weight:600; font-size:clamp(1.6rem,3.6vw,2.15rem);
+    line-height:1.12; letter-spacing:-.01em; margin:0; text-wrap:balance;
+  }
+  h3 {
+    font-family:var(--sans); font-weight:600; font-size:1.06rem; letter-spacing:-.005em;
+    margin:2rem 0 .6rem; color:var(--ink);
+  }
+  h4 {
+    font-family:var(--mono); font-weight:600; font-size:.8rem; letter-spacing:.04em;
+    text-transform:uppercase; color:var(--muted); margin:1.5rem 0 .5rem;
+  }
+  p { margin:0 0 1rem; max-width:var(--measure); }
+  main ul, main ol { max-width:var(--measure); padding-left:1.2rem; margin:0 0 1rem; }
+  main li { margin:.35rem 0; }
+  main li::marker { color:var(--accent); }
+  strong { font-weight:600; }
+  a { color:var(--accent-ink); text-underline-offset:2px; }
+  code {
+    font-family:var(--mono); font-size:.86em; background:var(--surface-2);
+    border:1px solid var(--line); border-radius:4px; padding:.05em .35em;
+  }
+  .lead { font-size:1.08rem; color:var(--muted); }
+  .lead strong { color:var(--ink); }
+
+  /* ---- callout ---- */
+  .callout {
+    border-left:3px solid var(--accent); background:var(--accent-weak);
+    padding:.9rem 1.1rem; border-radius:0 8px 8px 0; margin:1.4rem 0; max-width:var(--measure);
+  }
+  .callout p:last-child { margin-bottom:0; }
+  .callout .tag {
+    font-family:var(--mono); font-size:.68rem; font-weight:600; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--accent-ink); display:block; margin-bottom:.35rem;
+  }
+  .callout.warn { border-color:var(--warn); background:var(--warn-weak); }
+  .callout.warn .tag { color:var(--warn); }
+
+  /* ---- figure / bleed ---- */
+  .bleed { margin:1.6rem 0; }
+  @media (min-width:1240px) { .bleed { margin-inline:-3rem; } }
+  .scroll-x { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  figure { margin:0; }
+  figcaption {
+    font-family:var(--mono); font-size:.72rem; color:var(--faint); margin-top:.6rem;
+    padding-left:.1rem;
+  }
+
+  /* ---- tables ---- */
+  table { border-collapse:collapse; width:100%; font-size:.86rem; background:var(--surface); }
+  .bleed table { min-width:640px; }
+  caption {
+    text-align:left; font-family:var(--mono); font-size:.72rem; color:var(--faint);
+    padding:.5rem .1rem; caption-side:bottom;
+  }
+  th, td {
+    text-align:left; padding:.55rem .8rem; border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  thead th {
+    font-family:var(--mono); font-size:.7rem; font-weight:600; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--muted); background:var(--surface-2);
+    border-bottom:1px solid var(--line-strong); position:sticky; top:0;
+  }
+  tbody tr:last-child td { border-bottom:none; }
+  td.num, th.num { text-align:right; font-family:var(--mono); font-variant-numeric:tabular-nums; }
+  .t-frame { border:1px solid var(--line-strong); border-radius:8px; overflow:hidden; }
+
+  /* ---- pills ---- */
+  .pill {
+    display:inline-flex; align-items:center; gap:.3rem; font-family:var(--mono);
+    font-size:.68rem; font-weight:600; padding:.1rem .45rem; border-radius:999px;
+    border:1px solid; white-space:nowrap;
+  }
+  .pill.done { color:var(--accent-ink); border-color:var(--accent); background:var(--accent-weak); }
+  .pill.part { color:var(--warn); border-color:var(--warn); background:var(--warn-weak); }
+  .pill.plan { color:var(--muted); border-color:var(--line-strong); background:var(--surface-2); }
+
+  /* ---- metric grid ---- */
+  .metrics {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden;
+    margin:1.6rem 0; max-width:var(--measure);
+  }
+  .metrics div { background:var(--surface); padding:1rem 1.1rem; }
+  .metrics .v {
+    font-family:var(--mono); font-weight:600; font-size:1.5rem; color:var(--ink);
+    font-variant-numeric:tabular-nums; line-height:1;
+  }
+  .metrics .k {
+    font-family:var(--mono); font-size:.68rem; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--faint); margin-top:.4rem;
+  }
+
+  /* ---- code block ---- */
+  pre {
+    font-family:var(--mono); font-size:.8rem; line-height:1.6; background:var(--surface);
+    border:1px solid var(--line-strong); border-radius:8px; padding:1rem 1.15rem;
+    overflow-x:auto; margin:1.4rem 0; color:var(--ink);
+  }
+  pre .c { color:var(--faint); }
+  pre .g { color:var(--accent-ink); }
+
+  /* ---- diagram ---- */
+  .diagram { background:var(--surface); border:1px solid var(--line-strong); border-radius:10px; padding:1.4rem; }
+  .diagram svg { display:block; width:100%; height:auto; }
+  .diagram text { font-family:var(--mono); fill:var(--ink); }
+  .d-box { fill:var(--surface-2); stroke:var(--line-strong); }
+  .d-accent { fill:var(--accent-weak); stroke:var(--accent); }
+  .d-line { stroke:var(--line-strong); stroke-width:1.5; fill:none; }
+  .d-lbl { fill:var(--muted); }
+
+  hr.rule { border:none; border-top:1px solid var(--line); margin:2.6rem 0; }
+  .foot {
+    margin-top:4rem; padding-top:1.5rem; border-top:2px solid var(--ink);
+    font-family:var(--mono); font-size:.74rem; color:var(--faint);
+  }
+  .two-col { display:grid; gap:1.4rem 2.2rem; }
+  @media (min-width:720px){ .two-col.c2 { grid-template-columns:1fr 1fr; } .two-col.c2 > * { max-width:none; } }
+
+  :focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:3px; }
+  ::selection { background:var(--accent); color:#fff; }
+
+  /* ---- print / PDF ---- */
+  @media print {
+    @page { size:A4; margin:16mm 15mm; }
+    :root {
+      --paper:#fff; --surface:#fff; --surface-2:#f2f4f2;
+      --ink:#161b1e; --muted:#4c565c; --faint:#767f85;
+      --line:#d8ddd9; --line-strong:#c2c9c4;
+      --accent:#0f5a43; --accent-ink:#0c4a37; --accent-weak:#eef4f1;
+      --shadow:none;
+    }
+    html, body { background:#fff; font-size:10.2pt; line-height:1.5; }
+    .wrap { display:block; max-width:none; padding:0; }
+    .toc { position:static; page-break-after:always; padding:0 0 1rem; border-bottom:none; }
+    .toc ol { columns:2; column-gap:2rem; }
+    main { padding:0; }
+    .masthead { break-after:avoid; }
+    section { margin-bottom:1.6rem; break-inside:auto; }
+    .sec-head { break-after:avoid; }
+    h2.sec-title, h3, h4 { break-after:avoid; }
+    p, li { orphans:3; widows:3; }
+    .bleed { margin-inline:0; }
+    .bleed table { min-width:0; }
+    table { font-size:8.4pt; }
+    thead th { position:static; }
+    .t-frame, figure, .diagram, .callout, .metrics, pre { break-inside:avoid; }
+    pre { font-size:7.8pt; white-space:pre-wrap; word-break:break-word; }
+    a { color:var(--ink); text-decoration:none; }
+    .foot { break-before:avoid; }
+    tr { break-inside:avoid; }
+  }
+</style>
+
+<div class="wrap">
+  <nav class="toc" aria-label="Contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#abstract"><span class="n">—</span> Abstract</a></li>
+      <li><a href="#s1"><span class="n">1</span> Introduction</a></li>
+      <li><a class="sub" href="#s1-1"><span class="n">1.1</span> General</a></li>
+      <li><a class="sub" href="#s1-2"><span class="n">1.2</span> Problem Statement</a></li>
+      <li><a class="sub" href="#s1-3"><span class="n">1.3</span> Objectives</a></li>
+      <li><a href="#s2"><span class="n">2</span> Literature Review</a></li>
+      <li><a href="#s3"><span class="n">3</span> Existing System</a></li>
+      <li><a class="sub" href="#s3-1"><span class="n">3.1</span> Traditional System</a></li>
+      <li><a class="sub" href="#s3-2"><span class="n">3.2</span> Feature Comparison</a></li>
+      <li><a class="sub" href="#s3-3"><span class="n">3.3</span> Limitations</a></li>
+      <li><a href="#s4"><span class="n">4</span> Proposed System</a></li>
+      <li><a class="sub" href="#s4-1"><span class="n">4.1</span> Feature Overview</a></li>
+      <li><a class="sub" href="#s4-2"><span class="n">4.2</span> Technology Stack</a></li>
+      <li><a class="sub" href="#s4-3"><span class="n">4.3</span> Benefits</a></li>
+      <li><a href="#s5"><span class="n">5</span> Concept &amp; Methodology</a></li>
+      <li><a href="#s6"><span class="n">6</span> Design, Modelling &amp; Architecture</a></li>
+      <li><a href="#s7"><span class="n">7</span> Implementation</a></li>
+      <li><a href="#s8"><span class="n">8</span> Results &amp; Discussion</a></li>
+      <li><a href="#s9"><span class="n">9</span> Conclusion</a></li>
+      <li><a href="#s10"><span class="n">10</span> Future Scope</a></li>
+      <li><a href="#s11"><span class="n">11</span> References</a></li>
+      <li><a href="#s12"><span class="n">12</span> Appendix</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <header class="masthead">
+      <p class="eyebrow">Project Report</p>
+      <h1>RecoverChain</h1>
+      <p class="lede">A deterministic decisioning engine for recovering failed revenue &mdash; with machine learning kept strictly in the passenger seat.</p>
+      <div class="metastrip">
+        <span><b>Domain</b>&nbsp; Revenue recovery / FinTech decisioning</span>
+        <span><b>Stack</b>&nbsp; FastAPI · SQLAlchemy · React · XGBoost</span>
+        <span><b>Backend tests</b>&nbsp; 216 passing · 88% cov</span>
+        <span><b>Code</b>&nbsp; ~15.4k LOC Python · ~3.7k LOC TS/TSX</span>
+        <span><b>Iterations</b>&nbsp; 33 commits · ~24 build phases</span>
+        <span><b>Report date</b>&nbsp; 2026-09-02</span>
+      </div>
+    </header>
+
+    <!-- ================= ABSTRACT ================= -->
+    <section id="abstract">
+      <div class="sec-head" style="border-top:none;padding-top:0">
+        <span class="kicker">Abstract</span>
+        <h2 class="sec-title">Abstract</h2>
+      </div>
+      <p class="lead">Businesses that bill customers &mdash; subscriptions, invoices, marketplaces, checkouts &mdash; lose a persistent slice of revenue not because customers refuse to pay, but because a payment fails, an invoice slips past its due date, or a checkout is abandoned. This <em>involuntary</em> leakage is usually chased with blind retry schedules and generic reminder emails that treat every failure alike.</p>
+      <p><strong>RecoverChain</strong> reframes recovery as a <strong>decisioning</strong> problem. Failure events are correlated into <em>cases</em>, and every case is driven through one fixed, auditable lifecycle: assess risk &rarr; diagnose the root cause &rarr; predict the odds of recovery &rarr; recommend the next-best action and its expected recoverable value &rarr; clear a policy and safety gate &rarr; execute in a sandbox &rarr; verify the outcome against a settlement source &rarr; write an audit record. Each stage is a small deterministic rules engine that produces an explanation a human can read.</p>
+      <p>A second subsystem, the <strong>Dataset Lab</strong>, lets a user upload an arbitrary CSV, Parquet, or Excel file; it semantically maps columns to canonical fields, runs leakage detection and a minimum-information contract, trains a per-dataset model, and replays the rows through the pipeline to produce real cases. Crucially, every model is <strong>shadow-only</strong>: its probability feeds ranking and prioritisation but is architecturally barred from authorising an action &mdash; the deterministic policy engine is the sole authority, and prediction always falls back to a deterministic baseline rather than a silent zero.</p>
+      <p>The system is delivered as a FastAPI backend (clean domain / application / infrastructure layering, SQLAlchemy + Alembic, <code>Decimal</code> money) and a React single-page frontend presenting a ten-step guided workflow plus a gated aggregate report. It runs fully offline with no external service calls. The implementation is validated by <strong>216 automated backend tests (88% line coverage)</strong>, an end-to-end walk-through of the ten-step workflow in a browser, and a hardening pass that added authentication on every mutating route, a request rate limiter, CORS correctness, container and CI security, and a lint / type-check / coverage gate.</p>
+    </section>
+
+    <!-- ================= 1 INTRODUCTION ================= -->
+    <section id="s1">
+      <div class="sec-head"><span class="kicker">Section 1</span><h2 class="sec-title">Introduction</h2></div>
+
+      <h3 id="s1-1">1.1&ensp;General</h3>
+      <p>Any organisation that charges customers on a recurring or deferred basis carries a structural revenue leak. A card expires between billing cycles; a bank declines a debit for insufficient funds; a network timeout drops a transaction; an invoice with net-30 terms is simply forgotten; a shopper fills a cart and closes the tab. None of these are a decision <em>not</em> to pay &mdash; industry practitioners call this <strong>involuntary churn</strong>, as distinct from voluntary cancellation. Left alone, a meaningful fraction of it never converts back into collected cash.</p>
+      <p>The established response is <strong>dunning</strong>: a scheduled sequence of automated payment retries and reminder messages. Payment processors ship retry logic (&ldquo;smart&rdquo; or &ldquo;intelligent&rdquo; retries) that pick retry times statistically; standalone dunning tools send escalating email/SMS sequences; larger finance teams run in-house scripts and manual collections queues. These approaches share a blind spot: they act on a <em>schedule</em>, not on a <em>diagnosis</em>. A retry fired at a card that expired is wasted. A payment-link email sent to a customer whose bank is rejecting the mandate solves nothing. And when teams do reach for machine learning to prioritise, the model frequently ends up <em>in the loop</em> &mdash; deciding what runs &mdash; which in a financial-actions context is difficult to audit, explain, or safely roll back.</p>
+      <p>RecoverChain is built around a different premise: <strong>the decision of whether and how to act on a failed payment should be made by a transparent, deterministic rulebook</strong>, with every stage of reasoning recorded, and with statistical models contributing only prioritisation signal that can never, by construction, trigger an action.</p>
+
+      <h3 id="s1-2">1.2&ensp;Problem Statement</h3>
+      <p>Design and build a system that, given a stream (or a bulk file) of revenue-failure events, will for each affected account:</p>
+      <ol>
+        <li>Correlate related events into a single <strong>case</strong> so that a retry of the same invoice is one case, not two.</li>
+        <li>Produce an <strong>explainable</strong> assessment at every stage &mdash; risk level, likely root cause, recovery probability, recommended action, and expected recoverable value &mdash; each with the signals that produced it.</li>
+        <li>Pass the recommended action through a <strong>policy and safety gate</strong> that enforces retry caps, cooldowns, contact-frequency limits, an automated-amount ceiling, consent, and hard stop rules, using the account&rsquo;s <em>real</em> prior-attempt history.</li>
+        <li>Execute only what the gate permits, in a <strong>simulated</strong> environment (no live money movement), with idempotency so a replay produces the same record.</li>
+        <li><strong>Verify</strong> the true outcome independently against a settlement source rather than assuming an executed action succeeded.</li>
+        <li>Accept <strong>arbitrary tabular datasets</strong>, understand their columns, check them for target leakage and sufficiency, train a model on them, and score real rows &mdash; without that model ever gaining authority over an action.</li>
+        <li>Run <strong>fully offline</strong>, persist a complete <strong>audit trail</strong>, and be safe to demonstrate and hand over.</li>
+      </ol>
+
+      <h3 id="s1-3">1.3&ensp;Objectives</h3>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th>#</th><th>Objective</th><th>How it is met in RecoverChain</th></tr></thead>
+        <tbody>
+          <tr><td class="num">O1</td><td>A single fixed case lifecycle</td><td>Nine ordered stages implemented as one <code>CasePipelineService</code>; a persisted <code>CaseState</code> machine with 21 states.</td></tr>
+          <tr><td class="num">O2</td><td>Explainability at every stage</td><td>Each engine returns its signals, confidence, rule-by-rule results, and a plain-language line; all captured in <code>audit_records</code>.</td></tr>
+          <tr><td class="num">O3</td><td>ML strictly advisory (&ldquo;shadow-only&rdquo;)</td><td><code>shadow_mode_active: true</code> is hard-coded in the predictor; no ML value is an input to any <code>PolicyDecision</code>; missing/failed model &rarr; deterministic baseline.</td></tr>
+          <tr><td class="num">O4</td><td>Dataset-agnostic ingestion</td><td>Dataset Lab: format-agnostic reader (CSV/Parquet/XLSX), semantic column mapper, leakage detector, minimum-information contract, per-dataset training.</td></tr>
+          <tr><td class="num">O5</td><td>Real safety gate with real history</td><td><code>DeterministicPolicyEngine</code> + <code>PolicyContext</code> built from the <code>execution_attempts</code> ledger; enforces retry/cooldown/contact/amount/consent/stop rules.</td></tr>
+          <tr><td class="num">O6</td><td>Honest execution &amp; verification</td><td><code>MockExecutionAdapter</code> only; idempotency keys; independent settlement reconciliation clamped to <code>[0, amount]</code>.</td></tr>
+          <tr><td class="num">O7</td><td>Offline, audited, demonstrable</td><td>Zero runtime external calls; full audit table; 216 passing tests; verified end-to-end in a browser.</td></tr>
+          <tr><td class="num">O8</td><td>Deployable and hardened</td><td>Auth on all mutating routes, rate limiting, CORS correctness, non-root container, CI with lint + types + coverage gate.</td></tr>
+        </tbody>
+      </table>
+      </div></div>
+    </section>
+
+    <!-- ================= 2 LITERATURE REVIEW ================= -->
+    <section id="s2">
+      <div class="sec-head"><span class="kicker">Section 2</span><h2 class="sec-title">Literature Review</h2></div>
+      <p>RecoverChain draws on four strands of prior work and practice: dunning / involuntary-churn management, payment-failure prediction, safe deployment patterns for machine learning, and human-in-the-loop decision support.</p>
+
+      <h4>Involuntary churn and dunning management</h4>
+      <p>The subscription-economy literature and vendor practice (recovery and billing platforms, processor retry engines) establish involuntary churn as a first-class, recoverable revenue category and dunning &mdash; timed retries plus escalating customer messaging &mdash; as the standard mitigation. The consistent finding is that <em>timing</em> and <em>message sequencing</em> matter, and that naive fixed schedules leave money uncollected. RecoverChain accepts the dunning primitives (retry, reminder, payment-link, payment-method update, escalation) but subordinates them to a per-case diagnosis rather than a global schedule.</p>
+
+      <h4>Payment-failure and churn prediction</h4>
+      <p>Supervised models &mdash; gradient-boosted trees prominent among them &mdash; are widely used to estimate the probability that a given charge will fail or that a subscriber will lapse, using billing history, tenure, payment-method attributes, and prior-failure counts. Two recurring methodological hazards are emphasised in this literature: <strong>target leakage</strong> (post-outcome columns such as a settlement date or final status leaking the answer into the features) and <strong>improper validation</strong> (random splits on time-ordered data inflating scores). RecoverChain&rsquo;s Dataset Lab operationalises both defences: an explicit leakage detector that quarantines post-outcome columns, and a chronological train/validation/test split with a flagged stratified fallback.</p>
+
+      <h4>Safe ML deployment &mdash; shadow mode</h4>
+      <p>Work on the operational risks of production ML (notably the &ldquo;hidden technical debt&rdquo; framing from Sculley et&nbsp;al., 2015) motivates <strong>shadow deployment</strong>: running a model against live traffic while its outputs are logged and compared but never acted on. RecoverChain adopts shadow mode not as a transient rollout phase but as a <em>permanent architectural boundary</em> &mdash; the predictor cannot be promoted into the decision path without changing the type signature of the policy engine, and the model card states this explicitly.</p>
+
+      <h4>Rules engines vs. learned policies; human-in-the-loop</h4>
+      <p>Decision-support research contrasts transparent rule systems (auditable, explainable, brittle to novelty) with learned policies (adaptive, opaque). For regulated financial actions the auditability requirement dominates. RecoverChain uses deterministic rules for every <em>decision</em>, reserves ML for <em>ranking</em>, and inserts an explicit human-escalation state (<code>ESCALATE</code> / human-review endpoint) for cases above the automated-amount ceiling or flagged by a stop rule &mdash; a conventional human-in-the-loop checkpoint.</p>
+
+      <div class="callout">
+        <span class="tag">Positioning</span>
+        <p>Where prior systems either schedule blindly or let a model decide, RecoverChain contributes a concrete architecture in which a <strong>diagnosis-driven deterministic pipeline</strong> makes every decision, a <strong>ledger-backed policy gate</strong> enforces safety against real history, and a <strong>permanently shadowed model</strong> supplies only prioritisation &mdash; all runnable offline with a full audit trail.</p>
+      </div>
+    </section>
+
+    <!-- ================= 3 EXISTING SYSTEM ================= -->
+    <section id="s3">
+      <div class="sec-head"><span class="kicker">Section 3</span><h2 class="sec-title">Existing System</h2></div>
+
+      <h3 id="s3-1">3.1&ensp;Traditional System</h3>
+      <p>In current practice, recovery of failed revenue is handled by some combination of:</p>
+      <ul>
+        <li><strong>Processor-native retries.</strong> The payment gateway re-attempts a failed charge on a built-in cadence (fixed intervals, or a statistically chosen &ldquo;smart&rdquo; time). Configuration is coarse &mdash; typically a retry count and window &mdash; and the retry has no view of <em>why</em> the charge failed.</li>
+        <li><strong>Standalone dunning / recovery tools.</strong> A SaaS product watches for failed invoices and sends a pre-authored email/SMS sequence (&ldquo;your payment failed&rdquo; &rarr; &ldquo;reminder&rdquo; &rarr; &ldquo;final notice&rdquo;), optionally with a hosted card-update page. Sequences are the same for every customer and every failure reason.</li>
+        <li><strong>In-house scripts.</strong> A finance or growth team writes cron jobs that query the billing database and fire retries or emails against hand-tuned thresholds. Logic accumulates as special cases; there is rarely an audit trail or a safety layer.</li>
+        <li><strong>Manual collections.</strong> For high-value B2B invoices, a human works a queue: calls, emails, escalations. Effective but unscalable, and the reasoning lives in the collector&rsquo;s head.</li>
+        <li><strong>Bolt-on ML scoring.</strong> Some teams add a churn/failure model to prioritise the queue. When the model&rsquo;s score is wired directly into &ldquo;who gets retried / dunned&rdquo;, it becomes an unaudited decision-maker.</li>
+      </ul>
+
+      <h3 id="s3-2">3.2&ensp;Feature Comparison</h3>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr>
+          <th>Capability</th><th>Processor retries</th><th>Dunning SaaS</th><th>In-house scripts</th><th>Manual collections</th><th>RecoverChain</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>Event &rarr; case correlation</td><td>&mdash;</td><td>Per-invoice</td><td>Ad hoc</td><td>Per-account</td><td><strong>Yes</strong> &mdash; shared <code>reference_id</code></td></tr>
+          <tr><td>Root-cause diagnosis</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>In collector&rsquo;s head</td><td><strong>Yes</strong> &mdash; 9 cause categories</td></tr>
+          <tr><td>Per-case action choice</td><td>Retry only</td><td>Fixed sequence</td><td>Threshold rules</td><td>Human judgement</td><td><strong>Yes</strong> &mdash; ranked candidates + ERV</td></tr>
+          <tr><td>Recovery-probability estimate</td><td>&mdash;</td><td>&mdash;</td><td>Rare</td><td>Gut feel</td><td><strong>Yes</strong> &mdash; shadow model or baseline</td></tr>
+          <tr><td>Safety gate (caps / cooldown / consent / stop)</td><td>Retry count only</td><td>Send limits</td><td>Partial</td><td>Policy in a doc</td><td><strong>Yes</strong> &mdash; 8 rule types, ledger-backed</td></tr>
+          <tr><td>Independent outcome verification</td><td>&mdash;</td><td>Assumes send = done</td><td>&mdash;</td><td>Manual reconcile</td><td><strong>Yes</strong> &mdash; settlement source, clamped</td></tr>
+          <tr><td>Full audit trail</td><td>Processor logs</td><td>Message logs</td><td>Rare</td><td>Notes</td><td><strong>Yes</strong> &mdash; every transition</td></tr>
+          <tr><td>Bring-your-own dataset + model</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><strong>Yes</strong> &mdash; Dataset Lab, per-dataset training</td></tr>
+          <tr><td>ML barred from deciding</td><td>n/a</td><td>n/a</td><td>Often not</td><td>n/a</td><td><strong>Yes</strong> &mdash; architectural boundary</td></tr>
+          <tr><td>Runs offline</td><td>&mdash;</td><td>&mdash;</td><td>Varies</td><td>n/a</td><td><strong>Yes</strong></td></tr>
+        </tbody>
+      </table>
+      </div></div>
+
+      <h3 id="s3-3">3.3&ensp;Limitations of the Existing System</h3>
+      <ul>
+        <li><strong>Schedule, not diagnosis.</strong> Retries and reminders fire on a calendar regardless of the failure reason, so effort is spent where it cannot work (expired card, rejected mandate, disputed invoice).</li>
+        <li><strong>One cadence for everyone.</strong> A &#8377;49 mobile top-up and a &#8377;9,800 B2B invoice get the same treatment.</li>
+        <li><strong>No explanation.</strong> When a customer is retried or emailed, there is no recorded reason, confidence, or expected value &mdash; nothing to review or appeal.</li>
+        <li><strong>Weak or absent safety layer.</strong> Contact-frequency and retry caps, cooldowns, consent, and hard stops are partial, per-tool, or written in a policy document rather than enforced in code against real history.</li>
+        <li><strong>&ldquo;Send equals recovered.&rdquo;</strong> Success is inferred from having sent a message or fired a retry, not from confirmed settlement.</li>
+        <li><strong>Unaudited ML.</strong> Where a model is used, its score often silently drives who gets actioned, with no boundary preventing it and no record of its influence.</li>
+        <li><strong>Rigid data assumptions.</strong> Each tool expects its own schema; feeding in a novel billing export or testing a hypothesis on historical data is not supported.</li>
+      </ul>
+    </section>
+
+    <!-- ================= 4 PROPOSED SYSTEM ================= -->
+    <section id="s4">
+      <div class="sec-head"><span class="kicker">Section 4</span><h2 class="sec-title">Proposed System</h2></div>
+      <p class="lead">RecoverChain is a two-part system: a <strong>decisioning core</strong> that runs every case through one auditable lifecycle, and a <strong>Dataset Lab</strong> that turns an arbitrary tabular file into scored cases &mdash; presented through a ten-step guided workflow and a gated report.</p>
+
+      <h3 id="s4-1">4.1&ensp;Feature Overview</h3>
+
+      <h4>Decisioning core</h4>
+      <ul>
+        <li><strong>Event ingestion &amp; correlation.</strong> Single (<code>/events</code>) or bulk (<code>/events/batch</code>) revenue-failure events, deduplicated by <code>external_event_id</code> and correlated into cases by <code>reference_id</code>.</li>
+        <li><strong>Risk assessment.</strong> A bounded score (amount curve <code>1&minus;e<sup>&minus;amount/800</sup></code> combined with retry / age / churn sub-scores per category) mapped to <code>LOW / MEDIUM / HIGH / CRITICAL</code>, with the contributing signals returned.</li>
+        <li><strong>Root-cause diagnosis.</strong> Evidence from the linked events is matched to nine cause categories (<code>INSUFFICIENT_FUNDS</code>, <code>PAYMENT_METHOD_INVALID</code>, <code>NETWORK_FAILURE</code>, <code>MANDATE_FAILURE</code>, <code>UNRESOLVED_DISPUTE</code>, <code>MISSED_COMMITMENT</code>, <code>PAYMENT_FRICTION</code>, <code>CONFLICTING_EVIDENCE</code>, <code>UNKNOWN</code>) with a confidence and <code>CONFIRMED / INFERRED / UNKNOWN</code> status.</li>
+        <li><strong>Recovery prediction.</strong> A probability from a per-dataset shadow model when one exists and passes the quality gate, otherwise from <code>DeterministicBaselinePredictor</code> &mdash; never a silent zero. Always labelled <code>SHADOW_ONLY</code>.</li>
+        <li><strong>Action recommendation + ERV.</strong> Candidate actions are generated for the diagnosed cause, scored, and ranked; the top candidate carries an <strong>expected recoverable value</strong> (amount &times; probability factor).</li>
+        <li><strong>Policy &amp; safety gate.</strong> <code>DeterministicPolicyEngine</code> returns <code>PERMITTED / WAIT / ESCALATE / DENIED</code> after evaluating stop, consent, evidence, human-escalation, automated-amount, max-retries, retry-cooldown, and contact-frequency rules &mdash; counting <em>real</em> attempts from the ledger when a <code>PolicyContext</code> is supplied.</li>
+        <li><strong>Sandboxed execution.</strong> <code>AgentOrchestrator</code> dispatches the permitted action to a specialist agent through <code>MockExecutionAdapter</code>; requires a fresh matching <code>PERMITTED</code> decision; idempotent via <code>idempotency_keys</code>; writes an <code>execution_attempts</code> ledger row.</li>
+        <li><strong>Independent verification.</strong> <code>VerificationEngine</code> reconciles against a <code>SANDBOX_SIMULATION</code> settlement source; the actual recovered amount comes only from the <code>RecoveryOutcome</code> and is clamped to <code>[0, amount]</code>.</li>
+        <li><strong>Audit.</strong> Every state transition writes an <code>audit_records</code> row with from/to state and an evidence blob.</li>
+        <li><strong>Observability.</strong> Read-only <code>/system/*</code> endpoints expose cases, events, models, executions, policy decisions, audit, and a CSV export.</li>
+      </ul>
+
+      <h4>Dataset Lab</h4>
+      <ul>
+        <li><strong>Upload</strong> CSV / Parquet / XLSX / ZIP (size-capped, path-sanitised, auth-guarded).</li>
+        <li><strong>Profiling &amp; semantic mapping.</strong> Columns are profiled and mapped to canonical fields (<code>ENTITY_ID</code>, <code>AMOUNT</code>, <code>TIMESTAMP</code>, <code>TARGET</code>, &hellip;) with confidence; the pipeline pauses at <code>MAPPING_REVIEW</code> for user confirmation and validates overrides server-side.</li>
+        <li><strong>Quality &amp; leakage.</strong> A data-health score, completeness breakdown, dead-column check, and a leakage detector that quarantines post-outcome columns.</li>
+        <li><strong>ML-readiness contract.</strong> Derives target, feature and excluded columns (identifier / constant / post-outcome / high-cardinality, each with a reason), the temporal split strategy, and class balance; blocks datasets failing the minimum-information contract.</li>
+        <li><strong>Per-dataset training.</strong> An sklearn <code>Pipeline</code> (text&rarr;numeric/epoch coercion, impute, scale, one-hot, LogReg + XGBoost candidates, calibration) with a chronological split and a ROC-AUC &ge; 0.55 quality gate; failing models are stored <code>REJECTED_LOW_QUALITY</code>.</li>
+        <li><strong>Replay.</strong> <code>generate-cases</code> reads rows, auto-trains a model, and runs each row through the full pipeline &mdash; producing real, inspectable cases with honest accepted/skipped counters.</li>
+        <li><strong>Registry hygiene.</strong> Dataset pruning that also sweeps orphaned model artifacts; strict dataset&harr;model isolation by <code>dataset_id</code>.</li>
+      </ul>
+
+      <h4>Presentation</h4>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th>Surface</th><th>Route</th><th>What it is</th></tr></thead>
+        <tbody>
+          <tr><td><strong>RecoverChain</strong> workflow</td><td><code>/</code></td><td>A ten-step guided flow, one full-screen step at a time, <code>Proceed &rarr;</code> navigation, plain-language copy, honest about real vs. simulated. Optional lazy-loaded 3D / motion backdrop, <code>prefers-reduced-motion</code>-safe.</td></tr>
+          <tr><td><strong>Insights</strong> report</td><td><code>/insights</code></td><td>Plain-language aggregation over every recovery run &mdash; money at risk, recovered, recovery rate, outcome mix, breakdown by cause and by action. <strong>Locked</strong> until the workflow has been completed once.</td></tr>
+        </tbody>
+      </table>
+      </div></div>
+
+      <h3 id="s4-2">4.2&ensp;Technology Stack</h3>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th>Layer</th><th>Technology</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="6">Backend</td><td>Python 3.12 (dev venv 3.14)</td><td>Runtime; CI and container pinned to 3.12.</td></tr>
+          <tr><td>FastAPI + Starlette + Uvicorn</td><td>HTTP API, dependency-injected routes, ASGI server.</td></tr>
+          <tr><td>Pydantic v2</td><td>Domain models, request/response schemas, validation.</td></tr>
+          <tr><td>SQLAlchemy 2.0 + Alembic</td><td>ORM and migrations; migrations own the Postgres schema.</td></tr>
+          <tr><td>SQLite / PostgreSQL</td><td>SQLite is the zero-setup offline default; Postgres for deployment.</td></tr>
+          <tr><td>Redis (optional)</td><td>Only <code>/health</code> touches it; system runs without it.</td></tr>
+          <tr><td rowspan="3">Machine learning</td><td>scikit-learn</td><td>Pipeline, preprocessing, LogisticRegression, calibration, metrics.</td></tr>
+          <tr><td>XGBoost</td><td>Gradient-boosted candidate model.</td></tr>
+          <tr><td>pandas · NumPy · pyarrow · openpyxl</td><td>Format-agnostic dataframe I/O and feature coercion.</td></tr>
+          <tr><td rowspan="4">Frontend</td><td>React 18 + Vite 5 + TypeScript</td><td>Single-page app, fast dev/build.</td></tr>
+          <tr><td>react-router v6</td><td>Workflow / Insights routing.</td></tr>
+          <tr><td>Tailwind CSS v3 (PostCSS <code>.cjs</code>)</td><td>Utility styling.</td></tr>
+          <tr><td>three · @react-three/fiber · @react-spring/three · GSAP</td><td>Lazy-loaded, toggleable motion backdrop.</td></tr>
+          <tr><td rowspan="4">Tooling / Ops</td><td>pytest + pytest-cov</td><td>216 tests; 80% coverage gate in CI.</td></tr>
+          <tr><td>Ruff + Mypy</td><td>Lint, format, typed-core checking.</td></tr>
+          <tr><td>ESLint + Prettier</td><td>Frontend lint and format.</td></tr>
+          <tr><td>Docker Compose + GitHub Actions + Dependabot</td><td>Postgres/Redis/api/web images; CI runs lint, types, migrations round-trip, tests+coverage, audits, image builds.</td></tr>
+        </tbody>
+      </table>
+      </div></div>
+
+      <h3 id="s4-3">4.3&ensp;Benefits over Existing Solutions</h3>
+      <ul>
+        <li><strong>Effort follows the diagnosis.</strong> A case caused by an expired card is routed to a card-update request, not a doomed retry; a disputed invoice is escalated, not reminded.</li>
+        <li><strong>Every output is defensible.</strong> Risk, cause, probability, action, and value each ship with their signals and confidence; the policy verdict is rule-by-rule; all of it is in the audit table.</li>
+        <li><strong>Safety is enforced, not documented.</strong> Retry caps, cooldowns, contact limits, an amount ceiling, consent, and stop rules are code, evaluated against the real attempt ledger.</li>
+        <li><strong>Outcomes are measured, not assumed.</strong> Recovered amounts come only from an independent settlement check.</li>
+        <li><strong>ML cannot misfire.</strong> The model is structurally unable to authorise an action; absence or low quality degrades gracefully to a deterministic baseline.</li>
+        <li><strong>Any dataset, safely.</strong> The Dataset Lab makes historical experimentation a first-class feature, with leakage and sufficiency checks built in.</li>
+        <li><strong>Runs anywhere, needs nothing.</strong> No CDN, no external API, Redis optional &mdash; demonstrable on a laptop with no network.</li>
+      </ul>
+    </section>
+
+    <!-- ================= 5 CONCEPT & METHODOLOGY ================= -->
+    <section id="s5">
+      <div class="sec-head"><span class="kicker">Section 5</span><h2 class="sec-title">Concept &amp; Methodology</h2></div>
+
+      <h3>5.1&ensp;Guiding concepts</h3>
+      <ul>
+        <li><strong>The case as the unit of work.</strong> Individual events are noisy and duplicative; the <code>RecoveryCase</code> aggregate is what carries state, accumulates the seven stage sub-objects, and is persisted and reasoned about.</li>
+        <li><strong>One lifecycle, always the same order.</strong> There is exactly one path through the stages. This makes the system predictable, testable stage-by-stage, and auditable &mdash; the sequence of <code>audit_records</code> for a case is a complete, ordered story.</li>
+        <li><strong>Determinism for decisions, statistics for priority.</strong> Anything that changes what the system <em>does</em> is a pure function of the case and explicit policy. Anything learned from data only changes the <em>order</em> in which humans or the queue see cases.</li>
+        <li><strong>Shadow mode as a boundary, not a phase.</strong> The predictor returns <code>shadow_mode_active: true</code> and its value is never a parameter to policy evaluation. Promoting it would require changing a type signature &mdash; a deliberate, reviewable act.</li>
+        <li><strong>Honesty in the UI.</strong> Every screen states whether a number is a rule output, a shadow-model estimate, or a simulation; execution and settlement are labelled <code>SANDBOX_SIMULATION</code>.</li>
+        <li><strong>Offline-first.</strong> A hard constraint that shaped dependency choices (bundled fonts, no CDN, Redis optional, a hand-rolled <code>StateGraph</code> where a library needed a blocked native module).</li>
+      </ul>
+
+      <h3>5.2&ensp;Software methodology</h3>
+      <ul>
+        <li><strong>Clean / layered architecture (DDD-influenced).</strong> <code>domain/</code> is framework-free Pydantic models and the state machine; <code>application/</code> is one engine per stage plus orchestration; <code>infrastructure/</code> is ORM, repositories, adapters; <code>api/</code> is thin FastAPI routers. Dependencies point inward only.</li>
+        <li><strong>Test-first, invariant-driven.</strong> The safety invariants (ML shadow-only, execution simulated, policy is sole authority, financial clamping, dataset&harr;model isolation, migrations own the schema, auth on mutating routes) each have dedicated regression tests. The suite runs against an isolated throwaway SQLite database.</li>
+        <li><strong>Iterative, phase-by-phase delivery.</strong> The project advanced through ~24 numbered build phases (architecture notes for phases 4&ndash;23 are kept under <code>docs/history/</code>) and 33 commits, each a self-contained, test-green increment &mdash; from &ldquo;make the live case loop flow&rdquo; through &ldquo;ledger-backed policy&rdquo;, &ldquo;ML quality gate&rdquo;, &ldquo;offline&rdquo;, the 10-step workflow redesign, real-data training, a performance fix, and the security/tooling hardening pass.</li>
+        <li><strong>Reproducible ML.</strong> Training is a single scripted entry point (<code>run_phase19_training.py</code>); models are written to a registry with metadata (dataset id, split counts, metrics, status) and a model card documents intended use and limitations.</li>
+        <li><strong>Environment-driven configuration.</strong> Behaviour (database URL, API key, CORS list, rate limits, upload cap, quality-gate thresholds, currency) is set by environment variables with safe offline defaults and a startup warning when insecure defaults are left in place.</li>
+      </ul>
+
+      <h3>5.3&ensp;The lifecycle, end to end</h3>
+      <div class="bleed">
+        <figure class="diagram">
+          <svg viewBox="0 0 900 250" role="img" aria-label="The nine-stage RecoverChain case lifecycle from ingest to audit">
+            <defs>
+              <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0 0 L10 5 L0 10 z" fill="var(--line-strong)"></path>
+              </marker>
+            </defs>
+            <g font-size="12">
+              <rect class="d-box" x="8"   y="40" width="88" height="46" rx="7"></rect><text x="52"  y="60" text-anchor="middle">ingest</text><text x="52" y="76" text-anchor="middle" class="d-lbl">event</text>
+              <rect class="d-box" x="116" y="40" width="92" height="46" rx="7"></rect><text x="162" y="60" text-anchor="middle">assess</text><text x="162" y="76" text-anchor="middle" class="d-lbl">risk</text>
+              <rect class="d-box" x="228" y="40" width="96" height="46" rx="7"></rect><text x="276" y="60" text-anchor="middle">diagnose</text><text x="276" y="76" text-anchor="middle" class="d-lbl">root cause</text>
+              <rect class="d-box" x="344" y="40" width="104" height="46" rx="7"></rect><text x="396" y="60" text-anchor="middle">predict</text><text x="396" y="76" text-anchor="middle" class="d-lbl">P(recovery)</text>
+              <rect class="d-box" x="468" y="40" width="112" height="46" rx="7"></rect><text x="524" y="60" text-anchor="middle">recommend</text><text x="524" y="76" text-anchor="middle" class="d-lbl">action + ERV</text>
+              <rect class="d-accent" x="600" y="40" width="104" height="46" rx="7"></rect><text x="652" y="60" text-anchor="middle">policy</text><text x="652" y="76" text-anchor="middle" class="d-lbl">safety gate</text>
+              <rect class="d-box" x="724" y="40" width="96" height="46" rx="7"></rect><text x="772" y="60" text-anchor="middle">execute</text><text x="772" y="76" text-anchor="middle" class="d-lbl">sandbox</text>
+              <rect class="d-box" x="344" y="150" width="104" height="46" rx="7"></rect><text x="396" y="170" text-anchor="middle">verify</text><text x="396" y="186" text-anchor="middle" class="d-lbl">settlement</text>
+              <rect class="d-box" x="468" y="150" width="112" height="46" rx="7"></rect><text x="524" y="170" text-anchor="middle">audit</text><text x="524" y="186" text-anchor="middle" class="d-lbl">every step</text>
+              <path class="d-line" d="M96 63 H116"  marker-end="url(#ah)"></path>
+              <path class="d-line" d="M208 63 H228" marker-end="url(#ah)"></path>
+              <path class="d-line" d="M324 63 H344" marker-end="url(#ah)"></path>
+              <path class="d-line" d="M448 63 H468" marker-end="url(#ah)"></path>
+              <path class="d-line" d="M580 63 H600" marker-end="url(#ah)"></path>
+              <path class="d-line" d="M704 63 H724" marker-end="url(#ah)"></path>
+              <path class="d-line" d="M772 86 V120 H396 V150" marker-end="url(#ah)"></path>
+              <path class="d-line" d="M448 173 H468" marker-end="url(#ah)"></path>
+              <text x="652" y="112" text-anchor="middle" class="d-lbl" font-size="11">PERMITTED / WAIT / ESCALATE / DENIED</text>
+            </g>
+          </svg>
+          <figcaption>Fig 5.1 &mdash; The fixed case lifecycle. The policy gate (highlighted) is the only stage that can authorise execution; verify and audit close the loop.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= 6 DESIGN / MODELLING / ARCHITECTURE ================= -->
+    <section id="s6">
+      <div class="sec-head"><span class="kicker">Section 6</span><h2 class="sec-title">Design, Modelling &amp; System Architecture</h2></div>
+
+      <h3>6.1&ensp;Layered architecture</h3>
+      <div class="bleed">
+        <figure class="diagram">
+          <svg viewBox="0 0 900 330" role="img" aria-label="Layered architecture: frontend, API, application, domain, infrastructure">
+            <g font-size="12.5">
+              <rect class="d-box" x="20" y="16" width="860" height="52" rx="8"></rect>
+              <text x="34" y="38">Frontend &mdash; React 18 / Vite / Tailwind</text>
+              <text x="34" y="55" class="d-lbl" font-size="11">10-step Workflow · gated Insights · lib/api.ts · lazy 3D backdrop</text>
+
+              <rect class="d-box" x="20" y="82" width="860" height="52" rx="8"></rect>
+              <text x="34" y="104">api/ &mdash; FastAPI routers</text>
+              <text x="34" y="121" class="d-lbl" font-size="11">main.py (case pipeline) · dataset_router.py · system_router.py · auth.py · security.py</text>
+
+              <rect class="d-accent" x="20" y="148" width="860" height="66" rx="8"></rect>
+              <text x="34" y="170">application/ &mdash; one engine per stage + orchestration</text>
+              <text x="34" y="188" class="d-lbl" font-size="11">risk_detector · diagnosis_engine · recovery_predictor(_ml) · action_evaluator · policy_engine · agents · verification_engine</text>
+              <text x="34" y="204" class="d-lbl" font-size="11">case_pipeline · dataset_lab · dataset_intelligence · ml_readiness · ml_training</text>
+
+              <rect class="d-box" x="20" y="228" width="420" height="52" rx="8"></rect>
+              <text x="34" y="250">domain/ &mdash; framework-free</text>
+              <text x="34" y="267" class="d-lbl" font-size="11">RecoveryCase + 7 sub-objects · CaseState · Money=Decimal · lifecycle · interfaces</text>
+
+              <rect class="d-box" x="460" y="228" width="420" height="52" rx="8"></rect>
+              <text x="474" y="250">infrastructure/ &mdash; persistence</text>
+              <text x="474" y="267" class="d-lbl" font-size="11">orm · dataset_orm · repositories · adapters · redis_client</text>
+
+              <rect class="d-box" x="20" y="294" width="860" height="24" rx="6"></rect>
+              <text x="34" y="310" class="d-lbl" font-size="11">SQLite (offline default) / PostgreSQL + Alembic &mdash; migrations own the schema &nbsp;·&nbsp; Redis optional</text>
+            </g>
+          </svg>
+          <figcaption>Fig 6.1 &mdash; Clean layering. Dependencies point inward; <code>domain/</code> imports no framework. The application layer (highlighted) is where every decision is made.</figcaption>
+        </figure>
+      </div>
+
+      <h3>6.2&ensp;Domain model</h3>
+      <p>The aggregate root is <code>RecoveryCase</code>. It holds identity and money fields, a <code>current_state</code>, the list of linked events, and seven optional stage sub-objects populated as the case advances:</p>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th>Sub-object</th><th>Produced by</th><th>Key fields</th></tr></thead>
+        <tbody>
+          <tr><td><code>RiskAssessment</code></td><td><code>risk_detector</code></td><td><code>score</code> (0&ndash;1), <code>risk_level</code>, <code>primary_risk_signals</code>, <code>detection_status</code></td></tr>
+          <tr><td><code>RootCauseDiagnosis</code></td><td><code>diagnosis_engine</code></td><td><code>cause_category</code> (9), <code>confidence</code>, <code>status</code>, <code>supporting_signals</code></td></tr>
+          <tr><td><code>RecoveryPrediction</code></td><td><code>recovery_predictor(_ml)</code></td><td><code>recovery_probability</code>, <code>model_version</code>, <code>prediction_status</code> (<code>SHADOW_ONLY</code>)</td></tr>
+          <tr><td><code>ActionRecommendation</code></td><td><code>action_evaluator</code></td><td><code>candidates[]</code>, <code>top_candidate</code>, <code>status</code>, <code>rationale</code></td></tr>
+          <tr><td><code>PolicyDecision</code></td><td><code>policy_engine</code></td><td><code>status</code>, <code>rules_evaluated[]</code>, <code>failed_rules[]</code>, <code>reason</code></td></tr>
+          <tr><td><code>ExecutionRecord</code></td><td><code>agents</code></td><td><code>action_type</code>, <code>agent_type</code>, <code>status</code>, <code>adapter_used</code>, <code>result_metadata</code></td></tr>
+          <tr><td><code>RecoveryOutcome</code></td><td><code>verification_engine</code></td><td><code>status</code> (4), <code>actual_amount_recovered</code>, <code>verification_source</code>, <code>reconciliation_status</code></td></tr>
+        </tbody>
+      </table>
+      </div></div>
+      <p><strong>Money</strong> is a Pydantic model wrapping a <code>Decimal</code> amount plus a currency (default <code>INR</code>); the ORM stores <code>Numeric(18,4)</code>. <strong>Enumerations</strong> are all string enums: <code>RiskCategory</code> (5), <code>RiskLevel</code> (4), <code>RootCauseCategory</code> (9), <code>ActionType</code> (~17), <code>PolicyDecisionStatus</code> (4), <code>ExecutionStatus</code> (5), <code>RecoveryOutcomeStatus</code> (4).</p>
+
+      <h4>Case state machine</h4>
+      <p><code>CaseState</code> has 21 members spanning the lifecycle: <code>DETECTED &rarr; OPEN &rarr; ASSESSED &rarr; DIAGNOSING &rarr; RECOMMENDING &rarr; POLICY_EVALUATED</code>, then a branch &mdash; <code>APPROVED / DENIED / WAITING / ESCALATED / POLICY_REVIEW</code> &mdash; then <code>EXECUTION_PREPARING &rarr; EXECUTING &rarr; PENDING_VERIFICATION &rarr; VERIFYING</code>, terminating in <code>FULLY_RECOVERED / PARTIALLY_RECOVERED / CLOSED_NOT_RECOVERED</code> or the out-of-band <code>STOPPED</code>. Every transition is written to <code>audit_records</code> with its true prior state.</p>
+
+      <h3>6.3&ensp;Persistence schema</h3>
+      <p>Seven tables; the lifecycle sub-objects are stored as JSON columns on <code>recovery_cases</code> (a deliberate trade-off &mdash; fast to evolve, noted as future relational work). Migrations own the Postgres schema; SQLite auto-creates for local dev.</p>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th>Table</th><th>Purpose</th><th>Notable columns</th></tr></thead>
+        <tbody>
+          <tr><td><code>recovery_cases</code></td><td>Case aggregate</td><td><code>case_id</code>, <code>customer_id</code>, <code>reference_id</code>, <code>amount_at_risk</code>, <code>current_state</code>, + 7 JSON sub-object columns</td></tr>
+          <tr><td><code>revenue_events</code></td><td>Correlated raw events</td><td><code>event_id</code>, <code>external_event_id</code>, <code>reference_id</code>, <code>case_id</code>, <code>amount</code>, <code>raw_payload</code></td></tr>
+          <tr><td><code>audit_records</code></td><td>Every state transition</td><td><code>case_id</code>, <code>from_state</code>, <code>to_state</code>, <code>evidence</code> (JSON), <code>timestamp</code></td></tr>
+          <tr><td><code>execution_attempts</code></td><td>Ledger &mdash; source of policy history</td><td><code>case_id</code>, <code>action_type</code>, <code>idempotency_key</code>, <code>status</code>, <code>created_at</code></td></tr>
+          <tr><td><code>idempotency_keys</code></td><td>Replay protection</td><td><code>key</code>, <code>execution_id</code></td></tr>
+          <tr><td><code>datasets</code></td><td>Dataset Lab registry</td><td><code>dataset_id</code>, <code>status</code>, <code>columns_profile</code>, <code>recoverchain_signals</code>, <code>data_quality_report</code>, <code>leakage_detection</code>, <code>training_suitability</code></td></tr>
+        </tbody>
+      </table>
+      </div></div>
+
+      <h3>6.4&ensp;API surface</h3>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th>Group</th><th>Endpoints</th><th>Auth</th></tr></thead>
+        <tbody>
+          <tr><td>Ingestion</td><td><code>POST /events</code>, <code>POST /events/batch</code></td><td>key</td></tr>
+          <tr><td>Case pipeline</td><td><code>POST /cases/{id}/advance</code>, <code>&hellip;/stop</code>, <code>&hellip;/{assess-risk,diagnose,predict-recovery,recommend-action,policy-check,execute,verify}</code>, <code>&hellip;/human-review</code></td><td>key</td></tr>
+          <tr><td>Case reads</td><td><code>GET /cases</code>, <code>/cases/{id}</code>, <code>/cases/{id}/{events,audit}</code>, <code>/dashboard/metrics</code></td><td>open</td></tr>
+          <tr><td>Dataset Lab (writes)</td><td><code>POST /datasets/{upload, sync, prune, {id}/analyze, {id}/ml-readiness, {id}/train, {id}/mapping, {id}/predict, {id}/generate-cases}</code></td><td>key</td></tr>
+          <tr><td>Dataset Lab (reads)</td><td><code>GET /datasets</code>, <code>/datasets/{id}</code>, <code>/datasets/{id}/{preview,workflow-status,ml-readiness,models}</code></td><td>open</td></tr>
+          <tr><td>Observability</td><td><code>GET /system/{health,summary,cases,cases.csv,cases/{id},datasets,models,events,policy,executions,audit}</code></td><td>open</td></tr>
+          <tr><td>Evaluation</td><td><code>POST /evaluation/run</code>, <code>GET /health</code></td><td>mixed</td></tr>
+        </tbody>
+      </table>
+      </div></div>
+
+      <h3>6.5&ensp;Dataset Lab state machine</h3>
+      <pre><span class="c"># explicit, review-driven — the pipeline pauses for the user at MAPPING_REVIEW</span>
+UPLOADED &rarr; PROFILING &rarr; <span class="g">MAPPING_REVIEW</span> &rarr; READY_FOR_ANALYSIS
+         &rarr; ANALYZING &rarr; ML_READY &rarr; TRAINING &rarr; TRAINED
+                                        &rarr; <span class="c">(REJECTED_LOW_QUALITY &rarr; deterministic baseline)</span></pre>
+
+      <h3>6.6&ensp;Security architecture</h3>
+      <ul>
+        <li><strong>Authentication.</strong> <code>verify_api_key</code> (<code>X-API-Key</code> header) guards every mutating route on both the case pipeline and the Dataset Lab; read-only GETs stay open for the dashboard. A startup check warns when the dev-default key or wildcard CORS is left in place.</li>
+        <li><strong>Rate limiting.</strong> A stdlib sliding-window limiter (per key / per IP, default 120&nbsp;req/min) as ASGI middleware; health and docs are exempt.</li>
+        <li><strong>CORS.</strong> Wildcard origin and credentialed requests are mutually exclusive by spec &mdash; the app enables credentials only when an explicit allow-list is configured.</li>
+        <li><strong>Uploads.</strong> Size-capped (<code>MAX_UPLOAD_BYTES</code>, 512&nbsp;MiB default), extension-checked, filename path-sanitised, dataset-scoped storage names.</li>
+        <li><strong>Container.</strong> Non-root user, health-check, migrations must succeed before serving. Compose requires explicit secrets rather than shipping defaults.</li>
+        <li><strong>Frontend.</strong> The API key is build-time config (<code>VITE_API_KEY</code>), not a source constant; nginx sets CSP, <code>X-Frame-Options</code>, <code>X-Content-Type-Options</code>, Referrer-Policy, and gzip.</li>
+      </ul>
+    </section>
+
+    <!-- ================= 7 IMPLEMENTATION ================= -->
+    <section id="s7">
+      <div class="sec-head"><span class="kicker">Section 7</span><h2 class="sec-title">Implementation</h2></div>
+
+      <h3>7.1&ensp;Stage engines (<code>application/</code>)</h3>
+      <div class="two-col c2">
+        <div>
+          <h4>risk_detector</h4>
+          <p>Computes a bounded amount score <code>1&minus;e<sup>&minus;amount/800</sup></code> and combines it with a category-specific sub-score &mdash; retry count for failed payments/subscriptions, churn risk for checkout abandonment, age-in-hours for overdue invoices and broken promises &mdash; then maps the blended 0&ndash;1 score to <code>LOW &lt;0.3</code>, <code>MEDIUM &lt;0.6</code>, <code>HIGH &lt;0.85</code>, <code>CRITICAL</code>, returning every signal used.</p>
+        </div>
+        <div>
+          <h4>diagnosis_engine</h4>
+          <p>Deterministic evidence matching from linked-event payloads to nine <code>RootCauseCategory</code> values, emitting a confidence and a <code>CONFIRMED / INFERRED / UNKNOWN</code> status plus supporting signal references. Receivables vocabulary (<code>net_terms_pending</code>, <code>dispute</code>, <code>bank_rejected</code>&hellip;) maps onto the shared cause set.</p>
+        </div>
+        <div>
+          <h4>recovery_predictor / _ml</h4>
+          <p><code>DeterministicBaselinePredictor</code> gives a rules-based probability from cause and risk. <code>MLPaymentFailurePredictor</code> loads only a model whose metadata <code>dataset_id</code> matches exactly and whose status is not <code>REJECTED_LOW_QUALITY</code>; recovery probability = <code>1 &minus; failure_risk</code>. Both stamp <code>SHADOW_ONLY</code>.</p>
+        </div>
+        <div>
+          <h4>action_evaluator</h4>
+          <p>Generates candidate <code>ActionType</code>s appropriate to the diagnosed cause and category, scores and ranks them, and attaches an <strong>expected recoverable value</strong> to the top candidate (<code>amount &times; probability factor</code>). Returns <code>RECOMMENDED</code> or <code>INSUFFICIENT_EVIDENCE</code>.</p>
+        </div>
+        <div>
+          <h4>policy_engine</h4>
+          <p><code>DeterministicPolicyEngine.evaluate(case, context)</code> runs, in order: <code>StopRule</code>, <code>ConsentCheck</code>, <code>EvidenceCheck</code>, <code>HumanEscalationAction</code>, <code>FinancialAutomatedLimit</code> (&#8377;5,000 default ceiling), <code>PaymentMaxRetries</code> (3), <code>PaymentRetryCooldown</code> (24&nbsp;h), <code>CommunicationMaxMessages</code> (2 / 24&nbsp;h). With a <code>PolicyContext</code> the retry/cooldown/contact counts come from the real ledger; without one it falls back to a linked-events proxy for unit tests. Result: <code>PERMITTED / WAIT / ESCALATE / DENIED</code> with per-rule detail.</p>
+        </div>
+        <div>
+          <h4>agents / verification_engine</h4>
+          <p><code>AgentOrchestrator.execute</code> requires a persisted, fresh, matching <code>PERMITTED</code> decision and a capable specialist agent, dispatches through <code>MockExecutionAdapter</code>, and (given a repo) writes the idempotency key + ledger row. <code>VerificationEngine.reconcile</code> checks the <code>SANDBOX_SIMULATION</code> settlement source, sets the outcome status, and clamps the recovered amount to <code>[0, amount]</code>.</p>
+        </div>
+      </div>
+      <p><code>case_pipeline.py</code>&rsquo;s <code>CasePipelineService</code> runs assess &rarr; diagnose &rarr; predict &rarr; recommend &rarr; policy in one call and is the shared path for <code>/events/batch</code>, <code>/cases/{id}/advance</code>, and <code>generate-cases</code>.</p>
+
+      <h3>7.2&ensp;Dataset Lab (<code>application/</code>)</h3>
+      <ul>
+        <li><strong><code>dataset_lab.py</code></strong> &mdash; registry service: import, list, prune; file storage under dataset-scoped names.</li>
+        <li><strong><code>dataset_intelligence.py</code></strong> &mdash; <code>SemanticMapper</code> normalises column names, inspects values, and scores each column against canonical fields with <code>HIGH / MEDIUM / LOW</code> confidence; ambiguous single-use fields (AMOUNT, TARGET, TIMESTAMP&hellip;) are downgraded and flagged for user confirmation. <code>DatasetValidator</code> runs leakage detection and dataset classification (<code>ANALYSIS_READY</code> &hellip; <code>INSUFFICIENT</code>).</li>
+        <li><strong><code>ml_readiness.py</code></strong> &mdash; derives target, feature columns, excluded columns with reasons, temporal-split strategy, and class balance; enforces the minimum-information contract.</li>
+        <li><strong><code>ml_training.py</code></strong> &mdash; the training pipeline (below).</li>
+      </ul>
+
+      <h4>ML training pipeline</h4>
+      <ol>
+        <li><strong>Format-agnostic read</strong> &mdash; <code>_read_any()</code> branches on extension (Parquet / Excel / CSV).</li>
+        <li><strong><code>_coerce_frame</code> step</strong> &mdash; turns number-like text (<code>"1,200"</code>, <code>"&#8377; 45"</code>) into floats and date-like text into epoch-day floats, <em>at fit and predict time</em>, so a messy real CSV transforms identically when served.</li>
+        <li><strong>Preprocessing</strong> &mdash; impute + scale numerics; one-hot categoricals with <code>handle_unknown="ignore"</code>.</li>
+        <li><strong>Candidates</strong> &mdash; <code>LogisticRegression</code> and <code>XGBClassifier</code>, probability-calibrated on the validation fold (skipped and folded back into train when that fold is tiny or single-class).</li>
+        <li><strong>Split</strong> &mdash; chronological on the real date column; <strong>stratified fallback</strong> (flagged in metadata) when there is no usable temporal column.</li>
+        <li><strong>Quality gate</strong> &mdash; ROC-AUC &ge; <code>ML_MIN_ROC_AUC</code> (0.55) and rows &ge; <code>ML_MIN_TEST_ROWS</code>; an adaptive mode lowers the row floor for small real datasets. Failing models are written <code>REJECTED_LOW_QUALITY</code> and are never loaded.</li>
+        <li><strong>Registry</strong> &mdash; <code>{model.joblib, metadata.json}</code> keyed by dataset id, with split counts, metrics, and status.</li>
+      </ol>
+
+      <h3>7.3&ensp;Infrastructure</h3>
+      <ul>
+        <li><strong><code>repositories.py</code></strong> &mdash; <code>SqlAlchemyCaseRepository</code> maps ORM &harr; domain, and provides <code>record_execution_attempt</code> and <code>get_policy_context</code> (which builds a <code>PolicyContext</code> from the <code>execution_attempts</code> ledger). Commits per use-case.</li>
+        <li><strong><code>orm.py</code> / <code>dataset_orm.py</code></strong> &mdash; the seven tables; lifecycle sub-objects as JSON columns; timezone-aware timestamps.</li>
+        <li><strong><code>adapters.py</code></strong> &mdash; <code>MockExecutionAdapter</code> and the settlement source; the only &ldquo;external world&rdquo; and both simulated.</li>
+        <li><strong><code>langgraph_orchestrator.py</code></strong> &mdash; a hand-rolled <code>StateGraph</code> used only by the evaluation harness, because the real library needs a native module blocked in the target environment. Kept deliberately dependency-free.</li>
+      </ul>
+
+      <h3>7.4&ensp;API layer</h3>
+      <p>Thin FastAPI routers. <code>main.py</code> carries the case-pipeline endpoints, batch ingest, advance/stop, a request-id + timing middleware, and the dashboard aggregation. <code>dataset_router.py</code> and <code>system_router.py</code> carry the Dataset Lab and read-only observability. <code>auth.py</code> and <code>security.py</code> hold the API-key dependency, the rate limiter, the startup config check, and the upload-size constant.</p>
+
+      <h3>7.5&ensp;Frontend</h3>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th>#</th><th>Step</th><th>Shows (all from live API data)</th></tr></thead>
+        <tbody>
+          <tr><td class="num">01</td><td>Upload data</td><td>Dropzone or bundled sample; real accepted formats.</td></tr>
+          <tr><td class="num">02</td><td>Data review</td><td>Real filename, row/column counts, detected canonical fields.</td></tr>
+          <tr><td class="num">03</td><td>Data quality</td><td>Health score, completeness breakdown, leakage check.</td></tr>
+          <tr><td class="num">04</td><td>Data mapping</td><td>The four roles pre-filled from detection; low confidence flagged; server-validated on confirm.</td></tr>
+          <tr><td class="num">05</td><td>Data connection</td><td>How the file wires into the pipeline &mdash; canonical inputs, model features vs. held-out columns with reasons, split strategy, class balance, readiness verdict; honest note that multi-file linking is not built.</td></tr>
+          <tr><td class="num">06</td><td>Revenue risk detection</td><td>Runs <code>generate-cases</code>; real accepted / skipped counters.</td></tr>
+          <tr><td class="num">07</td><td>AI analysis</td><td>Highest-value case: cause + confidence, recovery probability (advisory), expected recoverable value; rule-based vs. shadow-model labelled.</td></tr>
+          <tr><td class="num">08</td><td>Decision &amp; policy</td><td>Merged &mdash; the rules-engine proposal <em>and</em> the policy engine&rsquo;s rule-by-rule verdict on one screen.</td></tr>
+          <tr><td class="num">09</td><td>Recovery</td><td><code>PERMITTED</code> &rarr; executed (simulated); escalated &rarr; &ldquo;Approve &amp; execute&rdquo;; blocked &rarr; not executed, with the reason.</td></tr>
+          <tr><td class="num">10</td><td>Verified result</td><td>Outcome verified against the sandbox settlement source; actual amount recovered.</td></tr>
+        </tbody>
+      </table>
+      </div></div>
+      <p>Reaching step 10 sets a <code>localStorage</code> flag that unlocks the <strong>Insights</strong> report. <code>lib/api.ts</code> is the single API wrapper; the motion backdrop (Three.js / R3F / GSAP) is a lazy-loaded chunk, toggleable and reduced-motion-safe.</p>
+
+      <h3>7.6&ensp;Hardening &amp; tooling pass</h3>
+      <p>A dedicated pass addressed operational readiness: API-key auth extended to the entire Dataset Lab; a request rate limiter; CORS credential/wildcard correctness; a startup insecure-default warning; upload-size enforcement made configurable; the Gemini evaluation key moved from URL to header; dead dependencies removed and a release-candidate pin dropped; a non-root, migrate-then-serve container; nginx security headers; <code>pyproject.toml</code> with Ruff + Mypy + coverage config; a <code>requirements-dev.txt</code>; ESLint + Prettier and stricter <code>tsconfig</code> for the frontend; a rewritten CI (lint, format, types, Alembic round-trip, tests + 80% coverage gate, <code>pip-audit</code>, <code>npm audit</code>, Docker image builds, branch filter, concurrency) and a Dependabot config; and repository hygiene (≈55 one-off scripts archived out of the root). All 216 tests remained green throughout.</p>
+
+      <h3>7.7&ensp;Code metrics</h3>
+      <div class="metrics">
+        <div><div class="v">8,332</div><div class="k">LOC · app/api/domain/infra</div></div>
+        <div><div class="v">6,080</div><div class="k">LOC · backend tests</div></div>
+        <div><div class="v">3,665</div><div class="k">LOC · frontend TS/TSX/CSS</div></div>
+        <div><div class="v">42</div><div class="k">test files</div></div>
+        <div><div class="v">7</div><div class="k">DB tables</div></div>
+        <div><div class="v">~40</div><div class="k">HTTP endpoints</div></div>
+      </div>
+    </section>
+
+    <!-- ================= 8 RESULTS & DISCUSSION ================= -->
+    <section id="s8">
+      <div class="sec-head"><span class="kicker">Section 8</span><h2 class="sec-title">Results &amp; Discussion</h2></div>
+
+      <h3>8.1&ensp;Automated test suite</h3>
+      <p><strong>216 backend tests pass</strong> against an isolated throwaway SQLite database; line coverage is <strong>88%</strong> (CI gate 80%). Coverage by area:</p>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th>Area</th><th class="num">Tests</th><th>Representative files</th></tr></thead>
+        <tbody>
+          <tr><td>Stage engines (risk, diagnosis, prediction, recommendation, policy, execution, verification)</td><td class="num">70</td><td><code>test_risk_detector</code>, <code>test_diagnosis</code> (17), <code>test_policy</code> (9), <code>test_verification</code></td></tr>
+          <tr><td>Ingestion, correlation, case engine</td><td class="num">32</td><td><code>test_phase28_ingestion</code> (20), <code>test_correlation</code> (8), <code>test_case_engine</code></td></tr>
+          <tr><td>Dataset Lab &amp; ML</td><td class="num">44</td><td><code>test_dataset_intelligence</code>, <code>test_ml_readiness</code>, <code>test_ml_training</code>, <code>test_ml_quality_gate</code>, <code>test_shadow</code></td></tr>
+          <tr><td>API, observability, auth, hardening</td><td class="num">40</td><td><code>test_backend_observability</code> (12), <code>test_auth</code> (3), <code>test_phase32_hardening</code> (5)</td></tr>
+          <tr><td>End-to-end workflow &amp; safety regression</td><td class="num">18</td><td><code>test_phase27_e2e_integration</code>, <code>test_phase29_e2e_universal_workflow</code>, <code>test_phase34_1_safety_regression</code></td></tr>
+          <tr><td>Domain, contracts, evaluation, roadmap features</td><td class="num">12</td><td><code>test_domain</code>, <code>test_inference_contract</code>, <code>test_roadmap_track_a</code></td></tr>
+        </tbody>
+      </table>
+      </div></div>
+
+      <h3>8.2&ensp;End-to-end verification in a browser</h3>
+      <p>The full stack was run (SQLite backend on <code>:8000</code>, Vite on <code>:5173</code>) and the ten-step workflow driven through with the bundled sample dataset. Every step produced live data and every guarded route returned <code>200</code> with the frontend supplying the API key:</p>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th>Step</th><th>Observed result</th><th>Route exercised</th></tr></thead>
+        <tbody>
+          <tr><td>Upload sample</td><td>15 rows / 5 columns read; columns auto-mapped</td><td><code>POST /datasets/upload</code></td></tr>
+          <tr><td>Data quality</td><td>health 100/100; leakage check clean</td><td><code>POST /datasets/{id}/analyze</code></td></tr>
+          <tr><td>Confirm mapping</td><td>accepted after server-side validation</td><td><code>POST /datasets/{id}/mapping</code></td></tr>
+          <tr><td>Risk detection</td><td><strong>13 recovery cases created from 15 rows</strong> (2 skipped &mdash; already paid / nothing to recover)</td><td><code>POST /datasets/{id}/generate-cases</code></td></tr>
+          <tr><td>AI analysis</td><td>case <code>68914584</code>: &#8377;15,000 at risk, cause &ldquo;insufficient funds&rdquo; (95% conf.), recovery probability 67% (advisory), ERV &#8377;10,110</td><td>pipeline</td></tr>
+          <tr><td>Decision &amp; policy</td><td>proposed &ldquo;Retry the payment&rdquo;; policy flagged <code>FinancialAutomatedLimit</code> &mdash; &#8377;15,000 &gt; &#8377;5,000 ceiling &rarr; needs human approval</td><td>policy engine</td></tr>
+          <tr><td>Recovery</td><td>human approval gate shown; on approve &rarr; executed via <code>MockExecutionAdapter</code> (&ldquo;Payment retried successfully&rdquo;)</td><td><code>POST /cases/{id}/human-review</code> + <code>/execute</code></td></tr>
+          <tr><td>Verified result</td><td><strong>Not recovered</strong>, &#8377;0.00 recovered, reconciliation &ldquo;confirmed failure from source&rdquo; (<code>SANDBOX_SIMULATION</code>)</td><td><code>POST /cases/{id}/verify</code></td></tr>
+          <tr><td>Insights (unlocked)</td><td>49 cases across 12 datasets, &#8377;43,827.50 at risk, &#8377;9,947.34 recovered, 23% recovery rate, full outcome + cause + action breakdown</td><td><code>/dashboard/metrics</code>, <code>/cases</code>, <code>/system/*</code></td></tr>
+        </tbody>
+      </table>
+      </div></div>
+      <p>Zero console errors; no <code>500</code>s; clean backend log. The escalate-then-execute-then-fail-verification path is exactly the intended behaviour: an executed action is <em>not</em> assumed to have recovered money &mdash; the settlement check is authoritative.</p>
+
+      <h3>8.3&ensp;Security behaviours, verified live</h3>
+      <pre>POST /datasets/prune   (no key)   &rarr; <span class="g">403</span>
+POST /datasets/sync    (bad key)  &rarr; <span class="g">403</span>
+POST /datasets/sync    (good key) &rarr; <span class="g">200</span>
+130&times; rapid  GET /cases         &rarr; <span class="g">120&times;200</span> then <span class="g">10&times;429</span>   <span class="c"># 120 req/min budget, exact</span></pre>
+
+      <h3>8.4&ensp;Machine-learning behaviour</h3>
+      <ul>
+        <li>A ~140-row engineered dataset auto-trains an XGBoost model (ROC-AUC &asymp; 1.0 on its held-out fold) that then scores its cases <code>SHADOW_ONLY</code>.</li>
+        <li>Noisier small datasets correctly fail the 0.55 gate, are stored <code>REJECTED_LOW_QUALITY</code>, and the pipeline serves the <code>DeterministicBaselinePredictor</code> instead &mdash; never a silent 0.0.</li>
+        <li>In neither case does any probability enter a <code>PolicyDecision</code>; a dedicated regression test asserts the boundary.</li>
+      </ul>
+
+      <h3>8.5&ensp;Performance</h3>
+      <p>An early defect made Step&nbsp;06 appear to hang: <code>predict_recovery_for_case()</code> rebuilt a full sklearn+XGBoost predictor (scanning a ~400-file registry, <code>joblib.load</code> each call) <strong>once per row</strong>. The fix threads an optional pre-built predictor through the pipeline so <code>generate-cases</code> constructs it <strong>once</strong>.</p>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th></th><th class="num">Predictor initialisations</th><th class="num">Endpoint time (77-case run)</th></tr></thead>
+        <tbody>
+          <tr><td>Before</td><td class="num">78</td><td class="num">3.23 s</td></tr>
+          <tr><td>After</td><td class="num">1</td><td class="num">2.65 s</td></tr>
+        </tbody>
+      </table>
+      </div></div>
+      <p>The saving scales with row count and registry size; a regression test asserts exactly one construction per request. Frontend build: main bundle &asymp; 316&nbsp;kB (&asymp; 104&nbsp;kB gzip); the Three.js backdrop chunk &asymp; 859&nbsp;kB (&asymp; 236&nbsp;kB gzip) is lazy-loaded.</p>
+
+      <h3>8.6&ensp;Discussion</h3>
+      <p><strong>What works.</strong> The deterministic pipeline is genuinely explainable end to end &mdash; a case&rsquo;s audit trail reconstructs every decision. The policy gate behaves correctly against real ledger history (the &#8377;15,000 case escalated exactly as configured). The shadow-only boundary held under test and in the live run. The Dataset Lab turns an arbitrary CSV into inspectable cases with leakage and sufficiency checks that actually fire.</p>
+      <p><strong>Honest limitations.</strong> Execution and settlement are simulated &mdash; there is no live payment or communications adapter. The domain is still partly JSON-blob rather than fully relational, so cross-case querying is limited. Correlation needs a shared <code>reference_id</code>; there is no entity resolution across files yet. The dashboard aggregates in application code rather than SQL. The frontend has no automated tests. There is no multi-tenancy. The reference model&rsquo;s training data provenance is unverified (documented in the model card). These are scoped in Section&nbsp;10.</p>
+    </section>
+
+    <!-- ================= 9 CONCLUSION ================= -->
+    <section id="s9">
+      <div class="sec-head"><span class="kicker">Section 9</span><h2 class="sec-title">Conclusion</h2></div>
+      <p>RecoverChain demonstrates that failed-revenue recovery can be treated as a transparent decisioning problem rather than a blind schedule. Each failure becomes a case; each case runs one fixed, auditable lifecycle of small deterministic engines; a ledger-backed policy gate is the sole authority over whether an action runs; execution is sandboxed and idempotent; and the outcome is verified independently rather than assumed. Machine learning is present and useful for prioritisation, but is architecturally prevented from ever deciding &mdash; and degrades cleanly to a deterministic baseline when it is absent or weak.</p>
+      <p>The Dataset Lab extends the same discipline to arbitrary data: any tabular file can be mapped, checked for leakage and sufficiency, used to train a per-dataset model, and replayed into real cases &mdash; still without that model gaining authority.</p>
+      <p>The system is validated by 216 passing tests at 88% coverage, a clean end-to-end browser walk-through, and a hardening pass that makes it safe to deploy and demonstrate. It runs entirely offline. Within its deliberately simulated execution boundary, RecoverChain is a complete, coherent, and defensible implementation of diagnosis-driven revenue recovery.</p>
+    </section>
+
+    <!-- ================= 10 FUTURE SCOPE ================= -->
+    <section id="s10">
+      <div class="sec-head"><span class="kicker">Section 10</span><h2 class="sec-title">Future Scope</h2></div>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th>Track</th><th>Item</th><th>Description</th><th>State</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="3">Near-term</td><td>Trust &amp; explainability</td><td>Optional LLM narrator (behind a key, off by default) replacing template lines; CSV/XLSX export of cases and outcomes; per-dataset and trend breakdowns in Insights.</td><td><span class="pill part">partial</span></td></tr>
+          <tr><td>Workflow robustness</td><td>Persist run state across refresh; a case picker on Step&nbsp;7; background <code>generate-cases</code> as a tracked job with progress.</td><td><span class="pill plan">planned</span></td></tr>
+          <tr><td>Test &amp; quality</td><td>Frontend test suite (the 10-step flow, column mapping, <code>computeInsights</code>); correlation edge cases; frontend build+tests in CI.</td><td><span class="pill part">partial</span></td></tr>
+          <tr><td rowspan="2">Structural</td><td>First-class domain model</td><td>Customer, Transaction/Payment, Invoice, Subscription, CheckoutSession, PromiseToPay as relational entities; entity resolution + shared <code>reference_id</code>; move queryable sub-objects out of JSON columns; SQL-side dashboard aggregation.</td><td><span class="pill plan">planned</span></td></tr>
+          <tr><td>Multi-file &amp; relationships</td><td>Join payments &harr; customers &harr; invoices on a shared key; relationship detection in the Dataset Lab; make Step&nbsp;5 functional.</td><td><span class="pill plan">planned</span></td></tr>
+          <tr><td rowspan="2">Production</td><td>Real execution</td><td>Real payment adapter(s) (e.g. Stripe, Razorpay) and comms adapter (email/SMS) behind the existing interface; provider webhooks as settlement truth.</td><td><span class="pill plan">planned</span></td></tr>
+          <tr><td>Multi-tenancy &amp; hardening</td><td>Tenant isolation of data, models, and policy config; per-tenant policy (caps, cooldowns, thresholds, consent); production observability; distributed rate limiting; compliance and penetration testing.</td><td><span class="pill plan">planned</span></td></tr>
+        </tbody>
+      </table>
+      </div></div>
+      <p class="lead" style="margin-top:1.2rem">Milestone 1 of the near-term track (Excel/Parquet training, per-row risk category, configurable currency, payload sanitisation) and part of the tooling milestone (Ruff, Mypy, coverage gate, ESLint/Prettier, Docker build in CI) are <strong>already delivered</strong> in the current build.</p>
+    </section>
+
+    <!-- ================= 11 REFERENCES ================= -->
+    <section id="s11">
+      <div class="sec-head"><span class="kicker">Section 11</span><h2 class="sec-title">References</h2></div>
+      <ol>
+        <li>D.&nbsp;Sculley et&nbsp;al., &ldquo;Hidden Technical Debt in Machine Learning Systems,&rdquo; <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, 2015. &mdash; motivation for permanent shadow-mode boundaries.</li>
+        <li>T.&nbsp;Chen and C.&nbsp;Guestrin, &ldquo;XGBoost: A Scalable Tree Boosting System,&rdquo; <em>Proc. 22nd ACM SIGKDD</em>, 2016. &mdash; the gradient-boosted candidate model.</li>
+        <li>F.&nbsp;Pedregosa et&nbsp;al., &ldquo;Scikit-learn: Machine Learning in Python,&rdquo; <em>Journal of Machine Learning Research</em>, vol.&nbsp;12, 2011. &mdash; pipeline, preprocessing, calibration, metrics.</li>
+        <li>S.&nbsp;Ramírez, <em>FastAPI Documentation</em>, 2018&ndash;present. <span class="mono">fastapi.tiangolo.com</span> &mdash; dependency-injected routing, security utilities.</li>
+        <li>M.&nbsp;Bayer, <em>SQLAlchemy 2.0 Documentation</em> and <em>Alembic Documentation</em>. <span class="mono">docs.sqlalchemy.org</span> &mdash; ORM and migration model.</li>
+        <li>Pydantic, <em>Pydantic v2 Documentation</em>. <span class="mono">docs.pydantic.dev</span> &mdash; domain modelling and validation.</li>
+        <li>C.&nbsp;Molnar, <em>Interpretable Machine Learning</em>, 2nd&nbsp;ed., 2022. <span class="mono">christophm.github.io/interpretable-ml-book</span> &mdash; leakage, validation, explanation.</li>
+        <li>Stripe, &ldquo;Smart Retries and automated failed-payment recovery,&rdquo; <em>Stripe Billing Documentation</em>. &mdash; reference practice for processor-native retries and dunning.</li>
+        <li>Adyen, &ldquo;RevenueProtect / auto-rescue,&rdquo; <em>Adyen Documentation</em>. &mdash; reference practice for statistically-timed retries.</li>
+        <li>&ldquo;Involuntary churn&rdquo; and dunning benchmarks, subscription-analytics practitioner literature (ProfitWell / Recurly / Chargebee reports). &mdash; framing of involuntary churn as a recoverable revenue category.</li>
+        <li>React and Vite documentation. <span class="mono">react.dev</span>, <span class="mono">vitejs.dev</span> &mdash; the SPA and build tooling.</li>
+        <li>OWASP, <em>API Security Top 10</em> (2023) and <em>Secure Headers Project</em>. &mdash; auth, rate limiting, CORS, and header hardening guidance.</li>
+      </ol>
+    </section>
+
+    <!-- ================= 12 APPENDIX ================= -->
+    <section id="s12">
+      <div class="sec-head"><span class="kicker">Section 12</span><h2 class="sec-title">Appendix</h2></div>
+
+      <h3>A&ensp;Configuration (environment variables)</h3>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th>Variable</th><th>Default</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>DATABASE_URL</code></td><td><code>sqlite:///./recoverchain.db</code></td><td>SQLite offline default; Postgres for deployment (then <code>alembic upgrade head</code>).</td></tr>
+          <tr><td><code>API_KEY</code></td><td><code>test-api-key</code></td><td><code>X-API-Key</code> on mutating routes; dev default logs a startup warning.</td></tr>
+          <tr><td><code>CORS_ORIGINS</code></td><td><code>*</code></td><td>Comma-separated allow-list; <code>*</code> disables credentialed CORS.</td></tr>
+          <tr><td><code>RATE_LIMIT_ENABLED</code> / <code>RATE_LIMIT_RPM</code></td><td><code>1</code> / <code>120</code></td><td>Per key/IP sliding-window request limit.</td></tr>
+          <tr><td><code>MAX_UPLOAD_BYTES</code></td><td><code>536870912</code></td><td>Dataset upload cap (512&nbsp;MiB).</td></tr>
+          <tr><td><code>DEFAULT_CURRENCY</code></td><td><code>INR</code></td><td>Used when a dataset has no currency column.</td></tr>
+          <tr><td><code>ML_MIN_ROC_AUC</code> / <code>ML_MIN_TEST_ROWS</code></td><td><code>0.55</code> / <code>200</code></td><td>Training quality gate; <code>0</code> disables.</td></tr>
+          <tr><td><code>REDIS_URL</code></td><td><code>redis://localhost:6379/0</code></td><td>Optional; only <code>/health</code> uses it.</td></tr>
+          <tr><td><code>ALLOW_INSECURE_DEFAULTS</code></td><td>&mdash;</td><td><code>1</code> silences the insecure-default startup warnings.</td></tr>
+        </tbody>
+      </table>
+      </div></div>
+
+      <h3>B&ensp;Commands</h3>
+      <pre><span class="c"># full stack — backend :8000 + frontend :5173 (SQLite)</span>
+python run.py
+
+<span class="c"># backend</span>
+cd backend &amp;&amp; PYTHONPATH=. uvicorn api.main:app --reload
+cd backend &amp;&amp; PYTHONPATH=. pytest                 <span class="c"># 216 tests</span>
+cd backend &amp;&amp; PYTHONPATH=. pytest --cov            <span class="c"># coverage (CI gate 80%)</span>
+cd backend &amp;&amp; ruff check . &amp;&amp; ruff format --check .
+cd backend &amp;&amp; PYTHONPATH=. alembic upgrade head    <span class="c"># Postgres only</span>
+cd backend &amp;&amp; PYTHONPATH=. python run_phase19_training.py
+
+<span class="c"># frontend</span>
+cd frontend &amp;&amp; npm install &amp;&amp; npm run dev
+cd frontend &amp;&amp; npm run build &amp;&amp; npm run lint &amp;&amp; npm run format:check
+
+<span class="c"># containers  (copy .env.example -> .env first)</span>
+docker-compose up --build</pre>
+
+      <h3>C&ensp;Repository layout</h3>
+      <pre>backend/
+  domain/          <span class="c"># Pydantic models, CaseState, lifecycle, interfaces</span>
+  application/      <span class="c"># stage engines + case_pipeline + Dataset Lab + ml_*</span>
+  infrastructure/  <span class="c"># orm, dataset_orm, repositories, adapters, redis_client</span>
+  api/             <span class="c"># main.py, dataset_router.py, system_router.py, auth.py, security.py</span>
+  alembic/         <span class="c"># migrations (own the Postgres schema)</span>
+  evaluation/      <span class="c"># deterministic scenario harness + dataset metadata</span>
+  tests/           <span class="c"># 42 files, 216 tests</span>
+frontend/src/
+  workflow/        <span class="c"># 10 step components + Rail, Frame, Backdrop</span>
+  pages/           <span class="c"># Insights, CasesList, CaseView</span>
+  lib/             <span class="c"># api, format, motion, insights, progress</span>
+docs/
+  history/         <span class="c"># architecture_phase*.md (phases 4–23)</span>
+  MODEL_CARD.md · ROADMAP.md · PROJECT_REPORT.md
+scripts/legacy/    <span class="c"># archived one-off build scripts</span></pre>
+
+      <h3>D&ensp;Glossary</h3>
+      <div class="bleed scroll-x"><div class="t-frame">
+      <table>
+        <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Case</strong></td><td>The <code>RecoveryCase</code> aggregate &mdash; one account&rsquo;s correlated failure events plus all lifecycle sub-objects and state.</td></tr>
+          <tr><td><strong>Shadow-only</strong></td><td>A model whose output is logged and surfaced for ranking but architecturally barred from authorising an action.</td></tr>
+          <tr><td><strong>ERV</strong></td><td>Expected Recoverable Value &mdash; <code>amount &times; probability factor</code> attached to the top recommended action.</td></tr>
+          <tr><td><strong>Policy gate</strong></td><td><code>DeterministicPolicyEngine</code> &mdash; the sole authority over whether an action executes; returns <code>PERMITTED / WAIT / ESCALATE / DENIED</code>.</td></tr>
+          <tr><td><strong>PolicyContext</strong></td><td>Retry / cooldown / contact counts built from the real <code>execution_attempts</code> ledger.</td></tr>
+          <tr><td><strong>Leakage</strong></td><td>A post-outcome column (settlement date, final status&hellip;) that would let a model &ldquo;see the answer&rdquo;; quarantined by the Dataset Lab.</td></tr>
+          <tr><td><strong>Minimum-information contract</strong></td><td>The set of canonical fields a dataset must supply (entity, amount, timestamp, target) before it can train.</td></tr>
+          <tr><td><strong><code>SANDBOX_SIMULATION</code></strong></td><td>The settlement source used by verification; there is no live reconciliation.</td></tr>
+        </tbody>
+      </table>
+      </div></div>
+    </section>
+
+    <p class="foot">RecoverChain &mdash; Project Report &nbsp;·&nbsp; generated 2026-09-02 &nbsp;·&nbsp; backend @ 216 tests / 88% coverage &nbsp;·&nbsp; branch <code>master</code></p>
+  </main>
+</div>

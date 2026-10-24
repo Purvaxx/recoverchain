@@ -1,0 +1,56 @@
+﻿================================================================================
+PHASE 16C: BILLING.CSV DEEP VALIDATION
+================================================================================
+Original file SHA256: 9615a50e653bf075988efd8642bc44e5ff06c3e31bbf00336469b9dfd488244e
+Original file size: 273574298 bytes
+
+--- RAW DUPLICATE ANALYSIS ---
+Raw rows: 4424748
+Exact duplicate rows: 404972
+
+Subscriber-month pairs: 3601892
+Subscriber-months with 1 row: 2779036
+Subscriber-months with 2 rows: 822856
+Subscriber-months with >2 rows: 0
+
+--- CLASSIFYING DUPLICATE SUBSCRIBER-MONTHS ---
+Sampled 10000 duplicate subscriber-months:
+  Exact duplicates: 4902 (49.0%)
+  Differ on late_fee only: 406 (4.1%)
+  Differ on payment_status: 2458 (24.6%)
+  Differ on other fields: 2234 (22.3%)
+
+Conflicting payment_status examples:
+  SUB0105035 2026-01: Failed vs Paid On Time, diffs=['payment_status', 'days_to_payment']
+  SUB0226931 2026-05: Paid On Time vs Unpaid, diffs=['data_overage_usd', 'total_billed_usd', 'payment_status', 'days_to_payment']
+  SUB0114470 2026-01: Paid On Time vs Paid Late, diffs=['data_overage_usd', 'total_billed_usd', 'payment_status', 'days_to_payment']
+  SUB0290076 2026-01: Paid Late vs Paid On Time, diffs=['payment_status', 'days_to_payment']
+  SUB0086072 2026-05: Paid Late vs Paid On Time, diffs=['intl_roaming_usd', 'late_fee_usd', 'total_billed_usd', 'payment_status', 'days_to_payment']
+
+--- FAILED vs UNPAID SEMANTICS ---
+Subscribers with at least one Failed: 112112
+Subscribers (sampled 500 with Failed):
+  Later recovered (paid in subsequent month): 441
+  No subsequent recovery observed: 59
+
+--- DAYS_TO_PAYMENT DEEP CHECK ---
+  Paid On Time: count=3798683, mean_d2p=0.0, min=0, max=0, zero_pct=100.0%
+  Paid Late: count=414928, mean_d2p=23.7, min=1, max=59, zero_pct=0.0%
+  Failed: count=130898, mean_d2p=21.7, min=0, max=59, zero_pct=7.7%
+  Unpaid: count=80239, mean_d2p=23.5, min=1, max=59, zero_pct=0.0%
+
+--- IMPOSSIBLE VALUES CHECK ---
+Negative amounts: 0
+Negative total: 0
+Negative days_to_payment: 0
+Zero base_charge: 0
+
+--- SUBSCRIBER CONTINUITY ---
+Min months per subscriber: 1
+Max months per subscriber: 10
+Mean months per subscriber: 7.2
+Median months per subscriber: 10.0
+All year_months in data: ['2025-07', '2025-08', '2025-09', '2025-10', '2025-11', '2025-12', '2026-01', '2026-03', '2026-04', '2026-05']
+Total distinct months: 10
+
+DONE

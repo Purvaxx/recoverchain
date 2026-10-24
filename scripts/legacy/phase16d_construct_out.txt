@@ -1,0 +1,46 @@
+﻿================================================================================
+BILLING_RECOVERY_V2 CONSTRUCTION
+================================================================================
+Raw rows: 4424748
+After exact dedup: 4019776 (dropped 404972)
+Single-row subscriber-months: 3184008
+Duplicate subscriber-months: 417884
+Conflicting status subscriber-months (EXCLUDED): 201327
+Agreeing status subscriber-months (KEPT, deduped): 216557
+Clean billing rows: 3400565
+
+Primary target distribution:
+target_recovered
+1    3266620
+0     133945
+Name: count, dtype: int64
+target_recovered
+1    0.9606
+0    0.0394
+Name: proportion, dtype: float64
+
+Final billing v2 shape: (3400565, 20)
+Temporal split:
+              count    mean
+split                      
+test         819759  0.9711
+train       1872859  0.9522
+validation   707947  0.9708
+Nulls: 0
+Saved billing_recovery_v2.csv
+
+================================================================================
+AR_RECOVERY_V2 CONSTRUCTION
+================================================================================
+Final AR v2 shape: (2466, 16)
+Temporal split:
+            count    mean
+split                    
+test          429  0.2774
+train        1594  0.3858
+validation    443  0.3228
+Saved ar_recovery_v2.csv
+
+Metadata written.
+
+DONE ù No models trained.

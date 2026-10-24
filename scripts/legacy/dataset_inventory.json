@@ -1,0 +1,6452 @@
+[
+  {
+    "filename": "2019-Dec.csv.zip",
+    "file_size": 77358943,
+    "row_count": 287374,
+    "column_count": 9,
+    "columns": [
+      "event_time",
+      "event_type",
+      "product_id",
+      "category_id",
+      "category_code",
+      "brand",
+      "price",
+      "user_id",
+      "user_session"
+    ],
+    "targets": [],
+    "identifiers": [
+      "product_id",
+      "category_id",
+      "user_id",
+      "user_session"
+    ],
+    "temporal": [
+      "event_time"
+    ],
+    "profile": {
+      "event_time": {
+        "dtype": "str",
+        "uniques_in_sample": 7009,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2019-12-01 00:00:00 UTC",
+          "2019-12-01 00:00:00 UTC",
+          "2019-12-01 00:00:02 UTC"
+        ]
+      },
+      "event_type": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "remove_from_cart",
+          "view",
+          "cart"
+        ]
+      },
+      "product_id": {
+        "dtype": "int64",
+        "uniques_in_sample": 4441,
+        "nulls_in_sample": 0,
+        "samples": [
+          "5712790",
+          "5764655",
+          "4958"
+        ]
+      },
+      "category_id": {
+        "dtype": "int64",
+        "uniques_in_sample": 316,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1487580005268456287",
+          "1487580005411062629",
+          "1487580009471148064"
+        ]
+      },
+      "category_code": {
+        "dtype": "str",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 9857,
+        "samples": [
+          "furniture.bathroom.bath",
+          "furniture.bathroom.bath",
+          "appliances.environment.vacuum"
+        ]
+      },
+      "brand": {
+        "dtype": "str",
+        "uniques_in_sample": 150,
+        "nulls_in_sample": 4413,
+        "samples": [
+          "f.o.x",
+          "cnd",
+          "runail"
+        ]
+      },
+      "price": {
+        "dtype": "float64",
+        "uniques_in_sample": 724,
+        "nulls_in_sample": 0,
+        "samples": [
+          "6.27",
+          "29.05",
+          "1.19"
+        ]
+      },
+      "user_id": {
+        "dtype": "int64",
+        "uniques_in_sample": 1450,
+        "nulls_in_sample": 0,
+        "samples": [
+          "576802932",
+          "412120092",
+          "494077766"
+        ]
+      },
+      "user_session": {
+        "dtype": "str",
+        "uniques_in_sample": 2410,
+        "nulls_in_sample": 9,
+        "samples": [
+          "51d85cb0-897f-48d2-918b-ad63965c12dc",
+          "8adff31e-2051-4894-9758-224bfa8aec18",
+          "c99a50e8-2fac-4c4d-89ec-41c05f114554"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "AR_AP_Analytics_Dashboard_FINAL.xlsx",
+    "file_size": 23854,
+    "status": "ERROR",
+    "error": "`Import openpyxl` failed.  Use pip or conda to install the openpyxl package."
+  },
+  {
+    "filename": "ar_ledger.parquet",
+    "file_size": 34650677,
+    "status": "ERROR",
+    "error": "Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\nA suitable version of pyarrow or fastparquet is required for parquet support.\nTrying to import the above resulted in these errors:\n - `Import pyarrow` failed. pyarrow is required for parquet support. Use pip or conda to install the pyarrow package.\n - `Import fastparquet` failed. fastparquet is required for parquet support. Use pip or conda to install the fastparquet package."
+  },
+  {
+    "filename": "audit_trail.csv",
+    "file_size": 16898,
+    "row_count": 60,
+    "column_count": 15,
+    "columns": [
+      "subscription_id",
+      "customer_id",
+      "customer_segment",
+      "failure_reason",
+      "diagnosis",
+      "chosen_action",
+      "reasoning",
+      "allowed_by_rules",
+      "rule_override_reason",
+      "final_action",
+      "simulated_outcome",
+      "amount_inr",
+      "recovered_amount_inr",
+      "discount_cost_inr",
+      "timestamp"
+    ],
+    "targets": [
+      "simulated_outcome",
+      "recovered_amount_inr"
+    ],
+    "identifiers": [
+      "subscription_id",
+      "customer_id",
+      "customer_segment",
+      "rule_override_reason"
+    ],
+    "temporal": [
+      "timestamp"
+    ],
+    "profile": {
+      "subscription_id": {
+        "dtype": "str",
+        "uniques_in_sample": 60,
+        "nulls_in_sample": 0,
+        "samples": [
+          "sub_0001",
+          "sub_0002",
+          "sub_0003"
+        ]
+      },
+      "customer_id": {
+        "dtype": "str",
+        "uniques_in_sample": 59,
+        "nulls_in_sample": 0,
+        "samples": [
+          "cust_6925",
+          "cust_4814",
+          "cust_6977"
+        ]
+      },
+      "customer_segment": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "at_risk",
+          "standard",
+          "standard"
+        ]
+      },
+      "failure_reason": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "bank_technical_decline",
+          "card_expired",
+          "card_blocked_by_bank"
+        ]
+      },
+      "diagnosis": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "[API ERROR] Messages.create() got an unexpected keyword argument 'temperature'",
+          "[API ERROR] Messages.create() got an unexpected keyword argument 'temperature'",
+          "[API ERROR] Messages.create() got an unexpected keyword argument 'temperature'"
+        ]
+      },
+      "chosen_action": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "smart_retry",
+          "send_update_payment_link",
+          "send_update_payment_link"
+        ]
+      },
+      "reasoning": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Fallback to 'smart_retry' due to API error.",
+          "Fallback to 'send_update_payment_link' due to API error.",
+          "Fallback to 'send_update_payment_link' due to API error."
+        ]
+      },
+      "allowed_by_rules": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "no",
+          "yes",
+          "yes"
+        ]
+      },
+      "rule_override_reason": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 54,
+        "samples": [
+          "Max retries exhausted (3/2). Auto-escalating to human review.",
+          "Max retries exhausted (2/2). Auto-escalating to human review.",
+          "Max retries exhausted (3/2). Auto-escalating to human review."
+        ]
+      },
+      "final_action": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "escalate_to_human",
+          "send_update_payment_link",
+          "send_update_payment_link"
+        ]
+      },
+      "simulated_outcome": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "pending_human_review",
+          "recovered",
+          "recovered"
+        ]
+      },
+      "amount_inr": {
+        "dtype": "float64",
+        "uniques_in_sample": 8,
+        "nulls_in_sample": 0,
+        "samples": [
+          "199.0",
+          "1999.0",
+          "999.0"
+        ]
+      },
+      "recovered_amount_inr": {
+        "dtype": "float64",
+        "uniques_in_sample": 8,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.0",
+          "1999.0",
+          "999.0"
+        ]
+      },
+      "discount_cost_inr": {
+        "dtype": "float64",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.0",
+          "0.0",
+          "0.0"
+        ]
+      },
+      "timestamp": {
+        "dtype": "str",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2026-08-23T12:55:27.134784",
+          "2026-08-23T12:55:27.134784",
+          "2026-08-23T12:55:27.134784"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "bank_credit_scoring.csv",
+    "file_size": 3154074,
+    "row_count": 18420,
+    "column_count": 18,
+    "columns": [
+      "\u0417\u0430\u0434\u043e\u043b\u0436\u0435\u043d\u043d\u043e\u0441\u0442\u044c",
+      "\u041f\u0440\u043e\u0441\u0440\u043e\u0447\u043a\u0430, \u0434\u043d\u0438",
+      "\u041f\u0435\u0440\u0432\u043e\u043d\u0430\u0447\u043b\u044c\u043d\u044b\u0439 \u043b\u0438\u043c\u0438\u0442",
+      "BIRTHDATE",
+      "SEX",
+      "EDU",
+      "INCOME",
+      "TERM",
+      "\u0420\u0435\u0439\u0442\u0438\u043d\u0433 \u043a\u0440\u0435\u0434\u0438\u0442\u043d\u043e\u0439 \u0438\u0441\u0442\u043e\u0440\u0438\u0438",
+      "LV_AREA",
+      "LV_SETTLEMENTNAME",
+      "INDUSTRYNAME",
+      "PDN",
+      "CLIENTID",
+      "SCORINGMARK",
+      "UNDERAGECHILDRENCOUNT",
+      "VELCOMSCORING",
+      "FAMILYSTATUS"
+    ],
+    "targets": [
+      "LV_SETTLEMENTNAME",
+      "FAMILYSTATUS"
+    ],
+    "identifiers": [
+      "CLIENTID"
+    ],
+    "temporal": [
+      "BIRTHDATE"
+    ],
+    "profile": {
+      "\u0417\u0430\u0434\u043e\u043b\u0436\u0435\u043d\u043d\u043e\u0441\u0442\u044c": {
+        "dtype": "float64",
+        "uniques_in_sample": 4956,
+        "nulls_in_sample": 0,
+        "samples": [
+          "6063.5",
+          "3765.04",
+          "2067.66"
+        ]
+      },
+      "\u041f\u0440\u043e\u0441\u0440\u043e\u0447\u043a\u0430, \u0434\u043d\u0438": {
+        "dtype": "int64",
+        "uniques_in_sample": 21,
+        "nulls_in_sample": 0,
+        "samples": [
+          "3",
+          "0",
+          "0"
+        ]
+      },
+      "\u041f\u0435\u0440\u0432\u043e\u043d\u0430\u0447\u043b\u044c\u043d\u044b\u0439 \u043b\u0438\u043c\u0438\u0442": {
+        "dtype": "float64",
+        "uniques_in_sample": 330,
+        "nulls_in_sample": 0,
+        "samples": [
+          "7000.0",
+          "5000.0",
+          "2650.0"
+        ]
+      },
+      "BIRTHDATE": {
+        "dtype": "str",
+        "uniques_in_sample": 6346,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1983-07-08",
+          "1987-12-19",
+          "1966-02-28"
+        ]
+      },
+      "SEX": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "\u041c\u0443\u0436\u0441\u043a\u043e\u0439",
+          "\u0416\u0435\u043d\u0441\u043a\u0438\u0439",
+          "\u0416\u0435\u043d\u0441\u043a\u0438\u0439"
+        ]
+      },
+      "EDU": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "\u0421\u0440\u0435\u0434\u043d\u0435\u0435 \u0441\u043f\u0435\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0435",
+          "\u0412\u044b\u0441\u0448\u0435\u0435",
+          "\u0421\u0440\u0435\u0434\u043d\u0435\u0435"
+        ]
+      },
+      "INCOME": {
+        "dtype": "float64",
+        "uniques_in_sample": 8516,
+        "nulls_in_sample": 0,
+        "samples": [
+          "703.07",
+          "1693.68",
+          "724.49"
+        ]
+      },
+      "TERM": {
+        "dtype": "int64",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "60",
+          "60",
+          "60"
+        ]
+      },
+      "\u0420\u0435\u0439\u0442\u0438\u043d\u0433 \u043a\u0440\u0435\u0434\u0438\u0442\u043d\u043e\u0439 \u0438\u0441\u0442\u043e\u0440\u0438\u0438": {
+        "dtype": "str",
+        "uniques_in_sample": 16,
+        "nulls_in_sample": 518,
+        "samples": [
+          "A1",
+          "B2",
+          "C2"
+        ]
+      },
+      "LV_AREA": {
+        "dtype": "str",
+        "uniques_in_sample": 28,
+        "nulls_in_sample": 1467,
+        "samples": [
+          "\u0413\u043e\u043c\u0435\u043b\u044c\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c",
+          "\u0413\u0420\u041e\u0414\u041d\u0415\u041d\u0421\u041a\u0410\u042f",
+          "\u041c\u0418\u041d\u0421\u041a\u0410\u042f"
+        ]
+      },
+      "LV_SETTLEMENTNAME": {
+        "dtype": "str",
+        "uniques_in_sample": 1491,
+        "nulls_in_sample": 46,
+        "samples": [
+          "\u041a\u041e\u0421\u0410\u041a\u041e\u0412\u041a\u0410",
+          "\u041c\u0418\u041d\u0421\u041a",
+          "\u0401\u0414\u041a\u0418"
+        ]
+      },
+      "INDUSTRYNAME": {
+        "dtype": "str",
+        "uniques_in_sample": 16,
+        "nulls_in_sample": 0,
+        "samples": [
+          "\u0410\u041f\u041a",
+          "\u0424\u0438\u043d\u0430\u043d\u0441\u044b \u0438 \u0441\u0442\u0440\u0430\u0445\u043e\u0432\u0430\u043d\u0438\u0435",
+          "\u041c\u0435\u0434\u0438\u0446\u0438\u043d\u0430 \u0438 \u0437\u0434\u0440\u0430\u0432\u043e\u043e\u0445\u0440\u0430\u043d\u0435\u043d\u0438\u0435"
+        ]
+      },
+      "PDN": {
+        "dtype": "float64",
+        "uniques_in_sample": 102,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.98",
+          "0.17",
+          "0.4"
+        ]
+      },
+      "CLIENTID": {
+        "dtype": "int64",
+        "uniques_in_sample": 8495,
+        "nulls_in_sample": 0,
+        "samples": [
+          "919517",
+          "539353",
+          "818913"
+        ]
+      },
+      "SCORINGMARK": {
+        "dtype": "float64",
+        "uniques_in_sample": 371,
+        "nulls_in_sample": 1634,
+        "samples": [
+          "233.0",
+          "216.0",
+          "246.0"
+        ]
+      },
+      "UNDERAGECHILDRENCOUNT": {
+        "dtype": "int64",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "1",
+          "0"
+        ]
+      },
+      "VELCOMSCORING": {
+        "dtype": "float64",
+        "uniques_in_sample": 121,
+        "nulls_in_sample": 9522,
+        "samples": [
+          "-2.0",
+          "-2.0",
+          "-2.0"
+        ]
+      },
+      "FAMILYSTATUS": {
+        "dtype": "int64",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1",
+          "1",
+          "2"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "billing.csv",
+    "file_size": 273574298,
+    "row_count": 4424748,
+    "column_count": 10,
+    "columns": [
+      "subscriber_id",
+      "year_month",
+      "base_charge_usd",
+      "data_overage_usd",
+      "intl_roaming_usd",
+      "tax_usd",
+      "late_fee_usd",
+      "total_billed_usd",
+      "payment_status",
+      "days_to_payment"
+    ],
+    "targets": [
+      "payment_status"
+    ],
+    "identifiers": [
+      "subscriber_id"
+    ],
+    "temporal": [],
+    "profile": {
+      "subscriber_id": {
+        "dtype": "str",
+        "uniques_in_sample": 1117,
+        "nulls_in_sample": 0,
+        "samples": [
+          "SUB0000001",
+          "SUB0000001",
+          "SUB0000001"
+        ]
+      },
+      "year_month": {
+        "dtype": "str",
+        "uniques_in_sample": 10,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2026-05",
+          "2026-05",
+          "2026-04"
+        ]
+      },
+      "base_charge_usd": {
+        "dtype": "float64",
+        "uniques_in_sample": 1035,
+        "nulls_in_sample": 0,
+        "samples": [
+          "61.99",
+          "61.99",
+          "61.99"
+        ]
+      },
+      "data_overage_usd": {
+        "dtype": "float64",
+        "uniques_in_sample": 567,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.0",
+          "0.0",
+          "0.0"
+        ]
+      },
+      "intl_roaming_usd": {
+        "dtype": "float64",
+        "uniques_in_sample": 662,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.0",
+          "0.0",
+          "0.0"
+        ]
+      },
+      "tax_usd": {
+        "dtype": "float64",
+        "uniques_in_sample": 646,
+        "nulls_in_sample": 0,
+        "samples": [
+          "5.27",
+          "5.27",
+          "5.27"
+        ]
+      },
+      "late_fee_usd": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "15",
+          "0",
+          "0"
+        ]
+      },
+      "total_billed_usd": {
+        "dtype": "float64",
+        "uniques_in_sample": 2585,
+        "nulls_in_sample": 0,
+        "samples": [
+          "82.26",
+          "67.26",
+          "67.26"
+        ]
+      },
+      "payment_status": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Paid On Time",
+          "Paid On Time",
+          "Paid On Time"
+        ]
+      },
+      "days_to_payment": {
+        "dtype": "int64",
+        "uniques_in_sample": 60,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "click_stream.csv.zip",
+    "file_size": 479897049,
+    "row_count": 1702647,
+    "column_count": 6,
+    "columns": [
+      "session_id",
+      "event_name",
+      "event_time",
+      "event_id",
+      "traffic_source",
+      "event_metadata"
+    ],
+    "targets": [],
+    "identifiers": [
+      "session_id",
+      "event_id"
+    ],
+    "temporal": [
+      "event_time"
+    ],
+    "profile": {
+      "session_id": {
+        "dtype": "str",
+        "uniques_in_sample": 543,
+        "nulls_in_sample": 0,
+        "samples": [
+          "fb0abf9e-fd1a-44dd-b5c0-2834d5a4b81c",
+          "fb0abf9e-fd1a-44dd-b5c0-2834d5a4b81c",
+          "7d440441-e67a-4d36-b324-80ffd636d166"
+        ]
+      },
+      "event_name": {
+        "dtype": "str",
+        "uniques_in_sample": 9,
+        "nulls_in_sample": 0,
+        "samples": [
+          "HOMEPAGE",
+          "SCROLL",
+          "HOMEPAGE"
+        ]
+      },
+      "event_time": {
+        "dtype": "str",
+        "uniques_in_sample": 9990,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2019-09-06T15:54:32.821085Z",
+          "2019-09-06T16:03:57.821085Z",
+          "2019-09-01T12:05:10.322763Z"
+        ]
+      },
+      "event_id": {
+        "dtype": "str",
+        "uniques_in_sample": 10000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "9c4388c4-c95b-4678-b5ca-e9cbc0734109",
+          "4690e1f5-3f99-42d3-84a5-22c4c4d8500a",
+          "88aeaeb5-ec98-4859-852c-8abb483faf31"
+        ]
+      },
+      "traffic_source": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "MOBILE",
+          "MOBILE",
+          "MOBILE"
+        ]
+      },
+      "event_metadata": {
+        "dtype": "str",
+        "uniques_in_sample": 1044,
+        "nulls_in_sample": 7280,
+        "samples": [
+          "{'product_id': 15315, 'quantity': 4, 'item_price': 313529}",
+          "{'payment_status': 'Success'}",
+          "{'search_keywords': 'Dress Kondangan'}"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "customers (1).csv",
+    "file_size": 609111,
+    "row_count": 4080,
+    "column_count": 12,
+    "columns": [
+      "customer_id",
+      "company_name",
+      "customer_segment",
+      "country",
+      "city",
+      "region_type",
+      "contact_email",
+      "contact_phone",
+      "payment_term_days",
+      "credit_limit",
+      "customer_since",
+      "is_active"
+    ],
+    "targets": [],
+    "identifiers": [
+      "customer_id",
+      "customer_segment",
+      "customer_since"
+    ],
+    "temporal": [],
+    "profile": {
+      "customer_id": {
+        "dtype": "str",
+        "uniques_in_sample": 4080,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CUST-000001",
+          "CUST-000002",
+          "CUST-000003"
+        ]
+      },
+      "company_name": {
+        "dtype": "str",
+        "uniques_in_sample": 3749,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Gutierrez LLC",
+          "Wells, Atkinson and Turner",
+          "Lucas-Nielsen"
+        ]
+      },
+      "customer_segment": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Small Business",
+          "Mid-Market",
+          "Small Business"
+        ]
+      },
+      "country": {
+        "dtype": "str",
+        "uniques_in_sample": 17,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Japan",
+          "United States",
+          "Australia"
+        ]
+      },
+      "city": {
+        "dtype": "str",
+        "uniques_in_sample": 3487,
+        "nulls_in_sample": 0,
+        "samples": [
+          "New Stacyburgh",
+          "Port Steven",
+          "Christopherborough"
+        ]
+      },
+      "region_type": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "International",
+          "Domestic",
+          "International"
+        ]
+      },
+      "contact_email": {
+        "dtype": "str",
+        "uniques_in_sample": 3672,
+        "nulls_in_sample": 0,
+        "samples": [
+          "orders@gutierrezllc.com",
+          "orders@wellsatkinsonandturn.com",
+          "orders@lucas-nielsen.com"
+        ]
+      },
+      "contact_phone": {
+        "dtype": "str",
+        "uniques_in_sample": 3789,
+        "nulls_in_sample": 221,
+        "samples": [
+          "+1-868-470-5685x6624",
+          "6865688263",
+          "5469990139"
+        ]
+      },
+      "payment_term_days": {
+        "dtype": "int64",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "15",
+          "30",
+          "30"
+        ]
+      },
+      "credit_limit": {
+        "dtype": "float64",
+        "uniques_in_sample": 3999,
+        "nulls_in_sample": 0,
+        "samples": [
+          "9772.27",
+          "40654.01",
+          "7300.9"
+        ]
+      },
+      "customer_since": {
+        "dtype": "str",
+        "uniques_in_sample": 1306,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2023-01-19",
+          "2023-11-26",
+          "2022-07-17"
+        ]
+      },
+      "is_active": {
+        "dtype": "bool",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "True",
+          "True",
+          "True"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "customer_churn_business_dataset.csv",
+    "file_size": 1769457,
+    "row_count": 10000,
+    "column_count": 32,
+    "columns": [
+      "customer_id",
+      "gender",
+      "age",
+      "country",
+      "city",
+      "customer_segment",
+      "tenure_months",
+      "signup_channel",
+      "contract_type",
+      "monthly_logins",
+      "weekly_active_days",
+      "avg_session_time",
+      "features_used",
+      "usage_growth_rate",
+      "last_login_days_ago",
+      "monthly_fee",
+      "total_revenue",
+      "payment_method",
+      "payment_failures",
+      "discount_applied",
+      "price_increase_last_3m",
+      "support_tickets",
+      "avg_resolution_time",
+      "complaint_type",
+      "csat_score",
+      "escalations",
+      "email_open_rate",
+      "marketing_click_rate",
+      "nps_score",
+      "survey_response",
+      "referral_count",
+      "churn"
+    ],
+    "targets": [
+      "churn"
+    ],
+    "identifiers": [
+      "customer_id",
+      "customer_segment"
+    ],
+    "temporal": [
+      "avg_session_time",
+      "avg_resolution_time"
+    ],
+    "profile": {
+      "customer_id": {
+        "dtype": "str",
+        "uniques_in_sample": 10000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CUST_00001",
+          "CUST_00002",
+          "CUST_00003"
+        ]
+      },
+      "gender": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Male",
+          "Female",
+          "Male"
+        ]
+      },
+      "age": {
+        "dtype": "int64",
+        "uniques_in_sample": 57,
+        "nulls_in_sample": 0,
+        "samples": [
+          "68",
+          "57",
+          "24"
+        ]
+      },
+      "country": {
+        "dtype": "str",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Bangladesh",
+          "Canada",
+          "Germany"
+        ]
+      },
+      "city": {
+        "dtype": "str",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 0,
+        "samples": [
+          "London",
+          "Sydney",
+          "New York"
+        ]
+      },
+      "customer_segment": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "SME",
+          "Individual",
+          "SME"
+        ]
+      },
+      "tenure_months": {
+        "dtype": "int64",
+        "uniques_in_sample": 59,
+        "nulls_in_sample": 0,
+        "samples": [
+          "22",
+          "9",
+          "58"
+        ]
+      },
+      "signup_channel": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Web",
+          "Mobile",
+          "Web"
+        ]
+      },
+      "contract_type": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Monthly",
+          "Monthly",
+          "Yearly"
+        ]
+      },
+      "monthly_logins": {
+        "dtype": "int64",
+        "uniques_in_sample": 53,
+        "nulls_in_sample": 0,
+        "samples": [
+          "26",
+          "7",
+          "19"
+        ]
+      },
+      "weekly_active_days": {
+        "dtype": "int64",
+        "uniques_in_sample": 8,
+        "nulls_in_sample": 0,
+        "samples": [
+          "7",
+          "5",
+          "5"
+        ]
+      },
+      "avg_session_time": {
+        "dtype": "float64",
+        "uniques_in_sample": 9777,
+        "nulls_in_sample": 0,
+        "samples": [
+          "11.76237198882082",
+          "26.84638960973137",
+          "23.38006497233134"
+        ]
+      },
+      "features_used": {
+        "dtype": "int64",
+        "uniques_in_sample": 15,
+        "nulls_in_sample": 0,
+        "samples": [
+          "5",
+          "1",
+          "6"
+        ]
+      },
+      "usage_growth_rate": {
+        "dtype": "float64",
+        "uniques_in_sample": 104,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.06",
+          "-0.28",
+          "0.13"
+        ]
+      },
+      "last_login_days_ago": {
+        "dtype": "int64",
+        "uniques_in_sample": 71,
+        "nulls_in_sample": 0,
+        "samples": [
+          "7",
+          "2",
+          "23"
+        ]
+      },
+      "monthly_fee": {
+        "dtype": "int64",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "30",
+          "30",
+          "20"
+        ]
+      },
+      "total_revenue": {
+        "dtype": "int64",
+        "uniques_in_sample": 221,
+        "nulls_in_sample": 0,
+        "samples": [
+          "660",
+          "270",
+          "1160"
+        ]
+      },
+      "payment_method": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "PayPal",
+          "Card",
+          "Card"
+        ]
+      },
+      "payment_failures": {
+        "dtype": "int64",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1",
+          "1",
+          "2"
+        ]
+      },
+      "discount_applied": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Yes",
+          "No",
+          "No"
+        ]
+      },
+      "price_increase_last_3m": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "No",
+          "Yes",
+          "No"
+        ]
+      },
+      "support_tickets": {
+        "dtype": "int64",
+        "uniques_in_sample": 8,
+        "nulls_in_sample": 0,
+        "samples": [
+          "4",
+          "1",
+          "1"
+        ]
+      },
+      "avg_resolution_time": {
+        "dtype": "float64",
+        "uniques_in_sample": 9883,
+        "nulls_in_sample": 0,
+        "samples": [
+          "13.354359704932143",
+          "25.14008841258968",
+          "27.57292845215133"
+        ]
+      },
+      "complaint_type": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 2045,
+        "samples": [
+          "Service",
+          "Billing",
+          "Service"
+        ]
+      },
+      "csat_score": {
+        "dtype": "float64",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "4.0",
+          "2.0",
+          "3.0"
+        ]
+      },
+      "escalations": {
+        "dtype": "int64",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "email_open_rate": {
+        "dtype": "float64",
+        "uniques_in_sample": 81,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.71",
+          "0.78",
+          "0.35"
+        ]
+      },
+      "marketing_click_rate": {
+        "dtype": "float64",
+        "uniques_in_sample": 50,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.4",
+          "0.33",
+          "0.49"
+        ]
+      },
+      "nps_score": {
+        "dtype": "int64",
+        "uniques_in_sample": 197,
+        "nulls_in_sample": 0,
+        "samples": [
+          "27",
+          "-19",
+          "80"
+        ]
+      },
+      "survey_response": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Satisfied",
+          "Neutral",
+          "Neutral"
+        ]
+      },
+      "referral_count": {
+        "dtype": "int64",
+        "uniques_in_sample": 8,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1",
+          "2",
+          "1"
+        ]
+      },
+      "churn": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "1",
+          "0"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "customer_churn_dataset.csv",
+    "file_size": 6361677,
+    "row_count": 35000,
+    "column_count": 36,
+    "columns": [
+      "Customer_ID",
+      "Age",
+      "Gender",
+      "Region",
+      "City_Tier",
+      "Customer_Segment",
+      "Tenure_Months",
+      "Contract_Type",
+      "Subscription_Plan",
+      "Monthly_Charges",
+      "Total_Charges",
+      "Payment_Method",
+      "Auto_Payment",
+      "Paperless_Billing",
+      "Internet_Service",
+      "Phone_Service",
+      "Streaming_Service",
+      "Online_Security",
+      "Tech_Support",
+      "Device_Protection",
+      "Avg_Monthly_Usage_GB",
+      "Num_Logins_Last_Month",
+      "Support_Tickets_Last_6_Months",
+      "Late_Payments_Last_Year",
+      "Customer_Satisfaction",
+      "NPS_Score",
+      "Discount_Received",
+      "Discount_Percent",
+      "Complaints_Last_Year",
+      "Last_Interaction_Days",
+      "Marketing_Emails_Opened",
+      "Cross_Sell_Products",
+      "Customer_Lifetime_Value",
+      "Churn_Risk_Score",
+      "Churn_Reason",
+      "Churn"
+    ],
+    "targets": [
+      "Churn_Risk_Score",
+      "Churn_Reason",
+      "Churn"
+    ],
+    "identifiers": [
+      "Customer_ID",
+      "Customer_Segment",
+      "Customer_Satisfaction",
+      "Customer_Lifetime_Value"
+    ],
+    "temporal": [
+      "Customer_Lifetime_Value"
+    ],
+    "profile": {
+      "Customer_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 10000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CUST000001",
+          "CUST000002",
+          "CUST000003"
+        ]
+      },
+      "Age": {
+        "dtype": "int64",
+        "uniques_in_sample": 63,
+        "nulls_in_sample": 0,
+        "samples": [
+          "59",
+          "26",
+          "43"
+        ]
+      },
+      "Gender": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Male",
+          "Male",
+          "Female"
+        ]
+      },
+      "Region": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "West",
+          "South",
+          "Central"
+        ]
+      },
+      "City_Tier": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Tier 2",
+          "Tier 1",
+          "Tier 2"
+        ]
+      },
+      "Customer_Segment": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Basic",
+          "Basic",
+          "Premium"
+        ]
+      },
+      "Tenure_Months": {
+        "dtype": "int64",
+        "uniques_in_sample": 120,
+        "nulls_in_sample": 0,
+        "samples": [
+          "6",
+          "28",
+          "22"
+        ]
+      },
+      "Contract_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Month-to-Month",
+          "Month-to-Month",
+          "One Year"
+        ]
+      },
+      "Subscription_Plan": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Plus",
+          "Plus",
+          "Starter"
+        ]
+      },
+      "Monthly_Charges": {
+        "dtype": "float64",
+        "uniques_in_sample": 5886,
+        "nulls_in_sample": 0,
+        "samples": [
+          "51.98",
+          "46.27",
+          "58.44"
+        ]
+      },
+      "Total_Charges": {
+        "dtype": "float64",
+        "uniques_in_sample": 9824,
+        "nulls_in_sample": 0,
+        "samples": [
+          "308.57",
+          "1230.96",
+          "1331.25"
+        ]
+      },
+      "Payment_Method": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Bank Transfer",
+          "Credit Card",
+          "Bank Transfer"
+        ]
+      },
+      "Auto_Payment": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Yes",
+          "Yes",
+          "Yes"
+        ]
+      },
+      "Paperless_Billing": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "No",
+          "Yes",
+          "Yes"
+        ]
+      },
+      "Internet_Service": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 790,
+        "samples": [
+          "DSL",
+          "Fiber",
+          "Fiber"
+        ]
+      },
+      "Phone_Service": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Yes",
+          "Yes",
+          "Yes"
+        ]
+      },
+      "Streaming_Service": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Yes",
+          "Yes",
+          "No"
+        ]
+      },
+      "Online_Security": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "No",
+          "Yes",
+          "Yes"
+        ]
+      },
+      "Tech_Support": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "No",
+          "No",
+          "Yes"
+        ]
+      },
+      "Device_Protection": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Yes",
+          "Yes",
+          "Yes"
+        ]
+      },
+      "Avg_Monthly_Usage_GB": {
+        "dtype": "float64",
+        "uniques_in_sample": 7602,
+        "nulls_in_sample": 0,
+        "samples": [
+          "61.48",
+          "3.63",
+          "153.38"
+        ]
+      },
+      "Num_Logins_Last_Month": {
+        "dtype": "int64",
+        "uniques_in_sample": 42,
+        "nulls_in_sample": 0,
+        "samples": [
+          "18",
+          "22",
+          "19"
+        ]
+      },
+      "Support_Tickets_Last_6_Months": {
+        "dtype": "int64",
+        "uniques_in_sample": 9,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2",
+          "1",
+          "1"
+        ]
+      },
+      "Late_Payments_Last_Year": {
+        "dtype": "int64",
+        "uniques_in_sample": 10,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "2"
+        ]
+      },
+      "Customer_Satisfaction": {
+        "dtype": "float64",
+        "uniques_in_sample": 312,
+        "nulls_in_sample": 0,
+        "samples": [
+          "4.0",
+          "3.46",
+          "4.28"
+        ]
+      },
+      "NPS_Score": {
+        "dtype": "int64",
+        "uniques_in_sample": 131,
+        "nulls_in_sample": 0,
+        "samples": [
+          "36",
+          "39",
+          "32"
+        ]
+      },
+      "Discount_Received": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "No",
+          "Yes",
+          "Yes"
+        ]
+      },
+      "Discount_Percent": {
+        "dtype": "int64",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "30",
+          "30"
+        ]
+      },
+      "Complaints_Last_Year": {
+        "dtype": "int64",
+        "uniques_in_sample": 10,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "1",
+          "0"
+        ]
+      },
+      "Last_Interaction_Days": {
+        "dtype": "int64",
+        "uniques_in_sample": 144,
+        "nulls_in_sample": 0,
+        "samples": [
+          "28",
+          "34",
+          "11"
+        ]
+      },
+      "Marketing_Emails_Opened": {
+        "dtype": "int64",
+        "uniques_in_sample": 18,
+        "nulls_in_sample": 0,
+        "samples": [
+          "4",
+          "5",
+          "6"
+        ]
+      },
+      "Cross_Sell_Products": {
+        "dtype": "int64",
+        "uniques_in_sample": 10,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "1"
+        ]
+      },
+      "Customer_Lifetime_Value": {
+        "dtype": "float64",
+        "uniques_in_sample": 9267,
+        "nulls_in_sample": 0,
+        "samples": [
+          "600.42",
+          "1380.32",
+          "1658.17"
+        ]
+      },
+      "Churn_Risk_Score": {
+        "dtype": "float64",
+        "uniques_in_sample": 5429,
+        "nulls_in_sample": 0,
+        "samples": [
+          "56.04",
+          "35.0",
+          "0.0"
+        ]
+      },
+      "Churn_Reason": {
+        "dtype": "str",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Not Churned",
+          "Not Churned",
+          "Not Churned"
+        ]
+      },
+      "Churn": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "No",
+          "No",
+          "No"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "customer_table.csv",
+    "file_size": 34249,
+    "row_count": 1000,
+    "column_count": 5,
+    "columns": [
+      "customer_id",
+      "customer_name",
+      "age",
+      "gender",
+      "city"
+    ],
+    "targets": [],
+    "identifiers": [
+      "customer_id",
+      "customer_name"
+    ],
+    "temporal": [],
+    "profile": {
+      "customer_id": {
+        "dtype": "int64",
+        "uniques_in_sample": 1000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "customer_name": {
+        "dtype": "str",
+        "uniques_in_sample": 1000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Customer 1",
+          "Customer 2",
+          "Customer 3"
+        ]
+      },
+      "age": {
+        "dtype": "int64",
+        "uniques_in_sample": 47,
+        "nulls_in_sample": 0,
+        "samples": [
+          "49",
+          "45",
+          "51"
+        ]
+      },
+      "gender": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Female",
+          "Male",
+          "Male"
+        ]
+      },
+      "city": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "London",
+          "London",
+          "London"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "Delinquency_prediction_dataset.csv",
+    "file_size": 62558,
+    "row_count": 500,
+    "column_count": 19,
+    "columns": [
+      "Customer_ID",
+      "Age",
+      "Income",
+      "Credit_Score",
+      "Credit_Utilization",
+      "Missed_Payments",
+      "Delinquent_Account",
+      "Loan_Balance",
+      "Debt_to_Income_Ratio",
+      "Employment_Status",
+      "Account_Tenure",
+      "Credit_Card_Type",
+      "Location",
+      "Month_1",
+      "Month_2",
+      "Month_3",
+      "Month_4",
+      "Month_5",
+      "Month_6"
+    ],
+    "targets": [
+      "Employment_Status"
+    ],
+    "identifiers": [
+      "Customer_ID",
+      "Delinquent_Account",
+      "Account_Tenure"
+    ],
+    "temporal": [],
+    "profile": {
+      "Customer_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 500,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CUST0001",
+          "CUST0002",
+          "CUST0003"
+        ]
+      },
+      "Age": {
+        "dtype": "int64",
+        "uniques_in_sample": 57,
+        "nulls_in_sample": 0,
+        "samples": [
+          "56",
+          "69",
+          "46"
+        ]
+      },
+      "Income": {
+        "dtype": "float64",
+        "uniques_in_sample": 271,
+        "nulls_in_sample": 39,
+        "samples": [
+          "165580.0",
+          "100999.0",
+          "188416.0"
+        ]
+      },
+      "Credit_Score": {
+        "dtype": "float64",
+        "uniques_in_sample": 234,
+        "nulls_in_sample": 2,
+        "samples": [
+          "398.0",
+          "493.0",
+          "500.0"
+        ]
+      },
+      "Credit_Utilization": {
+        "dtype": "float64",
+        "uniques_in_sample": 492,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.390501929",
+          "0.312444033",
+          "0.359930239"
+        ]
+      },
+      "Missed_Payments": {
+        "dtype": "int64",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 0,
+        "samples": [
+          "3",
+          "6",
+          "0"
+        ]
+      },
+      "Delinquent_Account": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "1",
+          "0"
+        ]
+      },
+      "Loan_Balance": {
+        "dtype": "float64",
+        "uniques_in_sample": 300,
+        "nulls_in_sample": 29,
+        "samples": [
+          "16310.0",
+          "17401.0",
+          "13761.0"
+        ]
+      },
+      "Debt_to_Income_Ratio": {
+        "dtype": "float64",
+        "uniques_in_sample": 487,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.317396115",
+          "0.196092643",
+          "0.30165494"
+        ]
+      },
+      "Employment_Status": {
+        "dtype": "str",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "EMP",
+          "Self-employed",
+          "Self-employed"
+        ]
+      },
+      "Account_Tenure": {
+        "dtype": "int64",
+        "uniques_in_sample": 20,
+        "nulls_in_sample": 0,
+        "samples": [
+          "18",
+          "0",
+          "1"
+        ]
+      },
+      "Credit_Card_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Student",
+          "Standard",
+          "Platinum"
+        ]
+      },
+      "Location": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Los Angeles",
+          "Phoenix",
+          "Chicago"
+        ]
+      },
+      "Month_1": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Late",
+          "Missed",
+          "Missed"
+        ]
+      },
+      "Month_2": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Late",
+          "Missed",
+          "Late"
+        ]
+      },
+      "Month_3": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Missed",
+          "Late",
+          "Late"
+        ]
+      },
+      "Month_4": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Late",
+          "Missed",
+          "On-time"
+        ]
+      },
+      "Month_5": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Missed",
+          "On-time",
+          "Missed"
+        ]
+      },
+      "Month_6": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Late",
+          "On-time",
+          "Late"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "digital_wallet_transactions.csv",
+    "file_size": 903674,
+    "row_count": 5000,
+    "column_count": 16,
+    "columns": [
+      "idx",
+      "transaction_id",
+      "user_id",
+      "transaction_date",
+      "product_category",
+      "product_name",
+      "merchant_name",
+      "product_amount",
+      "transaction_fee",
+      "cashback",
+      "loyalty_points",
+      "payment_method",
+      "transaction_status",
+      "merchant_id",
+      "device_type",
+      "location"
+    ],
+    "targets": [
+      "transaction_status"
+    ],
+    "identifiers": [
+      "idx",
+      "transaction_id",
+      "user_id",
+      "merchant_id"
+    ],
+    "temporal": [
+      "transaction_date"
+    ],
+    "profile": {
+      "idx": {
+        "dtype": "int64",
+        "uniques_in_sample": 5000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "transaction_id": {
+        "dtype": "str",
+        "uniques_in_sample": 5000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "4dac3ea3-6492-46ec-80b8-dc45c3ad0b14",
+          "a903ed9f-eb84-47e7-b8aa-fd1786c919cf",
+          "2a393013-733c-4add-9f09-bed1eeb33676"
+        ]
+      },
+      "user_id": {
+        "dtype": "str",
+        "uniques_in_sample": 3932,
+        "nulls_in_sample": 0,
+        "samples": [
+          "USER_05159",
+          "USER_07204",
+          "USER_00903"
+        ]
+      },
+      "transaction_date": {
+        "dtype": "str",
+        "uniques_in_sample": 4978,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2023-08-19 03:32",
+          "2023-08-19 04:37",
+          "2023-08-19 05:52"
+        ]
+      },
+      "product_category": {
+        "dtype": "str",
+        "uniques_in_sample": 20,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Rent Payment",
+          "Gas Bill",
+          "Bus Ticket"
+        ]
+      },
+      "product_name": {
+        "dtype": "str",
+        "uniques_in_sample": 100,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2BHK Flat Deposit",
+          "Commercial Gas Connection",
+          "Semi-Sleeper"
+        ]
+      },
+      "merchant_name": {
+        "dtype": "str",
+        "uniques_in_sample": 97,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Airbnb",
+          "Adani Gas",
+          "MakeMyTrip Bus"
+        ]
+      },
+      "product_amount": {
+        "dtype": "float64",
+        "uniques_in_sample": 4990,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1525.39",
+          "1495.4",
+          "1267.71"
+        ]
+      },
+      "transaction_fee": {
+        "dtype": "float64",
+        "uniques_in_sample": 3175,
+        "nulls_in_sample": 0,
+        "samples": [
+          "36.69",
+          "28.19",
+          "11.36"
+        ]
+      },
+      "cashback": {
+        "dtype": "float64",
+        "uniques_in_sample": 3959,
+        "nulls_in_sample": 0,
+        "samples": [
+          "19.19",
+          "89.99",
+          "95.7"
+        ]
+      },
+      "loyalty_points": {
+        "dtype": "int64",
+        "uniques_in_sample": 995,
+        "nulls_in_sample": 0,
+        "samples": [
+          "186",
+          "182",
+          "994"
+        ]
+      },
+      "payment_method": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Debit Card",
+          "UPI",
+          "UPI"
+        ]
+      },
+      "transaction_status": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Successful",
+          "Successful",
+          "Successful"
+        ]
+      },
+      "merchant_id": {
+        "dtype": "str",
+        "uniques_in_sample": 987,
+        "nulls_in_sample": 0,
+        "samples": [
+          "MERCH_0083",
+          "MERCH_0163",
+          "MERCH_0320"
+        ]
+      },
+      "device_type": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "iOS",
+          "iOS",
+          "iOS"
+        ]
+      },
+      "location": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Urban",
+          "Urban",
+          "Urban"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "ecommerce_customer_churn_dataset.csv",
+    "file_size": 6112281,
+    "row_count": 50000,
+    "column_count": 25,
+    "columns": [
+      "Age",
+      "Gender",
+      "Country",
+      "City",
+      "Membership_Years",
+      "Login_Frequency",
+      "Session_Duration_Avg",
+      "Pages_Per_Session",
+      "Cart_Abandonment_Rate",
+      "Wishlist_Items",
+      "Total_Purchases",
+      "Average_Order_Value",
+      "Days_Since_Last_Purchase",
+      "Discount_Usage_Rate",
+      "Returns_Rate",
+      "Email_Open_Rate",
+      "Customer_Service_Calls",
+      "Product_Reviews_Written",
+      "Social_Media_Engagement_Score",
+      "Mobile_App_Usage",
+      "Payment_Method_Diversity",
+      "Lifetime_Value",
+      "Credit_Balance",
+      "Churned",
+      "Signup_Quarter"
+    ],
+    "targets": [
+      "Churned"
+    ],
+    "identifiers": [
+      "Customer_Service_Calls"
+    ],
+    "temporal": [
+      "Lifetime_Value"
+    ],
+    "profile": {
+      "Age": {
+        "dtype": "float64",
+        "uniques_in_sample": 62,
+        "nulls_in_sample": 513,
+        "samples": [
+          "43.0",
+          "36.0",
+          "45.0"
+        ]
+      },
+      "Gender": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Male",
+          "Male",
+          "Female"
+        ]
+      },
+      "Country": {
+        "dtype": "str",
+        "uniques_in_sample": 8,
+        "nulls_in_sample": 0,
+        "samples": [
+          "France",
+          "UK",
+          "Canada"
+        ]
+      },
+      "City": {
+        "dtype": "str",
+        "uniques_in_sample": 40,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Marseille",
+          "Manchester",
+          "Vancouver"
+        ]
+      },
+      "Membership_Years": {
+        "dtype": "float64",
+        "uniques_in_sample": 120,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2.9",
+          "1.6",
+          "2.9"
+        ]
+      },
+      "Login_Frequency": {
+        "dtype": "float64",
+        "uniques_in_sample": 45,
+        "nulls_in_sample": 0,
+        "samples": [
+          "14.0",
+          "15.0",
+          "10.0"
+        ]
+      },
+      "Session_Duration_Avg": {
+        "dtype": "float64",
+        "uniques_in_sample": 589,
+        "nulls_in_sample": 730,
+        "samples": [
+          "27.4",
+          "42.7",
+          "24.8"
+        ]
+      },
+      "Pages_Per_Session": {
+        "dtype": "float64",
+        "uniques_in_sample": 212,
+        "nulls_in_sample": 628,
+        "samples": [
+          "6.0",
+          "10.3",
+          "1.6"
+        ]
+      },
+      "Cart_Abandonment_Rate": {
+        "dtype": "float64",
+        "uniques_in_sample": 859,
+        "nulls_in_sample": 0,
+        "samples": [
+          "50.6",
+          "37.7",
+          "70.9"
+        ]
+      },
+      "Wishlist_Items": {
+        "dtype": "float64",
+        "uniques_in_sample": 20,
+        "nulls_in_sample": 798,
+        "samples": [
+          "3.0",
+          "1.0",
+          "1.0"
+        ]
+      },
+      "Total_Purchases": {
+        "dtype": "float64",
+        "uniques_in_sample": 93,
+        "nulls_in_sample": 0,
+        "samples": [
+          "9.0",
+          "19.5",
+          "9.1"
+        ]
+      },
+      "Average_Order_Value": {
+        "dtype": "float64",
+        "uniques_in_sample": 7329,
+        "nulls_in_sample": 0,
+        "samples": [
+          "94.72",
+          "82.45",
+          "165.52"
+        ]
+      },
+      "Days_Since_Last_Purchase": {
+        "dtype": "float64",
+        "uniques_in_sample": 187,
+        "nulls_in_sample": 563,
+        "samples": [
+          "34.0",
+          "71.0",
+          "11.0"
+        ]
+      },
+      "Discount_Usage_Rate": {
+        "dtype": "float64",
+        "uniques_in_sample": 1516,
+        "nulls_in_sample": 688,
+        "samples": [
+          "46.4",
+          "57.96",
+          "12.239999999999998"
+        ]
+      },
+      "Returns_Rate": {
+        "dtype": "float64",
+        "uniques_in_sample": 282,
+        "nulls_in_sample": 868,
+        "samples": [
+          "2.0",
+          "9.2",
+          "11.5"
+        ]
+      },
+      "Email_Open_Rate": {
+        "dtype": "float64",
+        "uniques_in_sample": 632,
+        "nulls_in_sample": 473,
+        "samples": [
+          "17.9",
+          "42.8",
+          "0.0"
+        ]
+      },
+      "Customer_Service_Calls": {
+        "dtype": "float64",
+        "uniques_in_sample": 19,
+        "nulls_in_sample": 36,
+        "samples": [
+          "9.0",
+          "7.0",
+          "4.0"
+        ]
+      },
+      "Product_Reviews_Written": {
+        "dtype": "float64",
+        "uniques_in_sample": 15,
+        "nulls_in_sample": 697,
+        "samples": [
+          "4.0",
+          "3.0",
+          "1.0"
+        ]
+      },
+      "Social_Media_Engagement_Score": {
+        "dtype": "float64",
+        "uniques_in_sample": 857,
+        "nulls_in_sample": 1177,
+        "samples": [
+          "16.3",
+          "85.9",
+          "83.0"
+        ]
+      },
+      "Mobile_App_Usage": {
+        "dtype": "float64",
+        "uniques_in_sample": 486,
+        "nulls_in_sample": 997,
+        "samples": [
+          "20.8",
+          "23.3",
+          "8.8"
+        ]
+      },
+      "Payment_Method_Diversity": {
+        "dtype": "float64",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 487,
+        "samples": [
+          "1.0",
+          "3.0",
+          "3.0"
+        ]
+      },
+      "Lifetime_Value": {
+        "dtype": "float64",
+        "uniques_in_sample": 9801,
+        "nulls_in_sample": 0,
+        "samples": [
+          "953.33",
+          "1067.47",
+          "1289.75"
+        ]
+      },
+      "Credit_Balance": {
+        "dtype": "float64",
+        "uniques_in_sample": 3750,
+        "nulls_in_sample": 1118,
+        "samples": [
+          "2278.0",
+          "3028.0",
+          "2317.0"
+        ]
+      },
+      "Churned": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "Signup_Quarter": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Q1",
+          "Q4",
+          "Q4"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "Finance_Company_Receivables new.csv",
+    "file_size": 75593,
+    "row_count": 999,
+    "column_count": 9,
+    "columns": [
+      "Time Period",
+      "DTTHF_N.M",
+      "DTCTHF_N.M",
+      "DTCOLNVHF_N.M",
+      "DTCOLNOHF_N.M",
+      "DTTHF_XDF_BA_N.M",
+      "DTCTHF_XDF_BA_N.M",
+      "DTCOLNVHF_XDF_BA_N.M",
+      "DTCOLNOHF_XDF_BA_N.M"
+    ],
+    "targets": [],
+    "identifiers": [],
+    "temporal": [
+      "Time Period"
+    ],
+    "profile": {
+      "Time Period": {
+        "dtype": "str",
+        "uniques_in_sample": 999,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1943-02",
+          "1943-03",
+          "1943-04"
+        ]
+      },
+      "DTTHF_N.M": {
+        "dtype": "float64",
+        "uniques_in_sample": 991,
+        "nulls_in_sample": 0,
+        "samples": [
+          "994.0",
+          "938.0",
+          "888.0"
+        ]
+      },
+      "DTCTHF_N.M": {
+        "dtype": "float64",
+        "uniques_in_sample": 990,
+        "nulls_in_sample": 0,
+        "samples": [
+          "994.0",
+          "938.0",
+          "888.0"
+        ]
+      },
+      "DTCOLNVHF_N.M": {
+        "dtype": "float64",
+        "uniques_in_sample": 981,
+        "nulls_in_sample": 0,
+        "samples": [
+          "285.0",
+          "245.0",
+          "221.0"
+        ]
+      },
+      "DTCOLNOHF_N.M": {
+        "dtype": "float64",
+        "uniques_in_sample": 989,
+        "nulls_in_sample": 0,
+        "samples": [
+          "709.0",
+          "693.0",
+          "667.0"
+        ]
+      },
+      "DTTHF_XDF_BA_N.M": {
+        "dtype": "float64",
+        "uniques_in_sample": 889,
+        "nulls_in_sample": 0,
+        "samples": [
+          "-82.0",
+          "-56.0",
+          "-50.0"
+        ]
+      },
+      "DTCTHF_XDF_BA_N.M": {
+        "dtype": "float64",
+        "uniques_in_sample": 860,
+        "nulls_in_sample": 0,
+        "samples": [
+          "-82.0",
+          "-56.0",
+          "-50.0"
+        ]
+      },
+      "DTCOLNVHF_XDF_BA_N.M": {
+        "dtype": "float64",
+        "uniques_in_sample": 774,
+        "nulls_in_sample": 0,
+        "samples": [
+          "-45.0",
+          "-40.0",
+          "-24.0"
+        ]
+      },
+      "DTCOLNOHF_XDF_BA_N.M": {
+        "dtype": "float64",
+        "uniques_in_sample": 759,
+        "nulls_in_sample": 0,
+        "samples": [
+          "-37.0",
+          "-16.0",
+          "-26.0"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "Financial_Audit_N_Abnormal_Transactions.csv",
+    "file_size": 3704452,
+    "row_count": 7000,
+    "column_count": 59,
+    "columns": [
+      "Transaction_ID",
+      "Transaction_DateTime",
+      "Fiscal_Year",
+      "Fiscal_Quarter",
+      "Month",
+      "Hour",
+      "Weekend_Flag",
+      "Night_Transaction_Flag",
+      "Source_Node_ID",
+      "Destination_Node_ID",
+      "Source_Node_Index",
+      "Destination_Node_Index",
+      "Source_Entity_ID",
+      "Destination_Entity_ID",
+      "Source_Entity_Name",
+      "Destination_Entity_Name",
+      "Source_Bank",
+      "Destination_Bank",
+      "Source_Province",
+      "Destination_Province",
+      "Source_City",
+      "Destination_City",
+      "Source_Account_Type",
+      "Destination_Account_Type",
+      "Source_Account_Age_Days",
+      "Destination_Account_Age_Days",
+      "Currency",
+      "Transaction_Amount_RMB",
+      "Historical_Avg_Amount_RMB",
+      "Transaction_to_Avg_Ratio",
+      "Approval_Threshold_RMB",
+      "Amount_Threshold_Ratio",
+      "Payment_Channel",
+      "Invoice_ID",
+      "Invoice_Type",
+      "Invoice_Match_Score",
+      "Tax_Validation_Flag",
+      "Duplicate_Invoice_Flag",
+      "Edge_Type",
+      "Same_Bank_Flag",
+      "Province_Mismatch_Flag",
+      "Related_Party_Flag",
+      "Time_Since_Last_Transaction_Min",
+      "Approval_Level",
+      "Approval_Delay_Min",
+      "Vendor_Risk_Score",
+      "Source_Account_Degree",
+      "Destination_Account_Degree",
+      "Source_PageRank",
+      "Destination_PageRank",
+      "Common_Counterparty_Count",
+      "Edge_Transaction_Count_30D",
+      "Relation_Strength_Score",
+      "Temporal_Burst_Score",
+      "Audit_Rule_Violation_Count",
+      "Relational_Anomaly_Score",
+      "Abnormal_Type",
+      "Risk_Class",
+      "Abnormal_Label"
+    ],
+    "targets": [],
+    "identifiers": [
+      "Transaction_ID",
+      "Source_Node_ID",
+      "Destination_Node_ID",
+      "Source_Entity_ID",
+      "Destination_Entity_ID",
+      "Source_Account_Type",
+      "Destination_Account_Type",
+      "Source_Account_Age_Days",
+      "Destination_Account_Age_Days",
+      "Invoice_ID",
+      "Tax_Validation_Flag",
+      "Source_Account_Degree",
+      "Destination_Account_Degree"
+    ],
+    "temporal": [
+      "Transaction_DateTime",
+      "Time_Since_Last_Transaction_Min"
+    ],
+    "profile": {
+      "Transaction_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 7000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CN-TXN-0000001",
+          "CN-TXN-0000002",
+          "CN-TXN-0000003"
+        ]
+      },
+      "Transaction_DateTime": {
+        "dtype": "str",
+        "uniques_in_sample": 7000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2024-08-20 23:32:58",
+          "2025-12-12 00:18:31",
+          "2025-02-08 00:06:19"
+        ]
+      },
+      "Fiscal_Year": {
+        "dtype": "int64",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2024",
+          "2025",
+          "2025"
+        ]
+      },
+      "Fiscal_Quarter": {
+        "dtype": "int64",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "3",
+          "4",
+          "1"
+        ]
+      },
+      "Month": {
+        "dtype": "int64",
+        "uniques_in_sample": 12,
+        "nulls_in_sample": 0,
+        "samples": [
+          "8",
+          "12",
+          "2"
+        ]
+      },
+      "Hour": {
+        "dtype": "int64",
+        "uniques_in_sample": 24,
+        "nulls_in_sample": 0,
+        "samples": [
+          "23",
+          "0",
+          "0"
+        ]
+      },
+      "Weekend_Flag": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "1"
+        ]
+      },
+      "Night_Transaction_Flag": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1",
+          "1",
+          "1"
+        ]
+      },
+      "Source_Node_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 1490,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CN-ACC-001308",
+          "CN-ACC-000161",
+          "CN-ACC-000375"
+        ]
+      },
+      "Destination_Node_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 1484,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CN-ACC-000682",
+          "CN-ACC-000264",
+          "CN-ACC-000481"
+        ]
+      },
+      "Source_Node_Index": {
+        "dtype": "int64",
+        "uniques_in_sample": 1490,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1307",
+          "160",
+          "374"
+        ]
+      },
+      "Destination_Node_Index": {
+        "dtype": "int64",
+        "uniques_in_sample": 1484,
+        "nulls_in_sample": 0,
+        "samples": [
+          "681",
+          "263",
+          "480"
+        ]
+      },
+      "Source_Entity_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 586,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CN-ENT-00276",
+          "CN-ENT-00421",
+          "CN-ENT-00384"
+        ]
+      },
+      "Destination_Entity_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 586,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CN-ENT-00272",
+          "CN-ENT-00188",
+          "CN-ENT-00082"
+        ]
+      },
+      "Source_Entity_Name": {
+        "dtype": "str",
+        "uniques_in_sample": 132,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Dahua Logistics Co Ltd",
+          "Hengda Energy Development",
+          "Xinghe Construction Holdings"
+        ]
+      },
+      "Destination_Entity_Name": {
+        "dtype": "str",
+        "uniques_in_sample": 132,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Guanghua Manufacturing Group",
+          "Shengli Technology Co Ltd",
+          "Jinmao Logistics Co Ltd"
+        ]
+      },
+      "Source_Bank": {
+        "dtype": "str",
+        "uniques_in_sample": 9,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Postal Savings Bank of China",
+          "Industrial Bank",
+          "ICBC"
+        ]
+      },
+      "Destination_Bank": {
+        "dtype": "str",
+        "uniques_in_sample": 9,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Shanghai Pudong Development Bank",
+          "Postal Savings Bank of China",
+          "Bank of Communications"
+        ]
+      },
+      "Source_Province": {
+        "dtype": "str",
+        "uniques_in_sample": 12,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Chongqing",
+          "Guangdong",
+          "Fujian"
+        ]
+      },
+      "Destination_Province": {
+        "dtype": "str",
+        "uniques_in_sample": 12,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Chongqing",
+          "Guangdong",
+          "Sichuan"
+        ]
+      },
+      "Source_City": {
+        "dtype": "str",
+        "uniques_in_sample": 25,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Chongqing",
+          "Dongguan",
+          "Fuzhou"
+        ]
+      },
+      "Destination_City": {
+        "dtype": "str",
+        "uniques_in_sample": 25,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Chongqing",
+          "Dongguan",
+          "Mianyang"
+        ]
+      },
+      "Source_Account_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Subsidiary Account",
+          "Corporate Operating Account",
+          "Vendor Payable Account"
+        ]
+      },
+      "Destination_Account_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Vendor Payable Account",
+          "Payroll Account",
+          "Payroll Account"
+        ]
+      },
+      "Source_Account_Age_Days": {
+        "dtype": "int64",
+        "uniques_in_sample": 1266,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2996",
+          "2169",
+          "3304"
+        ]
+      },
+      "Destination_Account_Age_Days": {
+        "dtype": "int64",
+        "uniques_in_sample": 1265,
+        "nulls_in_sample": 0,
+        "samples": [
+          "980",
+          "526",
+          "3416"
+        ]
+      },
+      "Currency": {
+        "dtype": "str",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CNY",
+          "CNY",
+          "CNY"
+        ]
+      },
+      "Transaction_Amount_RMB": {
+        "dtype": "float64",
+        "uniques_in_sample": 6863,
+        "nulls_in_sample": 0,
+        "samples": [
+          "67514.44",
+          "79986.4",
+          "33298.91"
+        ]
+      },
+      "Historical_Avg_Amount_RMB": {
+        "dtype": "float64",
+        "uniques_in_sample": 6997,
+        "nulls_in_sample": 0,
+        "samples": [
+          "61445.67",
+          "35211.71",
+          "24269.3"
+        ]
+      },
+      "Transaction_to_Avg_Ratio": {
+        "dtype": "float64",
+        "uniques_in_sample": 5922,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1.0988",
+          "2.2716",
+          "1.3721"
+        ]
+      },
+      "Approval_Threshold_RMB": {
+        "dtype": "int64",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "50000",
+          "50000",
+          "50000"
+        ]
+      },
+      "Amount_Threshold_Ratio": {
+        "dtype": "float64",
+        "uniques_in_sample": 4417,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1.3503",
+          "1.5997",
+          "0.666"
+        ]
+      },
+      "Payment_Channel": {
+        "dtype": "str",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 0,
+        "samples": [
+          "UnionPay Corporate Payment",
+          "UnionPay Corporate Payment",
+          "Alipay Business"
+        ]
+      },
+      "Invoice_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 6695,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CN-VAT-0000001",
+          "CN-VAT-0001241",
+          "CN-VAT-0000003"
+        ]
+      },
+      "Invoice_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Service Invoice",
+          "VAT General Invoice",
+          "Customs Invoice"
+        ]
+      },
+      "Invoice_Match_Score": {
+        "dtype": "float64",
+        "uniques_in_sample": 2235,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.8773",
+          "0.5683",
+          "0.959"
+        ]
+      },
+      "Tax_Validation_Flag": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1",
+          "1",
+          "1"
+        ]
+      },
+      "Duplicate_Invoice_Flag": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "1",
+          "0"
+        ]
+      },
+      "Edge_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 8,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Service Settlement",
+          "Supplier Payment",
+          "Customer Receipt"
+        ]
+      },
+      "Same_Bank_Flag": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "Province_Mismatch_Flag": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "1"
+        ]
+      },
+      "Related_Party_Flag": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "Time_Since_Last_Transaction_Min": {
+        "dtype": "float64",
+        "uniques_in_sample": 6587,
+        "nulls_in_sample": 0,
+        "samples": [
+          "64.54",
+          "82.7",
+          "125.08"
+        ]
+      },
+      "Approval_Level": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Audit Required",
+          "Audit Required",
+          "Audit Required"
+        ]
+      },
+      "Approval_Delay_Min": {
+        "dtype": "float64",
+        "uniques_in_sample": 5559,
+        "nulls_in_sample": 0,
+        "samples": [
+          "36.13",
+          "302.99",
+          "69.7"
+        ]
+      },
+      "Vendor_Risk_Score": {
+        "dtype": "float64",
+        "uniques_in_sample": 4116,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.2378",
+          "0.3544",
+          "0.3181"
+        ]
+      },
+      "Source_Account_Degree": {
+        "dtype": "int64",
+        "uniques_in_sample": 315,
+        "nulls_in_sample": 0,
+        "samples": [
+          "178",
+          "269",
+          "312"
+        ]
+      },
+      "Destination_Account_Degree": {
+        "dtype": "int64",
+        "uniques_in_sample": 315,
+        "nulls_in_sample": 0,
+        "samples": [
+          "215",
+          "115",
+          "282"
+        ]
+      },
+      "Source_PageRank": {
+        "dtype": "float64",
+        "uniques_in_sample": 6408,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.06176",
+          "0.07398",
+          "0.19287"
+        ]
+      },
+      "Destination_PageRank": {
+        "dtype": "float64",
+        "uniques_in_sample": 6449,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.05738",
+          "0.18808",
+          "0.18286"
+        ]
+      },
+      "Common_Counterparty_Count": {
+        "dtype": "int64",
+        "uniques_in_sample": 68,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2",
+          "8",
+          "7"
+        ]
+      },
+      "Edge_Transaction_Count_30D": {
+        "dtype": "int64",
+        "uniques_in_sample": 88,
+        "nulls_in_sample": 0,
+        "samples": [
+          "5",
+          "5",
+          "4"
+        ]
+      },
+      "Relation_Strength_Score": {
+        "dtype": "float64",
+        "uniques_in_sample": 4267,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.1124",
+          "0.4845",
+          "0.3255"
+        ]
+      },
+      "Temporal_Burst_Score": {
+        "dtype": "float64",
+        "uniques_in_sample": 4116,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.7284",
+          "0.62",
+          "0.5438"
+        ]
+      },
+      "Audit_Rule_Violation_Count": {
+        "dtype": "int64",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "2",
+          "1"
+        ]
+      },
+      "Relational_Anomaly_Score": {
+        "dtype": "float64",
+        "uniques_in_sample": 2564,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.1923",
+          "0.3484",
+          "0.3073"
+        ]
+      },
+      "Abnormal_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 9,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Normal",
+          "Duplicate_Invoice",
+          "Normal"
+        ]
+      },
+      "Risk_Class": {
+        "dtype": "int64",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "1",
+          "0"
+        ]
+      },
+      "Abnormal_Label": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "1",
+          "0"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "Financial_Ecosystem_Dataset_T1_5k_.csv",
+    "file_size": 2015069,
+    "row_count": 5000,
+    "column_count": 50,
+    "columns": [
+      "Cust_ID",
+      "Cust_Age",
+      "Cust_Gender",
+      "Cust_Marital_Status",
+      "Cust_Dependents",
+      "Cust_Education",
+      "Cust_Employment_Status",
+      "Cust_Occupation_Sector",
+      "Cust_Annual_Income_USD",
+      "Cust_Home_Ownership",
+      "Account_ID",
+      "Account_Type",
+      "Account_Open_Date",
+      "Account_Status",
+      "Account_KYC_Tier",
+      "Primary_Branch_Region",
+      "Total_Assets_Under_Management",
+      "Has_Active_Credit_Card",
+      "Has_Active_Loan",
+      "Digital_Banking_Enrollment",
+      "Txn_ID",
+      "Txn_Timestamp",
+      "Txn_Type",
+      "Txn_Channel",
+      "Txn_Amount_USD",
+      "Txn_Currency",
+      "Counterparty_ID",
+      "Counterparty_Type",
+      "Merchant_Category_Code_MCC",
+      "Txn_Response_Code",
+      "Orig_Balance_Before",
+      "Orig_Balance_After",
+      "Dest_Balance_Before",
+      "Dest_Balance_After",
+      "Monthly_Avg_Inflow",
+      "Monthly_Avg_Outflow",
+      "Overdraft_Limit_USD",
+      "Days_In_Overdraft_L12M",
+      "Credit_Card_Utilization_Rate",
+      "Delinquency_Status",
+      "Risk_Score_Internal",
+      "Bureau_Credit_Score",
+      "Device_Type",
+      "Device_IP_Country",
+      "Is_VPN_Used",
+      "Login_Attempts_Fail_Count",
+      "Txn_Velocity_1H",
+      "Behavioral_Anomaly_Flag",
+      "Target_Credit_Default",
+      "Target_Is_Fraud_AML"
+    ],
+    "targets": [
+      "Cust_Marital_Status",
+      "Cust_Employment_Status",
+      "Account_Status",
+      "Delinquency_Status",
+      "Target_Credit_Default",
+      "Target_Is_Fraud_AML"
+    ],
+    "identifiers": [
+      "Cust_ID",
+      "Account_ID",
+      "Account_Type",
+      "Account_Open_Date",
+      "Account_Status",
+      "Account_KYC_Tier",
+      "Txn_ID",
+      "Counterparty_ID"
+    ],
+    "temporal": [
+      "Account_Open_Date",
+      "Txn_Timestamp"
+    ],
+    "profile": {
+      "Cust_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 348,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CUST-00000001",
+          "CUST-00000001",
+          "CUST-00000001"
+        ]
+      },
+      "Cust_Age": {
+        "dtype": "int64",
+        "uniques_in_sample": 39,
+        "nulls_in_sample": 0,
+        "samples": [
+          "50",
+          "50",
+          "50"
+        ]
+      },
+      "Cust_Gender": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "M",
+          "M",
+          "M"
+        ]
+      },
+      "Cust_Marital_Status": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Single",
+          "Single",
+          "Single"
+        ]
+      },
+      "Cust_Dependents": {
+        "dtype": "int64",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "Cust_Education": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Undergraduate",
+          "Undergraduate",
+          "Undergraduate"
+        ]
+      },
+      "Cust_Employment_Status": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Employed",
+          "Employed",
+          "Employed"
+        ]
+      },
+      "Cust_Occupation_Sector": {
+        "dtype": "str",
+        "uniques_in_sample": 9,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Finance",
+          "Finance",
+          "Finance"
+        ]
+      },
+      "Cust_Annual_Income_USD": {
+        "dtype": "float64",
+        "uniques_in_sample": 348,
+        "nulls_in_sample": 0,
+        "samples": [
+          "41397.17",
+          "41397.17",
+          "41397.17"
+        ]
+      },
+      "Cust_Home_Ownership": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Own_Mortgage",
+          "Own_Mortgage",
+          "Own_Mortgage"
+        ]
+      },
+      "Account_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 348,
+        "nulls_in_sample": 0,
+        "samples": [
+          "ACCT-000000001",
+          "ACCT-000000001",
+          "ACCT-000000001"
+        ]
+      },
+      "Account_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Credit_Card",
+          "Credit_Card",
+          "Credit_Card"
+        ]
+      },
+      "Account_Open_Date": {
+        "dtype": "str",
+        "uniques_in_sample": 340,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2014-01-15",
+          "2014-01-15",
+          "2014-01-15"
+        ]
+      },
+      "Account_Status": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Active",
+          "Active",
+          "Active"
+        ]
+      },
+      "Account_KYC_Tier": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Tier_3_Premium",
+          "Tier_3_Premium",
+          "Tier_3_Premium"
+        ]
+      },
+      "Primary_Branch_Region": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "North",
+          "North",
+          "North"
+        ]
+      },
+      "Total_Assets_Under_Management": {
+        "dtype": "float64",
+        "uniques_in_sample": 348,
+        "nulls_in_sample": 0,
+        "samples": [
+          "18422.44",
+          "18422.44",
+          "18422.44"
+        ]
+      },
+      "Has_Active_Credit_Card": {
+        "dtype": "bool",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "True",
+          "True",
+          "True"
+        ]
+      },
+      "Has_Active_Loan": {
+        "dtype": "bool",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "False",
+          "False",
+          "False"
+        ]
+      },
+      "Digital_Banking_Enrollment": {
+        "dtype": "bool",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "True",
+          "True",
+          "True"
+        ]
+      },
+      "Txn_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 5000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "TXN-0000000001",
+          "TXN-0000000002",
+          "TXN-0000000003"
+        ]
+      },
+      "Txn_Timestamp": {
+        "dtype": "str",
+        "uniques_in_sample": 5000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2024-09-16 19:56:16",
+          "2024-02-09 10:45:25",
+          "2024-02-03 17:42:10"
+        ]
+      },
+      "Txn_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 0,
+        "samples": [
+          "ACH_Debit",
+          "ACH_Debit",
+          "Online_Shopping"
+        ]
+      },
+      "Txn_Channel": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Mobile_App",
+          "Mobile_App",
+          "Mobile_App"
+        ]
+      },
+      "Txn_Amount_USD": {
+        "dtype": "float64",
+        "uniques_in_sample": 4715,
+        "nulls_in_sample": 0,
+        "samples": [
+          "16369.01",
+          "31.27",
+          "60.59"
+        ]
+      },
+      "Txn_Currency": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "USD",
+          "EUR",
+          "Local"
+        ]
+      },
+      "Counterparty_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 4998,
+        "nulls_in_sample": 0,
+        "samples": [
+          "CP-002645610",
+          "CP-003452183",
+          "CP-003883175"
+        ]
+      },
+      "Counterparty_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Individual",
+          "Individual",
+          "Small_Business"
+        ]
+      },
+      "Merchant_Category_Code_MCC": {
+        "dtype": "int64",
+        "uniques_in_sample": 18,
+        "nulls_in_sample": 0,
+        "samples": [
+          "7995",
+          "7011",
+          "7011"
+        ]
+      },
+      "Txn_Response_Code": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Approved",
+          "Approved",
+          "Approved"
+        ]
+      },
+      "Orig_Balance_Before": {
+        "dtype": "float64",
+        "uniques_in_sample": 4992,
+        "nulls_in_sample": 0,
+        "samples": [
+          "6175.59",
+          "5256.88",
+          "4171.75"
+        ]
+      },
+      "Orig_Balance_After": {
+        "dtype": "float64",
+        "uniques_in_sample": 4994,
+        "nulls_in_sample": 0,
+        "samples": [
+          "-10193.42",
+          "5225.61",
+          "4111.16"
+        ]
+      },
+      "Dest_Balance_Before": {
+        "dtype": "float64",
+        "uniques_in_sample": 4998,
+        "nulls_in_sample": 0,
+        "samples": [
+          "35282.83",
+          "90616.14",
+          "73146.4"
+        ]
+      },
+      "Dest_Balance_After": {
+        "dtype": "float64",
+        "uniques_in_sample": 4992,
+        "nulls_in_sample": 0,
+        "samples": [
+          "51651.84",
+          "90647.41",
+          "73206.99"
+        ]
+      },
+      "Monthly_Avg_Inflow": {
+        "dtype": "float64",
+        "uniques_in_sample": 347,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2658.43",
+          "2658.43",
+          "2658.43"
+        ]
+      },
+      "Monthly_Avg_Outflow": {
+        "dtype": "float64",
+        "uniques_in_sample": 348,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2095.62",
+          "2095.62",
+          "2095.62"
+        ]
+      },
+      "Overdraft_Limit_USD": {
+        "dtype": "float64",
+        "uniques_in_sample": 348,
+        "nulls_in_sample": 0,
+        "samples": [
+          "7069.86",
+          "7069.86",
+          "7069.86"
+        ]
+      },
+      "Days_In_Overdraft_L12M": {
+        "dtype": "int64",
+        "uniques_in_sample": 38,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "Credit_Card_Utilization_Rate": {
+        "dtype": "float64",
+        "uniques_in_sample": 68,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.4",
+          "0.4",
+          "0.4"
+        ]
+      },
+      "Delinquency_Status": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Current",
+          "Current",
+          "Current"
+        ]
+      },
+      "Risk_Score_Internal": {
+        "dtype": "int64",
+        "uniques_in_sample": 173,
+        "nulls_in_sample": 0,
+        "samples": [
+          "728",
+          "728",
+          "728"
+        ]
+      },
+      "Bureau_Credit_Score": {
+        "dtype": "int64",
+        "uniques_in_sample": 152,
+        "nulls_in_sample": 0,
+        "samples": [
+          "723",
+          "723",
+          "723"
+        ]
+      },
+      "Device_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "iOS",
+          "iOS",
+          "Android"
+        ]
+      },
+      "Device_IP_Country": {
+        "dtype": "str",
+        "uniques_in_sample": 25,
+        "nulls_in_sample": 0,
+        "samples": [
+          "US",
+          "US",
+          "US"
+        ]
+      },
+      "Is_VPN_Used": {
+        "dtype": "bool",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "False",
+          "False",
+          "False"
+        ]
+      },
+      "Login_Attempts_Fail_Count": {
+        "dtype": "int64",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "Txn_Velocity_1H": {
+        "dtype": "int64",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2",
+          "2",
+          "2"
+        ]
+      },
+      "Behavioral_Anomaly_Flag": {
+        "dtype": "bool",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "False",
+          "False",
+          "False"
+        ]
+      },
+      "Target_Credit_Default": {
+        "dtype": "bool",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "False",
+          "False",
+          "False"
+        ]
+      },
+      "Target_Is_Fraud_AML": {
+        "dtype": "bool",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "False",
+          "False",
+          "False"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "fraud_data_20251225_004640.csv",
+    "file_size": 1707235,
+    "row_count": 6126,
+    "column_count": 21,
+    "columns": [
+      "id",
+      "razorpay_payment_id",
+      "timestamp",
+      "agent_type",
+      "amount",
+      "currency",
+      "payment_method",
+      "upi_app",
+      "bank",
+      "status",
+      "error_code",
+      "device_fingerprint",
+      "ip_address",
+      "fraud_score",
+      "is_suspicious",
+      "fraud_reasons",
+      "amount_slab",
+      "hour_of_day",
+      "is_night_transaction",
+      "is_weekend",
+      "attempt_count"
+    ],
+    "targets": [
+      "status"
+    ],
+    "identifiers": [
+      "id",
+      "razorpay_payment_id"
+    ],
+    "temporal": [
+      "timestamp"
+    ],
+    "profile": {
+      "id": {
+        "dtype": "int64",
+        "uniques_in_sample": 6126,
+        "nulls_in_sample": 0,
+        "samples": [
+          "6126",
+          "6125",
+          "6124"
+        ]
+      },
+      "razorpay_payment_id": {
+        "dtype": "str",
+        "uniques_in_sample": 6126,
+        "nulls_in_sample": 0,
+        "samples": [
+          "pay_KFKEPVIA8HQ74B",
+          "pay_1YIDYT0IHDIYKT",
+          "pay_2AFOIPFEKZQJLQ"
+        ]
+      },
+      "timestamp": {
+        "dtype": "str",
+        "uniques_in_sample": 6126,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2025-12-24T19:16:39.745684",
+          "2025-12-24T19:16:39.631577",
+          "2025-12-24T19:16:39.603167"
+        ]
+      },
+      "agent_type": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "dormant",
+          "dormant",
+          "dormant"
+        ]
+      },
+      "amount": {
+        "dtype": "float64",
+        "uniques_in_sample": 4934,
+        "nulls_in_sample": 0,
+        "samples": [
+          "809.42",
+          "6146.09",
+          "62.78"
+        ]
+      },
+      "currency": {
+        "dtype": "str",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "INR",
+          "INR",
+          "INR"
+        ]
+      },
+      "payment_method": {
+        "dtype": "str",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "upi",
+          "upi",
+          "upi"
+        ]
+      },
+      "upi_app": {
+        "dtype": "str",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 0,
+        "samples": [
+          "BHIM",
+          "GPay",
+          "PhonePe"
+        ]
+      },
+      "bank": {
+        "dtype": "str",
+        "uniques_in_sample": 8,
+        "nulls_in_sample": 0,
+        "samples": [
+          "BOB",
+          "Axis",
+          "SBI"
+        ]
+      },
+      "status": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "success",
+          "success",
+          "success"
+        ]
+      },
+      "error_code": {
+        "dtype": "str",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 4074,
+        "samples": [
+          "UPI_AUTHENTICATION_FAILED",
+          "INSUFFICIENT_FUNDS",
+          "DEBIT_FAILED"
+        ]
+      },
+      "device_fingerprint": {
+        "dtype": "str",
+        "uniques_in_sample": 250,
+        "nulls_in_sample": 0,
+        "samples": [
+          "device_c43078c7-ea54-4a",
+          "device_af5deff8-284a-4a",
+          "device_ef322e13-4428-49"
+        ]
+      },
+      "ip_address": {
+        "dtype": "str",
+        "uniques_in_sample": 250,
+        "nulls_in_sample": 0,
+        "samples": [
+          "103.245.141.81",
+          "103.248.131.250",
+          "103.34.235.49"
+        ]
+      },
+      "fraud_score": {
+        "dtype": "float64",
+        "uniques_in_sample": 39,
+        "nulls_in_sample": 0,
+        "samples": [
+          "7.0",
+          "14.0",
+          "7.0"
+        ]
+      },
+      "is_suspicious": {
+        "dtype": "bool",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "False",
+          "False",
+          "False"
+        ]
+      },
+      "fraud_reasons": {
+        "dtype": "str",
+        "uniques_in_sample": 3103,
+        "nulls_in_sample": 454,
+        "samples": [
+          "[\"UPI switching: 80.0%\"]",
+          "[\"High velocity: 7 txns in 1 min\", \"UPI switching: 77.78%\"]",
+          "[\"UPI switching: 100.0%\"]"
+        ]
+      },
+      "amount_slab": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "large",
+          "very_large",
+          "medium"
+        ]
+      },
+      "hour_of_day": {
+        "dtype": "int64",
+        "uniques_in_sample": 11,
+        "nulls_in_sample": 0,
+        "samples": [
+          "19",
+          "19",
+          "19"
+        ]
+      },
+      "is_night_transaction": {
+        "dtype": "bool",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "False",
+          "False",
+          "False"
+        ]
+      },
+      "is_weekend": {
+        "dtype": "bool",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "False",
+          "False",
+          "False"
+        ]
+      },
+      "attempt_count": {
+        "dtype": "int64",
+        "uniques_in_sample": 316,
+        "nulls_in_sample": 0,
+        "samples": [
+          "7",
+          "11",
+          "4"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "new_retail_data.csv.zip",
+    "file_size": 26861249,
+    "row_count": 302010,
+    "column_count": 30,
+    "columns": [
+      "Transaction_ID",
+      "Customer_ID",
+      "Name",
+      "Email",
+      "Phone",
+      "Address",
+      "City",
+      "State",
+      "Zipcode",
+      "Country",
+      "Age",
+      "Gender",
+      "Income",
+      "Customer_Segment",
+      "Date",
+      "Year",
+      "Month",
+      "Time",
+      "Total_Purchases",
+      "Amount",
+      "Total_Amount",
+      "Product_Category",
+      "Product_Brand",
+      "Product_Type",
+      "Feedback",
+      "Shipping_Method",
+      "Payment_Method",
+      "Order_Status",
+      "Ratings",
+      "products"
+    ],
+    "targets": [
+      "Order_Status"
+    ],
+    "identifiers": [
+      "Transaction_ID",
+      "Customer_ID",
+      "Customer_Segment"
+    ],
+    "temporal": [
+      "Date",
+      "Time"
+    ],
+    "profile": {
+      "Transaction_ID": {
+        "dtype": "float64",
+        "uniques_in_sample": 9984,
+        "nulls_in_sample": 10,
+        "samples": [
+          "8691788.0",
+          "2174773.0",
+          "6679610.0"
+        ]
+      },
+      "Customer_ID": {
+        "dtype": "float64",
+        "uniques_in_sample": 9482,
+        "nulls_in_sample": 15,
+        "samples": [
+          "37249.0",
+          "69749.0",
+          "30192.0"
+        ]
+      },
+      "Name": {
+        "dtype": "str",
+        "uniques_in_sample": 9384,
+        "nulls_in_sample": 10,
+        "samples": [
+          "Michelle Harrington",
+          "Kelsey Hill",
+          "Scott Jensen"
+        ]
+      },
+      "Email": {
+        "dtype": "str",
+        "uniques_in_sample": 8066,
+        "nulls_in_sample": 8,
+        "samples": [
+          "Ebony39@gmail.com",
+          "Mark36@gmail.com",
+          "Shane85@gmail.com"
+        ]
+      },
+      "Phone": {
+        "dtype": "float64",
+        "uniques_in_sample": 9989,
+        "nulls_in_sample": 11,
+        "samples": [
+          "1414786801.0",
+          "6852899987.0",
+          "8362160449.0"
+        ]
+      },
+      "Address": {
+        "dtype": "str",
+        "uniques_in_sample": 9997,
+        "nulls_in_sample": 3,
+        "samples": [
+          "3959 Amanda Burgs",
+          "82072 Dawn Centers",
+          "4133 Young Canyon"
+        ]
+      },
+      "City": {
+        "dtype": "str",
+        "uniques_in_sample": 11,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Dortmund",
+          "Nottingham",
+          "Geelong"
+        ]
+      },
+      "State": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Berlin",
+          "England",
+          "New South Wales"
+        ]
+      },
+      "Zipcode": {
+        "dtype": "float64",
+        "uniques_in_sample": 9499,
+        "nulls_in_sample": 10,
+        "samples": [
+          "77985.0",
+          "99071.0",
+          "75929.0"
+        ]
+      },
+      "Country": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Germany",
+          "UK",
+          "Australia"
+        ]
+      },
+      "Age": {
+        "dtype": "float64",
+        "uniques_in_sample": 53,
+        "nulls_in_sample": 2,
+        "samples": [
+          "21.0",
+          "19.0",
+          "48.0"
+        ]
+      },
+      "Gender": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 15,
+        "samples": [
+          "Male",
+          "Female",
+          "Male"
+        ]
+      },
+      "Income": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Low",
+          "Low",
+          "Low"
+        ]
+      },
+      "Customer_Segment": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Regular",
+          "Premium",
+          "Regular"
+        ]
+      },
+      "Date": {
+        "dtype": "str",
+        "uniques_in_sample": 366,
+        "nulls_in_sample": 8,
+        "samples": [
+          "9/18/2023",
+          "12/31/2023",
+          "4/26/2023"
+        ]
+      },
+      "Year": {
+        "dtype": "float64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 13,
+        "samples": [
+          "2023.0",
+          "2023.0",
+          "2023.0"
+        ]
+      },
+      "Month": {
+        "dtype": "str",
+        "uniques_in_sample": 12,
+        "nulls_in_sample": 18,
+        "samples": [
+          "September",
+          "December",
+          "April"
+        ]
+      },
+      "Time": {
+        "dtype": "str",
+        "uniques_in_sample": 9446,
+        "nulls_in_sample": 12,
+        "samples": [
+          "22:03:55",
+          "8:42:04",
+          "4:06:29"
+        ]
+      },
+      "Total_Purchases": {
+        "dtype": "float64",
+        "uniques_in_sample": 10,
+        "nulls_in_sample": 14,
+        "samples": [
+          "3.0",
+          "2.0",
+          "3.0"
+        ]
+      },
+      "Amount": {
+        "dtype": "float64",
+        "uniques_in_sample": 9993,
+        "nulls_in_sample": 7,
+        "samples": [
+          "108.0287567",
+          "403.3539073",
+          "354.4775997"
+        ]
+      },
+      "Total_Amount": {
+        "dtype": "float64",
+        "uniques_in_sample": 9983,
+        "nulls_in_sample": 17,
+        "samples": [
+          "324.08627",
+          "806.7078147",
+          "1063.432799"
+        ]
+      },
+      "Product_Category": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 14,
+        "samples": [
+          "Clothing",
+          "Electronics",
+          "Books"
+        ]
+      },
+      "Product_Brand": {
+        "dtype": "str",
+        "uniques_in_sample": 15,
+        "nulls_in_sample": 10,
+        "samples": [
+          "Nike",
+          "Samsung",
+          "Penguin Books"
+        ]
+      },
+      "Product_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 30,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Shorts",
+          "Tablet",
+          "Children's"
+        ]
+      },
+      "Feedback": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 9,
+        "samples": [
+          "Excellent",
+          "Excellent",
+          "Average"
+        ]
+      },
+      "Shipping_Method": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 10,
+        "samples": [
+          "Same-Day",
+          "Standard",
+          "Same-Day"
+        ]
+      },
+      "Payment_Method": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 9,
+        "samples": [
+          "Debit Card",
+          "Credit Card",
+          "Credit Card"
+        ]
+      },
+      "Order_Status": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 21,
+        "samples": [
+          "Shipped",
+          "Processing",
+          "Processing"
+        ]
+      },
+      "Ratings": {
+        "dtype": "float64",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 9,
+        "samples": [
+          "5.0",
+          "4.0",
+          "2.0"
+        ]
+      },
+      "products": {
+        "dtype": "str",
+        "uniques_in_sample": 297,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Cycling shorts",
+          "Lenovo Tab",
+          "Sports equipment"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "online+retail+ii.zip",
+    "file_size": 45940139,
+    "status": "ARCHIVE",
+    "contents": [
+      "online_retail_II.xlsx",
+      "sales+transactions+dataset+weekly.zip"
+    ]
+  },
+  {
+    "filename": "online+shoppers+purchasing+intention+dataset.zip",
+    "file_size": 1072219,
+    "status": "ARCHIVE",
+    "contents": [
+      "online_shoppers_intention.csv"
+    ]
+  },
+  {
+    "filename": "online_furniture_retailer-selected-columns.csv",
+    "file_size": 161336,
+    "row_count": 1938,
+    "column_count": 10,
+    "columns": [
+      "product_category",
+      "product_subcategory",
+      "brand",
+      "delivery_status",
+      "assembly_service_requested",
+      "payment_method",
+      "order_id",
+      "customer_id",
+      "product_price",
+      "shipping_cost"
+    ],
+    "targets": [
+      "delivery_status"
+    ],
+    "identifiers": [
+      "order_id",
+      "customer_id"
+    ],
+    "temporal": [],
+    "profile": {
+      "product_category": {
+        "dtype": "str",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Outdoor",
+          "Living Room",
+          "Dining Room"
+        ]
+      },
+      "product_subcategory": {
+        "dtype": "str",
+        "uniques_in_sample": 31,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Patio Set",
+          "Sofa",
+          "Bar Stool"
+        ]
+      },
+      "brand": {
+        "dtype": "str",
+        "uniques_in_sample": 12,
+        "nulls_in_sample": 96,
+        "samples": [
+          "World Market",
+          "West Elm",
+          "Ashley Furniture"
+        ]
+      },
+      "delivery_status": {
+        "dtype": "str",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Failed Delivery",
+          "Cancelled",
+          "Delivered"
+        ]
+      },
+      "assembly_service_requested": {
+        "dtype": "bool",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "True",
+          "True",
+          "False"
+        ]
+      },
+      "payment_method": {
+        "dtype": "str",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Credit Card",
+          "Apple Pay",
+          "Cash on Delivery"
+        ]
+      },
+      "order_id": {
+        "dtype": "int64",
+        "uniques_in_sample": 1916,
+        "nulls_in_sample": 0,
+        "samples": [
+          "93810",
+          "13278",
+          "42098"
+        ]
+      },
+      "customer_id": {
+        "dtype": "int64",
+        "uniques_in_sample": 1738,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2824",
+          "5506",
+          "4657"
+        ]
+      },
+      "product_price": {
+        "dtype": "float64",
+        "uniques_in_sample": 1933,
+        "nulls_in_sample": 0,
+        "samples": [
+          "191.27",
+          "702.87",
+          "395.41"
+        ]
+      },
+      "shipping_cost": {
+        "dtype": "float64",
+        "uniques_in_sample": 1366,
+        "nulls_in_sample": 58,
+        "samples": [
+          "45.63",
+          "52.65",
+          "96.79"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "payment-practices.csv.zip",
+    "file_size": 789450,
+    "row_count": 24225,
+    "column_count": 23,
+    "columns": [
+      "Report Id",
+      "Start date",
+      "End date",
+      "Filing date",
+      "Company",
+      "Company number",
+      "Payments made in the reporting period",
+      "Average time to pay",
+      "% Invoices paid within 30 days",
+      "% Invoices paid between 31 and 60 days",
+      "% Invoices paid later than 60 days",
+      "% Invoices not paid within agreed terms",
+      "Shortest (or only) standard payment period",
+      "Longest standard payment period",
+      "Maximum contractual payment period",
+      "Payment terms have changed",
+      "Suppliers notified of changes",
+      "Participates in payment codes",
+      "E-Invoicing offered",
+      "Supply-chain financing offered",
+      "Policy covers charges for remaining on supplier list",
+      "Charges have been made for remaining on supplier list",
+      "URL"
+    ],
+    "targets": [],
+    "identifiers": [
+      "Report Id",
+      "% Invoices paid within 30 days",
+      "% Invoices paid between 31 and 60 days",
+      "% Invoices paid later than 60 days",
+      "% Invoices not paid within agreed terms"
+    ],
+    "temporal": [
+      "Start date",
+      "End date",
+      "Filing date",
+      "Average time to pay"
+    ],
+    "profile": {
+      "Report Id": {
+        "dtype": "int64",
+        "uniques_in_sample": 10000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "Start date": {
+        "dtype": "str",
+        "uniques_in_sample": 157,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2017-04-29",
+          "2017-05-01",
+          "2017-04-15"
+        ]
+      },
+      "End date": {
+        "dtype": "str",
+        "uniques_in_sample": 166,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2017-10-28",
+          "2017-10-31",
+          "2017-10-14"
+        ]
+      },
+      "Filing date": {
+        "dtype": "str",
+        "uniques_in_sample": 322,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2017-11-07",
+          "2017-11-08",
+          "2017-11-08"
+        ]
+      },
+      "Company": {
+        "dtype": "str",
+        "uniques_in_sample": 7111,
+        "nulls_in_sample": 0,
+        "samples": [
+          "MEDTRONIC LIMITED",
+          "SEBDEN STEEL SERVICE CENTRES LIMITED",
+          "GREENERGY FLEXIGRID LIMITED"
+        ]
+      },
+      "Company number": {
+        "dtype": "str",
+        "uniques_in_sample": 7074,
+        "nulls_in_sample": 0,
+        "samples": [
+          "01070807",
+          "02553464",
+          "07581532"
+        ]
+      },
+      "Payments made in the reporting period": {
+        "dtype": "object",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 8947,
+        "samples": [
+          "True",
+          "True",
+          "True"
+        ]
+      },
+      "Average time to pay": {
+        "dtype": "float64",
+        "uniques_in_sample": 134,
+        "nulls_in_sample": 973,
+        "samples": [
+          "25.0",
+          "69.0",
+          "21.0"
+        ]
+      },
+      "% Invoices paid within 30 days": {
+        "dtype": "float64",
+        "uniques_in_sample": 101,
+        "nulls_in_sample": 973,
+        "samples": [
+          "77.0",
+          "7.0",
+          "89.0"
+        ]
+      },
+      "% Invoices paid between 31 and 60 days": {
+        "dtype": "float64",
+        "uniques_in_sample": 99,
+        "nulls_in_sample": 973,
+        "samples": [
+          "20.0",
+          "28.0",
+          "9.0"
+        ]
+      },
+      "% Invoices paid later than 60 days": {
+        "dtype": "float64",
+        "uniques_in_sample": 97,
+        "nulls_in_sample": 973,
+        "samples": [
+          "3.0",
+          "65.0",
+          "2.0"
+        ]
+      },
+      "% Invoices not paid within agreed terms": {
+        "dtype": "float64",
+        "uniques_in_sample": 101,
+        "nulls_in_sample": 971,
+        "samples": [
+          "89.0",
+          "0.0",
+          "47.0"
+        ]
+      },
+      "Shortest (or only) standard payment period": {
+        "dtype": "float64",
+        "uniques_in_sample": 65,
+        "nulls_in_sample": 971,
+        "samples": [
+          "30.0",
+          "30.0",
+          "2.0"
+        ]
+      },
+      "Longest standard payment period": {
+        "dtype": "float64",
+        "uniques_in_sample": 134,
+        "nulls_in_sample": 4227,
+        "samples": [
+          "60.0",
+          "30.0",
+          "30.0"
+        ]
+      },
+      "Maximum contractual payment period": {
+        "dtype": "float64",
+        "uniques_in_sample": 169,
+        "nulls_in_sample": 971,
+        "samples": [
+          "60.0",
+          "75.0",
+          "30.0"
+        ]
+      },
+      "Payment terms have changed": {
+        "dtype": "object",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 971,
+        "samples": [
+          "False",
+          "False",
+          "False"
+        ]
+      },
+      "Suppliers notified of changes": {
+        "dtype": "object",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 9765,
+        "samples": [
+          "True",
+          "True",
+          "True"
+        ]
+      },
+      "Participates in payment codes": {
+        "dtype": "bool",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "False",
+          "False",
+          "False"
+        ]
+      },
+      "E-Invoicing offered": {
+        "dtype": "object",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 971,
+        "samples": [
+          "True",
+          "False",
+          "False"
+        ]
+      },
+      "Supply-chain financing offered": {
+        "dtype": "object",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 971,
+        "samples": [
+          "False",
+          "False",
+          "False"
+        ]
+      },
+      "Policy covers charges for remaining on supplier list": {
+        "dtype": "object",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 971,
+        "samples": [
+          "False",
+          "False",
+          "True"
+        ]
+      },
+      "Charges have been made for remaining on supplier list": {
+        "dtype": "object",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 971,
+        "samples": [
+          "False",
+          "False",
+          "True"
+        ]
+      },
+      "URL": {
+        "dtype": "str",
+        "uniques_in_sample": 10000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "https://check-payment-practices.service.gov.uk/report/2",
+          "https://check-payment-practices.service.gov.uk/report/3",
+          "https://check-payment-practices.service.gov.uk/report/4"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "retail_data.csv.zip",
+    "file_size": 25984799,
+    "row_count": 302010,
+    "column_count": 30,
+    "columns": [
+      "Transaction_ID",
+      "Customer_ID",
+      "Name",
+      "Email",
+      "Phone",
+      "Address",
+      "City",
+      "State",
+      "Zipcode",
+      "Country",
+      "Age",
+      "Gender",
+      "Income",
+      "Customer_Segment",
+      "Date",
+      "Year",
+      "Month",
+      "Time",
+      "Total_Purchases",
+      "Amount",
+      "Total_Amount",
+      "Product_Category",
+      "Product_Brand",
+      "Product_Type",
+      "Feedback",
+      "Shipping_Method",
+      "Payment_Method",
+      "Order_Status",
+      "Ratings",
+      "products"
+    ],
+    "targets": [
+      "Order_Status"
+    ],
+    "identifiers": [
+      "Transaction_ID",
+      "Customer_ID",
+      "Customer_Segment"
+    ],
+    "temporal": [
+      "Date",
+      "Time"
+    ],
+    "profile": {
+      "Transaction_ID": {
+        "dtype": "float64",
+        "uniques_in_sample": 9984,
+        "nulls_in_sample": 10,
+        "samples": [
+          "8691788.0",
+          "2174773.0",
+          "6679610.0"
+        ]
+      },
+      "Customer_ID": {
+        "dtype": "float64",
+        "uniques_in_sample": 9482,
+        "nulls_in_sample": 15,
+        "samples": [
+          "37249.0",
+          "69749.0",
+          "30192.0"
+        ]
+      },
+      "Name": {
+        "dtype": "str",
+        "uniques_in_sample": 9384,
+        "nulls_in_sample": 10,
+        "samples": [
+          "Michelle Harrington",
+          "Kelsey Hill",
+          "Scott Jensen"
+        ]
+      },
+      "Email": {
+        "dtype": "str",
+        "uniques_in_sample": 8066,
+        "nulls_in_sample": 8,
+        "samples": [
+          "Ebony39@gmail.com",
+          "Mark36@gmail.com",
+          "Shane85@gmail.com"
+        ]
+      },
+      "Phone": {
+        "dtype": "float64",
+        "uniques_in_sample": 9989,
+        "nulls_in_sample": 11,
+        "samples": [
+          "1414786801.0",
+          "6852899987.0",
+          "8362160449.0"
+        ]
+      },
+      "Address": {
+        "dtype": "str",
+        "uniques_in_sample": 9997,
+        "nulls_in_sample": 3,
+        "samples": [
+          "3959 Amanda Burgs",
+          "82072 Dawn Centers",
+          "4133 Young Canyon"
+        ]
+      },
+      "City": {
+        "dtype": "str",
+        "uniques_in_sample": 11,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Dortmund",
+          "Nottingham",
+          "Geelong"
+        ]
+      },
+      "State": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Berlin",
+          "England",
+          "New South Wales"
+        ]
+      },
+      "Zipcode": {
+        "dtype": "float64",
+        "uniques_in_sample": 9499,
+        "nulls_in_sample": 10,
+        "samples": [
+          "77985.0",
+          "99071.0",
+          "75929.0"
+        ]
+      },
+      "Country": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Germany",
+          "UK",
+          "Australia"
+        ]
+      },
+      "Age": {
+        "dtype": "float64",
+        "uniques_in_sample": 53,
+        "nulls_in_sample": 2,
+        "samples": [
+          "21.0",
+          "19.0",
+          "48.0"
+        ]
+      },
+      "Gender": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 15,
+        "samples": [
+          "Male",
+          "Female",
+          "Male"
+        ]
+      },
+      "Income": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Low",
+          "Low",
+          "Low"
+        ]
+      },
+      "Customer_Segment": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Regular",
+          "Premium",
+          "Regular"
+        ]
+      },
+      "Date": {
+        "dtype": "str",
+        "uniques_in_sample": 366,
+        "nulls_in_sample": 8,
+        "samples": [
+          "9/18/2023",
+          "12/31/2023",
+          "4/26/2023"
+        ]
+      },
+      "Year": {
+        "dtype": "float64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 13,
+        "samples": [
+          "2023.0",
+          "2023.0",
+          "2023.0"
+        ]
+      },
+      "Month": {
+        "dtype": "str",
+        "uniques_in_sample": 12,
+        "nulls_in_sample": 18,
+        "samples": [
+          "September",
+          "December",
+          "April"
+        ]
+      },
+      "Time": {
+        "dtype": "str",
+        "uniques_in_sample": 9446,
+        "nulls_in_sample": 12,
+        "samples": [
+          "22:03:55",
+          "8:42:04",
+          "4:06:29"
+        ]
+      },
+      "Total_Purchases": {
+        "dtype": "float64",
+        "uniques_in_sample": 10,
+        "nulls_in_sample": 14,
+        "samples": [
+          "3.0",
+          "2.0",
+          "3.0"
+        ]
+      },
+      "Amount": {
+        "dtype": "float64",
+        "uniques_in_sample": 9993,
+        "nulls_in_sample": 7,
+        "samples": [
+          "108.0287567",
+          "403.3539073",
+          "354.4775997"
+        ]
+      },
+      "Total_Amount": {
+        "dtype": "float64",
+        "uniques_in_sample": 9983,
+        "nulls_in_sample": 17,
+        "samples": [
+          "324.08627",
+          "806.7078147",
+          "1063.432799"
+        ]
+      },
+      "Product_Category": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 14,
+        "samples": [
+          "Clothing",
+          "Electronics",
+          "Books"
+        ]
+      },
+      "Product_Brand": {
+        "dtype": "str",
+        "uniques_in_sample": 15,
+        "nulls_in_sample": 10,
+        "samples": [
+          "Nike",
+          "Samsung",
+          "Penguin Books"
+        ]
+      },
+      "Product_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 30,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Shorts",
+          "Tablet",
+          "Children's"
+        ]
+      },
+      "Feedback": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 9,
+        "samples": [
+          "Excellent",
+          "Excellent",
+          "Average"
+        ]
+      },
+      "Shipping_Method": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 10,
+        "samples": [
+          "Same-Day",
+          "Standard",
+          "Same-Day"
+        ]
+      },
+      "Payment_Method": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 9,
+        "samples": [
+          "Debit Card",
+          "Credit Card",
+          "Credit Card"
+        ]
+      },
+      "Order_Status": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 21,
+        "samples": [
+          "Shipped",
+          "Processing",
+          "Processing"
+        ]
+      },
+      "Ratings": {
+        "dtype": "float64",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 9,
+        "samples": [
+          "5.0",
+          "4.0",
+          "2.0"
+        ]
+      },
+      "products": {
+        "dtype": "str",
+        "uniques_in_sample": 297,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Cycling shorts",
+          "Lenovo Tab",
+          "Sports equipment"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "shopping_trends.csv",
+    "file_size": 453248,
+    "row_count": 3900,
+    "column_count": 19,
+    "columns": [
+      "Customer ID",
+      "Age",
+      "Gender",
+      "Item Purchased",
+      "Category",
+      "Purchase Amount (USD)",
+      "Location",
+      "Size",
+      "Color",
+      "Season",
+      "Review Rating",
+      "Subscription Status",
+      "Payment Method",
+      "Shipping Type",
+      "Discount Applied",
+      "Promo Code Used",
+      "Previous Purchases",
+      "Preferred Payment Method",
+      "Frequency of Purchases"
+    ],
+    "targets": [
+      "Subscription Status"
+    ],
+    "identifiers": [
+      "Customer ID"
+    ],
+    "temporal": [],
+    "profile": {
+      "Customer ID": {
+        "dtype": "int64",
+        "uniques_in_sample": 3900,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "Age": {
+        "dtype": "int64",
+        "uniques_in_sample": 53,
+        "nulls_in_sample": 0,
+        "samples": [
+          "55",
+          "19",
+          "50"
+        ]
+      },
+      "Gender": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Male",
+          "Male",
+          "Male"
+        ]
+      },
+      "Item Purchased": {
+        "dtype": "str",
+        "uniques_in_sample": 25,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Blouse",
+          "Sweater",
+          "Jeans"
+        ]
+      },
+      "Category": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Clothing",
+          "Clothing",
+          "Clothing"
+        ]
+      },
+      "Purchase Amount (USD)": {
+        "dtype": "int64",
+        "uniques_in_sample": 81,
+        "nulls_in_sample": 0,
+        "samples": [
+          "53",
+          "64",
+          "73"
+        ]
+      },
+      "Location": {
+        "dtype": "str",
+        "uniques_in_sample": 50,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Kentucky",
+          "Maine",
+          "Massachusetts"
+        ]
+      },
+      "Size": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "L",
+          "L",
+          "S"
+        ]
+      },
+      "Color": {
+        "dtype": "str",
+        "uniques_in_sample": 25,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Gray",
+          "Maroon",
+          "Maroon"
+        ]
+      },
+      "Season": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Winter",
+          "Winter",
+          "Spring"
+        ]
+      },
+      "Review Rating": {
+        "dtype": "float64",
+        "uniques_in_sample": 26,
+        "nulls_in_sample": 0,
+        "samples": [
+          "3.1",
+          "3.1",
+          "3.1"
+        ]
+      },
+      "Subscription Status": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Yes",
+          "Yes",
+          "Yes"
+        ]
+      },
+      "Payment Method": {
+        "dtype": "str",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Credit Card",
+          "Bank Transfer",
+          "Cash"
+        ]
+      },
+      "Shipping Type": {
+        "dtype": "str",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Express",
+          "Express",
+          "Free Shipping"
+        ]
+      },
+      "Discount Applied": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Yes",
+          "Yes",
+          "Yes"
+        ]
+      },
+      "Promo Code Used": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Yes",
+          "Yes",
+          "Yes"
+        ]
+      },
+      "Previous Purchases": {
+        "dtype": "int64",
+        "uniques_in_sample": 50,
+        "nulls_in_sample": 0,
+        "samples": [
+          "14",
+          "2",
+          "23"
+        ]
+      },
+      "Preferred Payment Method": {
+        "dtype": "str",
+        "uniques_in_sample": 6,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Venmo",
+          "Cash",
+          "Credit Card"
+        ]
+      },
+      "Frequency of Purchases": {
+        "dtype": "str",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Fortnightly",
+          "Fortnightly",
+          "Weekly"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "synthetic_fraud_dataset.csv",
+    "file_size": 7019170,
+    "row_count": 50000,
+    "column_count": 21,
+    "columns": [
+      "Transaction_ID",
+      "User_ID",
+      "Transaction_Amount",
+      "Transaction_Type",
+      "Timestamp",
+      "Account_Balance",
+      "Device_Type",
+      "Location",
+      "Merchant_Category",
+      "IP_Address_Flag",
+      "Previous_Fraudulent_Activity",
+      "Daily_Transaction_Count",
+      "Avg_Transaction_Amount_7d",
+      "Failed_Transaction_Count_7d",
+      "Card_Type",
+      "Card_Age",
+      "Transaction_Distance",
+      "Authentication_Method",
+      "Risk_Score",
+      "Is_Weekend",
+      "Fraud_Label"
+    ],
+    "targets": [],
+    "identifiers": [
+      "Transaction_ID",
+      "User_ID",
+      "Account_Balance"
+    ],
+    "temporal": [
+      "Timestamp"
+    ],
+    "profile": {
+      "Transaction_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 10000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "TXN_33553",
+          "TXN_9427",
+          "TXN_199"
+        ]
+      },
+      "User_ID": {
+        "dtype": "str",
+        "uniques_in_sample": 6045,
+        "nulls_in_sample": 0,
+        "samples": [
+          "USER_1834",
+          "USER_7875",
+          "USER_2734"
+        ]
+      },
+      "Transaction_Amount": {
+        "dtype": "float64",
+        "uniques_in_sample": 7922,
+        "nulls_in_sample": 0,
+        "samples": [
+          "39.79",
+          "1.19",
+          "28.96"
+        ]
+      },
+      "Transaction_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "POS",
+          "Bank Transfer",
+          "Online"
+        ]
+      },
+      "Timestamp": {
+        "dtype": "str",
+        "uniques_in_sample": 9888,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2023-08-14 19:30:00",
+          "2023-06-07 04:01:00",
+          "2023-06-20 15:25:00"
+        ]
+      },
+      "Account_Balance": {
+        "dtype": "float64",
+        "uniques_in_sample": 9991,
+        "nulls_in_sample": 0,
+        "samples": [
+          "93213.17",
+          "75725.25",
+          "1588.96"
+        ]
+      },
+      "Device_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Laptop",
+          "Mobile",
+          "Tablet"
+        ]
+      },
+      "Location": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Sydney",
+          "New York",
+          "Mumbai"
+        ]
+      },
+      "Merchant_Category": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Travel",
+          "Clothing",
+          "Restaurants"
+        ]
+      },
+      "IP_Address_Flag": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "Previous_Fraudulent_Activity": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "Daily_Transaction_Count": {
+        "dtype": "int64",
+        "uniques_in_sample": 14,
+        "nulls_in_sample": 0,
+        "samples": [
+          "7",
+          "13",
+          "14"
+        ]
+      },
+      "Avg_Transaction_Amount_7d": {
+        "dtype": "float64",
+        "uniques_in_sample": 9066,
+        "nulls_in_sample": 0,
+        "samples": [
+          "437.63",
+          "478.76",
+          "50.01"
+        ]
+      },
+      "Failed_Transaction_Count_7d": {
+        "dtype": "int64",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "3",
+          "4",
+          "4"
+        ]
+      },
+      "Card_Type": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Amex",
+          "Mastercard",
+          "Visa"
+        ]
+      },
+      "Card_Age": {
+        "dtype": "int64",
+        "uniques_in_sample": 239,
+        "nulls_in_sample": 0,
+        "samples": [
+          "65",
+          "186",
+          "226"
+        ]
+      },
+      "Transaction_Distance": {
+        "dtype": "float64",
+        "uniques_in_sample": 9899,
+        "nulls_in_sample": 0,
+        "samples": [
+          "883.17",
+          "2203.36",
+          "1909.29"
+        ]
+      },
+      "Authentication_Method": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Biometric",
+          "Password",
+          "Biometric"
+        ]
+      },
+      "Risk_Score": {
+        "dtype": "float64",
+        "uniques_in_sample": 6274,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0.8494",
+          "0.0959",
+          "0.84"
+        ]
+      },
+      "Is_Weekend": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "Fraud_Label": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "1",
+          "1"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "test_dummy_4bc8c802c1c844c0894928e2ac24ea07.csv",
+    "file_size": 12,
+    "row_count": 1,
+    "column_count": 3,
+    "columns": [
+      "a",
+      "b",
+      "c"
+    ],
+    "targets": [],
+    "identifiers": [],
+    "temporal": [],
+    "profile": {
+      "a": {
+        "dtype": "int64",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1"
+        ]
+      },
+      "b": {
+        "dtype": "int64",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2"
+        ]
+      },
+      "c": {
+        "dtype": "int64",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "3"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "transactions new.csv",
+    "file_size": 137071,
+    "row_count": 1000,
+    "column_count": 8,
+    "columns": [
+      "Transaction ID",
+      "Timestamp",
+      "Sender Name",
+      "Sender UPI ID",
+      "Receiver Name",
+      "Receiver UPI ID",
+      "Amount (INR)",
+      "Status"
+    ],
+    "targets": [
+      "Status"
+    ],
+    "identifiers": [
+      "Transaction ID",
+      "Sender UPI ID",
+      "Receiver UPI ID"
+    ],
+    "temporal": [
+      "Timestamp"
+    ],
+    "profile": {
+      "Transaction ID": {
+        "dtype": "str",
+        "uniques_in_sample": 1000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "4d3db980-46cd-4158-a812-dcb77055d0d2",
+          "2582bdc0-4ea3-4a92-8329-72cd84b429f6",
+          "9a981fdf-f953-4fc6-8a7d-bfc26f1ea4dc"
+        ]
+      },
+      "Timestamp": {
+        "dtype": "str",
+        "uniques_in_sample": 1000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2024-06-22 04:06:38",
+          "2024-06-23 13:01:51",
+          "2024-06-30 08:43:40"
+        ]
+      },
+      "Sender Name": {
+        "dtype": "str",
+        "uniques_in_sample": 997,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Tiya Mall",
+          "Sara Khanna",
+          "Anvi Dalal"
+        ]
+      },
+      "Sender UPI ID": {
+        "dtype": "str",
+        "uniques_in_sample": 1000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "4161803452@okaxis",
+          "8203474864@oksbi",
+          "8893886778@okhdfcbank"
+        ]
+      },
+      "Receiver Name": {
+        "dtype": "str",
+        "uniques_in_sample": 996,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Mohanlal Golla",
+          "Tiya Virk",
+          "Pari Lal"
+        ]
+      },
+      "Receiver UPI ID": {
+        "dtype": "str",
+        "uniques_in_sample": 1000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "7776849307@okybl",
+          "9427710364@oksbi",
+          "0762409234@okaxis"
+        ]
+      },
+      "Amount (INR)": {
+        "dtype": "float64",
+        "uniques_in_sample": 999,
+        "nulls_in_sample": 0,
+        "samples": [
+          "3907.34",
+          "4680.11",
+          "1563.3"
+        ]
+      },
+      "Status": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "FAILED",
+          "FAILED",
+          "FAILED"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "transactions.csv",
+    "file_size": 137073,
+    "row_count": 1000,
+    "column_count": 8,
+    "columns": [
+      "Transaction ID",
+      "Timestamp",
+      "Sender Name",
+      "Sender UPI ID",
+      "Receiver Name",
+      "Receiver UPI ID",
+      "Amount (INR)",
+      "Status"
+    ],
+    "targets": [
+      "Status"
+    ],
+    "identifiers": [
+      "Transaction ID",
+      "Sender UPI ID",
+      "Receiver UPI ID"
+    ],
+    "temporal": [
+      "Timestamp"
+    ],
+    "profile": {
+      "Transaction ID": {
+        "dtype": "str",
+        "uniques_in_sample": 1000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "4d3db980-46cd-4158-a812-dcb77055d0d2",
+          "099ee548-2fc1-4811-bf92-559c467ca792",
+          "d4c05732-6b1b-4bab-90b9-efe09d252b99"
+        ]
+      },
+      "Timestamp": {
+        "dtype": "str",
+        "uniques_in_sample": 1000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2024-06-22 04:06:38",
+          "2024-06-19 06:04:49",
+          "2024-06-04 04:56:09"
+        ]
+      },
+      "Sender Name": {
+        "dtype": "str",
+        "uniques_in_sample": 997,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Tiya Mall",
+          "Mohanlal Bakshi",
+          "Kismat Bora"
+        ]
+      },
+      "Sender UPI ID": {
+        "dtype": "str",
+        "uniques_in_sample": 1000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "4161803452@okaxis",
+          "8908837379@okaxis",
+          "4633654150@okybl"
+        ]
+      },
+      "Receiver Name": {
+        "dtype": "str",
+        "uniques_in_sample": 996,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Mohanlal Golla",
+          "Mehul Sankaran",
+          "Diya Goel"
+        ]
+      },
+      "Receiver UPI ID": {
+        "dtype": "str",
+        "uniques_in_sample": 1000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "7776849307@okybl",
+          "7683454560@okaxis",
+          "2598130823@okicici"
+        ]
+      },
+      "Amount (INR)": {
+        "dtype": "float64",
+        "uniques_in_sample": 999,
+        "nulls_in_sample": 0,
+        "samples": [
+          "3907.34",
+          "8404.55",
+          "941.88"
+        ]
+      },
+      "Status": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "FAILED",
+          "SUCCESS",
+          "SUCCESS"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "upi_transactions_2024.csv",
+    "file_size": 29811789,
+    "row_count": 250000,
+    "column_count": 17,
+    "columns": [
+      "transaction id",
+      "timestamp",
+      "transaction type",
+      "merchant_category",
+      "amount (INR)",
+      "transaction_status",
+      "sender_age_group",
+      "receiver_age_group",
+      "sender_state",
+      "sender_bank",
+      "receiver_bank",
+      "device_type",
+      "network_type",
+      "fraud_flag",
+      "hour_of_day",
+      "day_of_week",
+      "is_weekend"
+    ],
+    "targets": [
+      "transaction_status"
+    ],
+    "identifiers": [
+      "transaction id"
+    ],
+    "temporal": [
+      "timestamp"
+    ],
+    "profile": {
+      "transaction id": {
+        "dtype": "str",
+        "uniques_in_sample": 10000,
+        "nulls_in_sample": 0,
+        "samples": [
+          "TXN0000000001",
+          "TXN0000000002",
+          "TXN0000000003"
+        ]
+      },
+      "timestamp": {
+        "dtype": "str",
+        "uniques_in_sample": 9999,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2024-10-08 15:17:28",
+          "2024-04-11 06:56:00",
+          "2024-04-02 13:27:18"
+        ]
+      },
+      "transaction type": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "P2P",
+          "P2M",
+          "P2P"
+        ]
+      },
+      "merchant_category": {
+        "dtype": "str",
+        "uniques_in_sample": 10,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Entertainment",
+          "Grocery",
+          "Grocery"
+        ]
+      },
+      "amount (INR)": {
+        "dtype": "int64",
+        "uniques_in_sample": 3298,
+        "nulls_in_sample": 0,
+        "samples": [
+          "868",
+          "1011",
+          "477"
+        ]
+      },
+      "transaction_status": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "SUCCESS",
+          "SUCCESS",
+          "SUCCESS"
+        ]
+      },
+      "sender_age_group": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "26-35",
+          "26-35",
+          "26-35"
+        ]
+      },
+      "receiver_age_group": {
+        "dtype": "str",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "18-25",
+          "26-35",
+          "36-45"
+        ]
+      },
+      "sender_state": {
+        "dtype": "str",
+        "uniques_in_sample": 10,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Delhi",
+          "Uttar Pradesh",
+          "Karnataka"
+        ]
+      },
+      "sender_bank": {
+        "dtype": "str",
+        "uniques_in_sample": 8,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Axis",
+          "ICICI",
+          "Yes Bank"
+        ]
+      },
+      "receiver_bank": {
+        "dtype": "str",
+        "uniques_in_sample": 8,
+        "nulls_in_sample": 0,
+        "samples": [
+          "SBI",
+          "Axis",
+          "PNB"
+        ]
+      },
+      "device_type": {
+        "dtype": "str",
+        "uniques_in_sample": 3,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Android",
+          "iOS",
+          "Android"
+        ]
+      },
+      "network_type": {
+        "dtype": "str",
+        "uniques_in_sample": 4,
+        "nulls_in_sample": 0,
+        "samples": [
+          "4G",
+          "4G",
+          "4G"
+        ]
+      },
+      "fraud_flag": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      "hour_of_day": {
+        "dtype": "int64",
+        "uniques_in_sample": 24,
+        "nulls_in_sample": 0,
+        "samples": [
+          "15",
+          "6",
+          "13"
+        ]
+      },
+      "day_of_week": {
+        "dtype": "str",
+        "uniques_in_sample": 7,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Tuesday",
+          "Thursday",
+          "Tuesday"
+        ]
+      },
+      "is_weekend": {
+        "dtype": "int64",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "0",
+          "0"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "upload_test.csv",
+    "file_size": 39,
+    "row_count": 1,
+    "column_count": 3,
+    "columns": [
+      "customer_id",
+      "amount",
+      "status"
+    ],
+    "targets": [
+      "status"
+    ],
+    "identifiers": [
+      "customer_id"
+    ],
+    "temporal": [],
+    "profile": {
+      "customer_id": {
+        "dtype": "int64",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1"
+        ]
+      },
+      "amount": {
+        "dtype": "int64",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "100"
+        ]
+      },
+      "status": {
+        "dtype": "str",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "success"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "upload_test_1180bbf5e78142ee8545df6e3afa1be9.csv",
+    "file_size": 39,
+    "row_count": 1,
+    "column_count": 3,
+    "columns": [
+      "customer_id",
+      "amount",
+      "status"
+    ],
+    "targets": [
+      "status"
+    ],
+    "identifiers": [
+      "customer_id"
+    ],
+    "temporal": [],
+    "profile": {
+      "customer_id": {
+        "dtype": "int64",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1"
+        ]
+      },
+      "amount": {
+        "dtype": "int64",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "100"
+        ]
+      },
+      "status": {
+        "dtype": "str",
+        "uniques_in_sample": 1,
+        "nulls_in_sample": 0,
+        "samples": [
+          "success"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "WA_Fn-UseC_-Accounts-Receivable.csv",
+    "file_size": 220150,
+    "row_count": 2466,
+    "column_count": 12,
+    "columns": [
+      "countryCode",
+      "customerID",
+      "PaperlessDate",
+      "invoiceNumber",
+      "InvoiceDate",
+      "DueDate",
+      "InvoiceAmount",
+      "Disputed",
+      "SettledDate",
+      "PaperlessBill",
+      "DaysToSettle",
+      "DaysLate"
+    ],
+    "targets": [],
+    "identifiers": [
+      "customerID"
+    ],
+    "temporal": [
+      "PaperlessDate",
+      "InvoiceDate",
+      "DueDate",
+      "SettledDate"
+    ],
+    "profile": {
+      "countryCode": {
+        "dtype": "int64",
+        "uniques_in_sample": 5,
+        "nulls_in_sample": 0,
+        "samples": [
+          "391",
+          "406",
+          "391"
+        ]
+      },
+      "customerID": {
+        "dtype": "str",
+        "uniques_in_sample": 100,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0379-NEVHP",
+          "8976-AMJEO",
+          "2820-XGXSB"
+        ]
+      },
+      "PaperlessDate": {
+        "dtype": "str",
+        "uniques_in_sample": 91,
+        "nulls_in_sample": 0,
+        "samples": [
+          "4/6/2013",
+          "3/3/2012",
+          "1/26/2012"
+        ]
+      },
+      "invoiceNumber": {
+        "dtype": "int64",
+        "uniques_in_sample": 2466,
+        "nulls_in_sample": 0,
+        "samples": [
+          "611365",
+          "7900770",
+          "9231909"
+        ]
+      },
+      "InvoiceDate": {
+        "dtype": "str",
+        "uniques_in_sample": 681,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1/2/2013",
+          "1/26/2013",
+          "7/3/2013"
+        ]
+      },
+      "DueDate": {
+        "dtype": "str",
+        "uniques_in_sample": 681,
+        "nulls_in_sample": 0,
+        "samples": [
+          "2/1/2013",
+          "2/25/2013",
+          "8/2/2013"
+        ]
+      },
+      "InvoiceAmount": {
+        "dtype": "float64",
+        "uniques_in_sample": 2098,
+        "nulls_in_sample": 0,
+        "samples": [
+          "55.94",
+          "61.74",
+          "65.88"
+        ]
+      },
+      "Disputed": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "No",
+          "Yes",
+          "No"
+        ]
+      },
+      "SettledDate": {
+        "dtype": "str",
+        "uniques_in_sample": 695,
+        "nulls_in_sample": 0,
+        "samples": [
+          "1/15/2013",
+          "3/3/2013",
+          "7/8/2013"
+        ]
+      },
+      "PaperlessBill": {
+        "dtype": "str",
+        "uniques_in_sample": 2,
+        "nulls_in_sample": 0,
+        "samples": [
+          "Paper",
+          "Electronic",
+          "Electronic"
+        ]
+      },
+      "DaysToSettle": {
+        "dtype": "int64",
+        "uniques_in_sample": 67,
+        "nulls_in_sample": 0,
+        "samples": [
+          "13",
+          "36",
+          "5"
+        ]
+      },
+      "DaysLate": {
+        "dtype": "int64",
+        "uniques_in_sample": 37,
+        "nulls_in_sample": 0,
+        "samples": [
+          "0",
+          "6",
+          "0"
+        ]
+      }
+    },
+    "status": "SUCCESS"
+  },
+  {
+    "filename": "wholesale+customers.zip",
+    "file_size": 15175,
+    "status": "ARCHIVE",
+    "contents": [
+      "Wholesale customers data.csv"
+    ]
+  }
+]

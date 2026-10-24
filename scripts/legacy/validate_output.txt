@@ -1,0 +1,60 @@
+﻿================================================================================
+VALIDATION: billing_recovery_v1.csv
+================================================================================
+Columns: ['subscriber_id', 'year_month', 'bill_amount_excl_late', 'base_charge_usd', 'data_overage_usd', 'intl_roaming_usd', 'tax_usd', 'has_overage', 'has_roaming', 'bill_seq', 'prior_failures', 'prior_unpaid', 'prior_late', 'prior_ontime', 'prior_nonrecovery_count', 'prior_nonrecovery_rate', 'prior_late_rate', 'prior_avg_amount', 'target_recovered', 'split']
+Shape (sample): (50000, 20)
+Dtypes:
+subscriber_id                  str
+year_month                     str
+bill_amount_excl_late      float64
+base_charge_usd            float64
+data_overage_usd           float64
+intl_roaming_usd           float64
+tax_usd                    float64
+has_overage                  int64
+has_roaming                  int64
+bill_seq                     int64
+prior_failures               int64
+prior_unpaid                 int64
+prior_late                   int64
+prior_ontime                 int64
+prior_nonrecovery_count      int64
+prior_nonrecovery_rate     float64
+prior_late_rate            float64
+prior_avg_amount           float64
+target_recovered             int64
+split                          str
+dtype: object
+
+Leakage check: PASSED (no leakage columns present)
+Target check: PASSED
+Split check: PASSED
+Null check: PASSED
+History temporal correctness: PASSED
+
+================================================================================
+VALIDATION: ar_recovery_v1.csv
+================================================================================
+Columns: ['customerID', 'invoiceNumber', 'InvoiceDate', 'DueDate', 'InvoiceAmount', 'countryCode', 'is_disputed', 'payment_window_days', 'invoice_seq', 'prior_late_count', 'prior_invoice_count', 'prior_late_rate', 'prior_avg_amount', 'prior_disputes', 'is_paperless', 'target_late', 'split']
+Shape: (2466, 17)
+
+Leakage check: PASSED
+Target check: PASSED
+Deduplication check: PASSED (invoiceNumber is unique)
+Split check: PASSED
+Null check: PASSED
+History temporal correctness: PASSED
+
+================================================================================
+METADATA VALIDATION
+================================================================================
+Billing version: recoverchain-billing-recovery-v1
+Billing provenance: UNKNOWN
+Billing row_count: 3601892
+AR version: recoverchain-ar-recovery-v1
+AR provenance: UNKNOWN
+AR row_count: 2466
+
+================================================================================
+ALL VALIDATION CHECKS PASSED
+================================================================================

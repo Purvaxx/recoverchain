@@ -1,0 +1,42 @@
+﻿================================================================================
+BILLING_RECOVERY_V3 VERIFICATION
+================================================================================
+Loaded v3: 3601892 rows
+  [PASS] No duplicate subscriber-months ù found=0
+  [PASS] Leakage column 'payment_status' absent
+  [PASS] Leakage column 'days_to_payment' absent
+  [PASS] Leakage column 'late_fee_usd' absent
+  [PASS] Leakage column 'total_billed_usd' absent
+  [PASS] target_recovered exists
+  [PASS] target_recovered is binary
+  [PASS] No nulls in dataset ù found=0
+  [PASS] First obs: prior_failures == 0
+  [PASS] First obs: prior_nonrecovery_rate == -1
+  [PASS] History features strictly respect temporal cutoff (verified on sample)
+
+Class Distribution:
+  Target=1 (No Failure Observed): 3392884 (94.20%)
+  Target=0 (Failure Observed): 209008 (5.80%)
+  Imbalance Ratio: 16.2 : 1
+  [PASS] Minority class is non-zero
+
+Temporal Split Distribution:
+              count    mean
+split                      
+test         930267  0.9302
+train       1872859  0.9522
+validation   798766  0.9318
+  [PASS] Splits exist
+  [WARN] Distribution shift detected ù Train=0.952, Test=0.930
+  [WARN] Entity Leakage ù 352353 subscribers overlap between train and test splits
+
+================================================================================
+AR_RECOVERY_V2 VERIFICATION (Benchmark)
+================================================================================
+  [PASS] AR v2 exists
+  [PASS] AR payment_window_days excluded
+  [PASS] AR DaysLate excluded
+
+================================================================================
+VERIFICATION SUMMARY: 16 passed, 0 failed, 2 warnings
+================================================================================

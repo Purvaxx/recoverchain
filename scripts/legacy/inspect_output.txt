@@ -1,0 +1,394 @@
+﻿================================================================================
+DATASET 1: WA_Fn-UseC_-Accounts-Receivable.csv
+================================================================================
+Shape: (2466, 12)
+
+Columns: ['countryCode', 'customerID', 'PaperlessDate', 'invoiceNumber', 'InvoiceDate', 'DueDate', 'InvoiceAmount', 'Disputed', 'SettledDate', 'PaperlessBill', 'DaysToSettle', 'DaysLate']
+
+Dtypes:
+countryCode        int64
+customerID           str
+PaperlessDate        str
+invoiceNumber      int64
+InvoiceDate          str
+DueDate              str
+InvoiceAmount    float64
+Disputed             str
+SettledDate          str
+PaperlessBill        str
+DaysToSettle       int64
+DaysLate           int64
+dtype: object
+
+First 5 rows:
+   countryCode  customerID PaperlessDate  ...  PaperlessBill DaysToSettle DaysLate
+0          391  0379-NEVHP      4/6/2013  ...          Paper           13        0
+1          406  8976-AMJEO      3/3/2012  ...     Electronic           36        6
+2          391  2820-XGXSB     1/26/2012  ...     Electronic            5        0
+3          406  9322-YCTQO      4/6/2012  ...     Electronic           35        5
+4          818  6627-ELFBK    11/26/2012  ...          Paper           34        4
+
+[5 rows x 12 columns]
+
+Describe:
+        countryCode  customerID  ... DaysToSettle     DaysLate
+count   2466.000000        2466  ...   2466.00000  2466.000000
+unique          NaN         100  ...          NaN          NaN
+top             NaN  9149-MATVB  ...          NaN          NaN
+freq            NaN          36  ...          NaN          NaN
+mean     620.446067         NaN  ...     26.44485     3.442417
+std      215.933610         NaN  ...     12.33493     6.290607
+min      391.000000         NaN  ...      0.00000     0.000000
+25%      406.000000         NaN  ...     18.00000     0.000000
+50%      770.000000         NaN  ...     26.00000     0.000000
+75%      818.000000         NaN  ...     35.00000     5.000000
+max      897.000000         NaN  ...     75.00000    45.000000
+
+[11 rows x 12 columns]
+
+Null counts:
+countryCode      0
+customerID       0
+PaperlessDate    0
+invoiceNumber    0
+InvoiceDate      0
+DueDate          0
+InvoiceAmount    0
+Disputed         0
+SettledDate      0
+PaperlessBill    0
+DaysToSettle     0
+DaysLate         0
+dtype: int64
+
+Duplicate rows: 0
+
+--- countryCode ---
+countryCode
+391    616
+406    561
+770    506
+897    396
+818    387
+Name: count, dtype: int64
+
+--- Disputed ---
+Disputed
+No     1905
+Yes     561
+Name: count, dtype: int64
+
+--- PaperlessBill ---
+PaperlessBill
+Paper         1263
+Electronic    1203
+Name: count, dtype: int64
+
+--- SettledDate (sample) ---
+0      1/15/2013
+1       3/3/2013
+2       7/8/2013
+3      3/17/2013
+4     11/28/2012
+5      2/22/2012
+6       9/9/2013
+7      1/12/2013
+8       7/1/2012
+9      7/26/2013
+10     4/16/2012
+11     8/15/2013
+12      6/9/2013
+13    11/30/2012
+14    11/18/2012
+15     2/28/2013
+16      6/4/2013
+17     7/10/2013
+18     11/9/2013
+19     1/16/2013
+Name: SettledDate, dtype: str
+SettledDate nulls: 0
+
+--- DaysToSettle ---
+count    2466.00000
+mean       26.44485
+std        12.33493
+min         0.00000
+25%        18.00000
+50%        26.00000
+75%        35.00000
+max        75.00000
+Name: DaysToSettle, dtype: float64
+
+--- DaysLate ---
+count    2466.000000
+mean        3.442417
+std         6.290607
+min         0.000000
+25%         0.000000
+50%         0.000000
+75%         5.000000
+max        45.000000
+Name: DaysLate, dtype: float64
+DaysLate
+0     1589
+5       69
+2       65
+4       62
+1       61
+6       56
+7       55
+3       51
+8       49
+11      46
+9       38
+10      33
+12      33
+13      32
+14      31
+16      27
+15      22
+17      21
+18      19
+19      16
+Name: count, dtype: int64
+
+DaysLate > 0: 877
+DaysLate == 0: 1589
+DaysLate < 0: 0
+
+--- InvoiceAmount ---
+count    2466.000000
+mean       59.895856
+std        20.435838
+min         5.260000
+25%        46.400000
+50%        60.560000
+75%        73.765000
+max       128.280000
+Name: InvoiceAmount, dtype: float64
+
+--- customerID ---
+Unique customers: 100
+Total invoices: 2466
+Invoices per customer:
+count    100.000000
+mean      24.660000
+std        4.774131
+min       15.000000
+25%       21.000000
+50%       24.000000
+75%       28.000000
+max       36.000000
+Name: count, dtype: float64
+
+--- invoiceNumber ---
+Unique invoiceNumbers: 2466
+Total rows: 2466
+Max invoices with same number: 1
+
+PaperlessDate: min=2012-01-09 00:00:00, max=2013-11-27 00:00:00, nulls=0
+
+InvoiceDate: min=2012-01-03 00:00:00, max=2013-12-02 00:00:00, nulls=0
+
+DueDate: min=2012-02-02 00:00:00, max=2014-01-01 00:00:00, nulls=0
+
+SettledDate: min=2012-01-13 00:00:00, max=2014-01-09 00:00:00, nulls=0
+
+
+
+================================================================================
+DATASET 2: billing.csv (first 100k rows for inspection)
+================================================================================
+Shape (sample): (100000, 10)
+
+Columns: ['subscriber_id', 'year_month', 'base_charge_usd', 'data_overage_usd', 'intl_roaming_usd', 'tax_usd', 'late_fee_usd', 'total_billed_usd', 'payment_status', 'days_to_payment']
+
+Dtypes:
+subscriber_id           str
+year_month              str
+base_charge_usd     float64
+data_overage_usd    float64
+intl_roaming_usd    float64
+tax_usd             float64
+late_fee_usd          int64
+total_billed_usd    float64
+payment_status          str
+days_to_payment       int64
+dtype: object
+
+First 5 rows:
+  subscriber_id year_month  ...  payment_status  days_to_payment
+0    SUB0000001    2026-05  ...    Paid On Time                0
+1    SUB0000001    2026-05  ...    Paid On Time                0
+2    SUB0000001    2026-04  ...    Paid On Time                0
+3    SUB0000001    2026-03  ...    Paid On Time                0
+4    SUB0000001    2026-01  ...    Paid On Time                0
+
+[5 rows x 10 columns]
+
+Describe:
+       subscriber_id year_month  ...  payment_status  days_to_payment
+count         100000     100000  ...          100000     100000.00000
+unique         11316         10  ...               4              NaN
+top       SUB0000003    2026-05  ...    Paid On Time              NaN
+freq              12      21575  ...           85937              NaN
+mean             NaN        NaN  ...             NaN          3.29596
+std              NaN        NaN  ...             NaN          9.68119
+min              NaN        NaN  ...             NaN          0.00000
+25%              NaN        NaN  ...             NaN          0.00000
+50%              NaN        NaN  ...             NaN          0.00000
+75%              NaN        NaN  ...             NaN          0.00000
+max              NaN        NaN  ...             NaN         59.00000
+
+[11 rows x 10 columns]
+
+Null counts:
+subscriber_id       0
+year_month          0
+base_charge_usd     0
+data_overage_usd    0
+intl_roaming_usd    0
+tax_usd             0
+late_fee_usd        0
+total_billed_usd    0
+payment_status      0
+days_to_payment     0
+dtype: int64
+
+--- payment_status ---
+payment_status
+Paid On Time    85937
+Paid Late        9351
+Failed           2906
+Unpaid           1806
+Name: count, dtype: int64
+
+--- days_to_payment ---
+count    100000.00000
+mean          3.29596
+std           9.68119
+min           0.00000
+25%           0.00000
+50%           0.00000
+75%           0.00000
+max          59.00000
+Name: days_to_payment, dtype: float64
+Nulls: 0
+
+--- subscriber_id ---
+Unique subscribers (in sample): 11316
+Sample values: ['SUB0000001', 'SUB0000001', 'SUB0000001', 'SUB0000001', 'SUB0000001', 'SUB0000001', 'SUB0000001', 'SUB0000001', 'SUB0000002', 'SUB0000002']
+
+--- year_month ---
+year_month
+2025-07     6232
+2025-08     6547
+2025-09     6841
+2025-10     7206
+2025-11     7538
+2025-12     7929
+2026-01    17150
+2026-03     9250
+2026-04     9732
+2026-05    21575
+Name: count, dtype: int64
+
+--- base_charge_usd ---
+count    100000.000000
+mean         58.017653
+std          36.839323
+min          10.000000
+25%          30.530000
+50%          52.470000
+75%          77.980000
+max         219.810000
+Name: base_charge_usd, dtype: float64
+
+--- total_billed_usd ---
+count    100000.000000
+mean         64.571673
+std          40.242483
+min          10.850000
+25%          34.180000
+50%          58.470000
+75%          87.052500
+max         249.250000
+Name: total_billed_usd, dtype: float64
+
+--- late_fee_usd ---
+count    100000.000000
+mean          0.587250
+std           2.909291
+min           0.000000
+25%           0.000000
+50%           0.000000
+75%           0.000000
+max          15.000000
+Name: late_fee_usd, dtype: float64
+
+
+
+================================================================================
+DATASET 3: fraud_data (Tier-2 supporting)
+================================================================================
+Shape: (6126, 21)
+
+Columns: ['id', 'razorpay_payment_id', 'timestamp', 'agent_type', 'amount', 'currency', 'payment_method', 'upi_app', 'bank', 'status', 'error_code', 'device_fingerprint', 'ip_address', 'fraud_score', 'is_suspicious', 'fraud_reasons', 'amount_slab', 'hour_of_day', 'is_night_transaction', 'is_weekend', 'attempt_count']
+
+First 5 rows:
+     id razorpay_payment_id  ... is_weekend attempt_count
+0  6126  pay_KFKEPVIA8HQ74B  ...      False             7
+1  6125  pay_1YIDYT0IHDIYKT  ...      False            11
+2  6124  pay_2AFOIPFEKZQJLQ  ...      False             4
+3  6123  pay_3ORVS33HR9X98O  ...      False             5
+4  6122  pay_DMHL40UY3YNX6O  ...      False             6
+
+[5 rows x 21 columns]
+
+Null counts:
+id                         0
+razorpay_payment_id        0
+timestamp                  0
+agent_type                 0
+amount                     0
+currency                   0
+payment_method             0
+upi_app                    0
+bank                       0
+status                     0
+error_code              4074
+device_fingerprint         0
+ip_address                 0
+fraud_score                0
+is_suspicious              0
+fraud_reasons            454
+amount_slab                0
+hour_of_day                0
+is_night_transaction       0
+is_weekend                 0
+attempt_count              0
+dtype: int64
+
+--- status ---
+status
+success    4074
+failed     2052
+Name: count, dtype: int64
+
+--- error_code ---
+error_code
+INSUFFICIENT_FUNDS           374
+BAD_REQUEST_ERROR            354
+GATEWAY_ERROR                350
+DEBIT_FAILED                 334
+UPI_AUTHENTICATION_FAILED    323
+TRANSACTION_DECLINED         317
+Name: count, dtype: int64
+
+--- payment_method ---
+payment_method
+upi    6126
+Name: count, dtype: int64
+
+
+DONE

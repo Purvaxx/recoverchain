@@ -1,0 +1,35 @@
+﻿Raw rows: 4424748
+Subscriber-months with 2 rows: 822856
+Rows in duplicate groups: 1645712
+
+Classification of 822856 duplicate subscriber-months:
+  Exact duplicates: 404972 (49.2%)
+  Same status, diff charges: 175199 (21.3%)
+  Same status, same charges, diff late_fee/total: 41358 (5.0%)
+  CONFLICTING payment_status: 201327 (24.5%)
+
+Status conflict combinations:
+combo
+(Paid Late, Paid On Time)    126264
+(Failed, Paid On Time)        40750
+(Paid On Time, Unpaid)        24567
+(Failed, Paid Late)            5316
+(Paid Late, Unpaid)            3472
+(Failed, Unpaid)                958
+Name: count, dtype: int64
+
+Conflicts with SAME charges: 144732
+Conflicts with DIFFERENT charges: 56595
+
+Subscribers with >=1 status conflict: 174856 / 500000 (35.0%)
+
+--- FAILED RECOVERY ANALYSIS (vectorized) ---
+Subscribers with at least one Failed: 112112
+  Later recovered: 99744 (89.0%)
+  No subsequent recovery: 12368 (11.0%)
+
+Subscribers with at least one Unpaid: 71998
+  Later recovered: 64063 (89.0%)
+  No subsequent recovery: 7935 (11.0%)
+
+DONE

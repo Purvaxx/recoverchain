@@ -1,0 +1,64 @@
+{
+  "dataset_version": "recoverchain-billing-recovery-v3",
+  "source_file": "dataset/billing.csv",
+  "source_sha256": "9615a50e653bf075988efd8642bc44e5ff06c3e31bbf00336469b9dfd488244e",
+  "provenance": "UNKNOWN \u2014 appears synthetic telecom billing data",
+  "training_unit": "subscriber-month billing obligation",
+  "unit_identifier": "subscriber_id + year_month",
+  "prediction_timestamp": "Start of billing month (year_month). Model sees subscriber history and current charges.",
+  "deduplication_rule": "1) Drop exact row duplicates. 2) For each subscriber-month, if ANY row has Failed/Unpaid status, target = 0. 3) Keep row with highest total_billed_usd for feature values.",
+  "target_column": "target_recovered",
+  "target_definition": "1 = ALL rows for this subscriber-month had Paid On Time or Paid Late. 0 = ANY row for this subscriber-month had Failed or Unpaid.",
+  "target_semantics": "Per-month billing cycle outcome. If a failure event occurred at any point during this billing cycle (even if later corrected), target = 0. This is conservative and captures all revenue-risk events.",
+  "target_caveat": "89% of subscribers with Failed/Unpaid status in any month later show successful payment in subsequent months. The target captures per-cycle payment failures, which are mostly temporary in this dataset.",
+  "row_count": 3601892,
+  "features": [
+    "bill_amount_excl_late",
+    "base_charge_usd",
+    "data_overage_usd",
+    "intl_roaming_usd",
+    "tax_usd",
+    "has_overage",
+    "has_roaming",
+    "bill_seq",
+    "prior_failures",
+    "prior_unpaid",
+    "prior_late",
+    "prior_ontime",
+    "prior_nonrecovery_count",
+    "prior_nonrecovery_rate",
+    "prior_late_rate",
+    "prior_avg_amount"
+  ],
+  "excluded_leakage": [
+    "payment_status",
+    "days_to_payment",
+    "late_fee_usd",
+    "total_billed_usd"
+  ],
+  "class_distribution": {
+    "recovered": 3392884,
+    "not_recovered": 209008,
+    "recovery_rate": 0.942
+  },
+  "temporal_split": {
+    "train": {
+      "period": "2025-07 to 2025-12",
+      "rows": 1872859,
+      "recovery_rate": 0.9522
+    },
+    "validation": {
+      "period": "2026-01 to 2026-03",
+      "rows": 798766,
+      "recovery_rate": 0.9318
+    },
+    "test": {
+      "period": "2026-04 to 2026-05",
+      "rows": 930267,
+      "recovery_rate": 0.9302
+    }
+  },
+  "entity_leakage": "Nearly 100% subscriber overlap across splits \u2014 model forecasts existing subscribers",
+  "selection_bias": "RESOLVED \u2014 v3 includes ALL subscriber-months (no conflicting records excluded)",
+  "provenance_status": "UNKNOWN"
+}

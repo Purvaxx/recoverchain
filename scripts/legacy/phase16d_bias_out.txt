@@ -1,0 +1,53 @@
+﻿================================================================================
+SELECTION BIAS ANALYSIS
+================================================================================
+
+Retained rows: 3617122 (90.0%)
+Excluded rows: 402654 (10.0%)
+
+--- Year-month distribution (conflict % by month) ---
+  2025-07: 0/274603 (0.0% excluded)
+  2025-08: 0/288622 (0.0% excluded)
+  2025-09: 0/303245 (0.0% excluded)
+  2025-10: 0/318832 (0.0% excluded)
+  2025-11: 0/335204 (0.0% excluded)
+  2025-12: 0/352353 (0.0% excluded)
+  2026-01: 181638/578009 (31.4% excluded)
+  2026-03: 0/409307 (0.0% excluded)
+  2026-04: 0/430267 (0.0% excluded)
+  2026-05: 221016/729334 (30.3% excluded)
+
+--- Charge amount comparison ---
+  Retained mean base_charge: 58.31
+  Excluded mean base_charge: 58.40
+  Retained mean total_billed: 65.06
+  Excluded mean total_billed: 64.98
+
+--- Payment status in retained ---
+payment_status
+Paid On Time    0.8853
+Paid Late       0.0773
+Failed          0.0232
+Unpaid          0.0142
+Name: proportion, dtype: float64
+
+--- Payment status in excluded (both rows per conflict) ---
+payment_status
+Paid On Time    0.4758
+Paid Late       0.3354
+Failed          0.1168
+Unpaid          0.0720
+Name: proportion, dtype: float64
+
+--- Subscriber overlap ---
+  Retained subscribers: 494537
+  Excluded subscribers: 174856
+  In both: 169393
+
+--- Bias assessment ---
+  Failure rate in retained: 3.73%
+  Failure rate in excluded: 18.88%
+  Difference: 15.15 percentage points
+  WARNING: Excluded records have higher failure rate -> exclusion biases toward success
+
+DONE

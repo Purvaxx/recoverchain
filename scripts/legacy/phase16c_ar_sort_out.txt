@@ -1,0 +1,49 @@
+﻿Customer 6627-ELFBK: date order != seq order
+  By date:      InvoiceDate  invoice_seq
+1296    1/6/2012            0
+1297   1/20/2012            1
+1298    4/6/2012            2
+1299   5/20/2012            3
+1300   5/21/2012            4
+  By seq:       InvoiceDate  invoice_seq
+1296    1/6/2012            0
+1297   1/20/2012            1
+1298    4/6/2012            2
+1299   5/20/2012            3
+1300   5/21/2012            4
+Customer 8887-NCUZC: date order != seq order
+  By date:      InvoiceDate  invoice_seq
+1945    1/3/2012            0
+1946   1/10/2012            1
+1947   3/29/2012            2
+1948   4/10/2012            3
+1949   5/30/2012            4
+  By seq:       InvoiceDate  invoice_seq
+1945    1/3/2012            0
+1946   1/10/2012            1
+1947   3/29/2012            2
+1948   4/10/2012            3
+1949   5/30/2012            4
+Customer 9928-IJYBQ: date order != seq order
+  By date:      InvoiceDate  invoice_seq
+2444    1/7/2012            0
+2445    3/5/2012            1
+2446    4/3/2012            2
+2447   6/27/2012            3
+2448    7/3/2012            4
+  By seq:       InvoiceDate  invoice_seq
+2444    1/7/2012            0
+2445    3/5/2012            1
+2446    4/3/2012            2
+2447   6/27/2012            3
+2448    7/3/2012            4
+
+Customers with misaligned seq vs date: 3 / 100
+WARNING: 3 customers have invoice_seq NOT aligned with InvoiceDate
+This means history features may use information from future dates!
+CLASSIFICATION: POTENTIAL TEMPORAL LEAKAGE IN HISTORY FEATURES
+
+payment_window_days unique values: [30]
+Is constant: True
+VALUE: 30 days
+CONCLUSION: payment_window_days has ZERO variance. Useless as a feature.

@@ -1,0 +1,66 @@
+[project]
+name = "recoverchain-backend"
+version = "0.2.0"
+description = "RecoverChain — revenue-recovery decisioning engine and Dataset Lab"
+requires-python = ">=3.12"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = ["venv", "alembic/versions", "ml/models"]
+
+# Correctness-focused: pyflakes (F), bug patterns (B), import hygiene (I),
+# and pycodestyle errors (E). The opinionated style families (SIM/UP/PIE/C4)
+# are deliberately out — this codebase predates them and the churn isn't worth
+# the risk (e.g. UP042 would rewrite every str-Enum base class).
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+ignore = [
+    "E501",   # line length is enforced by the formatter, not the linter
+    "E701",   # compound "if x: return" is used pervasively and reads fine here
+    "E741",   # single-letter loop/lambda vars in tests and math helpers
+    "B008",   # FastAPI Depends() in argument defaults is the framework idiom
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["B011"]
+# Deliberate mid-module imports (ordering / optional-dep / circular-avoidance).
+"api/main.py" = ["E402"]
+"api/dataset_router.py" = ["E402"]
+"infrastructure/repositories.py" = ["E402"]
+"application/langgraph_orchestrator.py" = ["E402"]
+"alembic/env.py" = ["E402"]
+"tests/conftest.py" = ["E402"]
+"tests/test_dataset_api.py" = ["E402"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["api", "application", "domain", "infrastructure", "evaluation"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+follow_imports = "silent"
+warn_redundant_casts = true
+warn_unused_ignores = true
+no_implicit_optional = true
+# Ratchet: the engine core is typed strictly; the rest is checked loosely for now.
+[[tool.mypy.overrides]]
+module = ["domain.*", "application.policy_engine", "application.case_pipeline"]
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+markers = [
+    "fast: fast unit tests",
+    "integration: slower integration tests testing DB/API/adapters",
+]
+addopts = "-q"
+
+[tool.coverage.run]
+source = ["api", "application", "domain", "infrastructure", "evaluation"]
+omit = ["*/tests/*", "*/alembic/*", "run_phase19_training.py"]
+
+[tool.coverage.report]
+skip_covered = true
+show_missing = true
+fail_under = 80
+exclude_lines = ["pragma: no cover", "raise NotImplementedError", "if TYPE_CHECKING:"]

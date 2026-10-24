@@ -1,0 +1,155 @@
+{
+  "manifest_version": "recoverchain-dataset-manifest-v3",
+  "created": "2026-08-29",
+  "phase": "16D (final)",
+  "revision_notes": "v3 addresses selection bias by re-including all subscriber-months with an aggregate target.",
+  "datasets": [
+    {
+      "name": "billing_recovery_v3",
+      "source": "dataset/billing.csv",
+      "source_sha256": "9615a50e653bf075988efd8642bc44e5ff06c3e31bbf00336469b9dfd488244e",
+      "source_size_bytes": 273574298,
+      "constructed_path": "backend/evaluation/datasets/billing_recovery_v3.csv",
+      "transformation_script": "phase16d_construct_v3.py",
+      "source_rows": 4424748,
+      "exact_duplicates_dropped": 404972,
+      "conflicting_status_excluded": 0,
+      "constructed_rows": 3601892,
+      "target_column": "target_recovered",
+      "target_semantics": "Payment Failure Risk: 1 = ALL rows for this subscriber-month were Paid On Time/Late; 0 = ANY row had Failed/Unpaid.",
+      "target_caveat": "Models payment friction/failure risk. DOES NOT model permanent revenue loss (89% of failures later recover).",
+      "class_distribution": {
+        "recovered_1": 3392884,
+        "failure_risk_0": 209008,
+        "non_failure_rate": 0.942,
+        "minority_pct": 5.8
+      },
+      "features": [
+        "bill_amount_excl_late",
+        "base_charge_usd",
+        "data_overage_usd",
+        "intl_roaming_usd",
+        "tax_usd",
+        "has_overage",
+        "has_roaming",
+        "bill_seq",
+        "prior_failures",
+        "prior_unpaid",
+        "prior_late",
+        "prior_ontime",
+        "prior_nonrecovery_count",
+        "prior_nonrecovery_rate",
+        "prior_late_rate",
+        "prior_avg_amount"
+      ],
+      "excluded_columns": {
+        "payment_status": "IS the target source",
+        "days_to_payment": "Post-outcome leakage",
+        "late_fee_usd": "Ambiguous temporal availability",
+        "total_billed_usd": "Includes late_fee (leakage risk)"
+      },
+      "deduplication_rule": "1) Drop exact row duplicates. 2) For each subscriber-month, if ANY row has Failed/Unpaid status, target = 0. 3) Keep row with highest total_billed_usd for feature values.",
+      "temporal_split": {
+        "train": {
+          "period": "2025-07 to 2025-12",
+          "rows": 1872859,
+          "recovery_rate": 0.9522
+        },
+        "validation": {
+          "period": "2026-01 to 2026-03",
+          "rows": 798766,
+          "recovery_rate": 0.9318
+        },
+        "test": {
+          "period": "2026-04 to 2026-05",
+          "rows": 930267,
+          "recovery_rate": 0.9302
+        }
+      },
+      "distribution_shift": "Non-failure rate drops from 95.2% (train) to 93.0% (test) \u2014 genuine temporal drift, selection bias removed.",
+      "entity_leakage": "352,353 subscribers overlap train/test splits. Model forecasts next outcome for existing subscribers.",
+      "provenance_status": "UNKNOWN",
+      "training_readiness": "TRAIN_READY (with documented target semantics)",
+      "remaining_caveats": [
+        "16:1 class imbalance \u2014 evaluation must use PR-AUC or F1, not accuracy",
+        "Target captures per-month billing failure risk, not permanent non-recovery",
+        "Temporal distribution shift is present and realistic",
+        "Provenance UNKNOWN \u2014 likely synthetic data"
+      ]
+    },
+    {
+      "name": "ar_recovery_v2",
+      "source": "dataset/WA_Fn-UseC_-Accounts-Receivable.csv",
+      "source_sha256": "651bc4225708bf33148a0e177c9221afdf697d3a4de10333725a4af3dd022fcf",
+      "constructed_path": "backend/evaluation/datasets/ar_recovery_v2.csv",
+      "transformation_script": "phase16d_construct_v2.py",
+      "source_rows": 2466,
+      "constructed_rows": 2466,
+      "target_column": "target_late",
+      "target_definition": "1 = DaysLate > 0; 0 = DaysLate == 0",
+      "target_caveat": "ALL invoices settled. Models late-settlement RISK, not non-recovery.",
+      "class_distribution": {
+        "late_1": 877,
+        "on_time_0": 1589,
+        "late_rate": 0.3556
+      },
+      "features": [
+        "InvoiceAmount",
+        "countryCode",
+        "is_disputed",
+        "invoice_seq",
+        "prior_late_count",
+        "prior_invoice_count",
+        "prior_late_rate",
+        "prior_avg_amount",
+        "prior_disputes",
+        "is_paperless"
+      ],
+      "dropped_from_v1": {
+        "payment_window_days": "Constant (30 for all rows), zero variance \u00e2\u20ac\u201d useless"
+      },
+      "ambiguous_features": {
+        "is_disputed": "May be cause or consequence of late payment",
+        "prior_disputes": "Derived from is_disputed"
+      },
+      "excluded_columns": {
+        "DaysToSettle": "Post-outcome",
+        "DaysLate": "Target source",
+        "SettledDate": "Post-outcome"
+      },
+      "temporal_split": {
+        "train": {
+          "period": "2012-01-03 to 2013-03-31",
+          "rows": 1594,
+          "late_rate": 0.3858
+        },
+        "validation": {
+          "period": "2013-04-01 to 2013-07-31",
+          "rows": 443,
+          "late_rate": 0.3228
+        },
+        "test": {
+          "period": "2013-08-01 to 2013-12-02",
+          "rows": 429,
+          "late_rate": 0.2774
+        }
+      },
+      "distribution_shift": "Late rate declines from 38.6% (train) to 27.7% (test) \u00e2\u20ac\u201d significant temporal shift",
+      "entity_leakage": "98/100 customers overlap train/test \u00e2\u20ac\u201d inherent with only 100 customers",
+      "provenance_status": "UNKNOWN",
+      "training_readiness": "TRAIN_READY (as late-payment benchmark only, with documented caveats)",
+      "remaining_caveats": [
+        "Only 2466 rows / 100 customers \u00e2\u20ac\u201d may be insufficient for robust generalization",
+        "ALL invoices settled \u00e2\u20ac\u201d cannot model absolute non-recovery",
+        "is_disputed has ambiguous temporal availability",
+        "Late rate declines 11 percentage points across temporal splits",
+        "Provenance UNKNOWN \u00e2\u20ac\u201d IBM Watson educational data"
+      ]
+    }
+  ],
+  "superseded_datasets": [
+    "billing_recovery_v1.csv \u2014 replaced by v2 (arbitrary dedup)",
+    "billing_recovery_v2.csv \u2014 replaced by v3 (selection bias introduced by excluding conflicts)",
+    "ar_recovery_v1.csv \u2014 replaced by v2 (payment_window_days dropped)"
+  ]
+}

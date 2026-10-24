@@ -1,0 +1,50 @@
+{
+  "dataset_version": "recoverchain-billing-recovery-v2",
+  "source_file": "dataset/billing.csv",
+  "source_sha256": "9615a50e653bf075988efd8642bc44e5ff06c3e31bbf00336469b9dfd488244e",
+  "provenance": "UNKNOWN \u2014 appears synthetic telecom billing data",
+  "training_unit": "subscriber-month billing obligation",
+  "unit_identifier": "subscriber_id + year_month",
+  "deduplication_rule": "1) Drop exact row duplicates. 2) For subscriber-months with 2 remaining rows: if payment_status CONFLICTS, EXCLUDE the subscriber-month entirely. If payment_status agrees, keep highest total_billed_usd.",
+  "conflicting_records_excluded": 201327,
+  "target_column": "target_recovered",
+  "target_definition": "1 = Paid On Time or Paid Late; 0 = Failed or Unpaid",
+  "target_caveat": "89% of subscribers with Failed/Unpaid status later recover. Individual-month failure is overwhelmingly temporary in this dataset.",
+  "row_count": 3400565,
+  "features": [
+    "bill_amount_excl_late",
+    "base_charge_usd",
+    "data_overage_usd",
+    "intl_roaming_usd",
+    "tax_usd",
+    "has_overage",
+    "has_roaming",
+    "bill_seq",
+    "prior_failures",
+    "prior_unpaid",
+    "prior_late",
+    "prior_ontime",
+    "prior_nonrecovery_count",
+    "prior_nonrecovery_rate",
+    "prior_late_rate",
+    "prior_avg_amount"
+  ],
+  "excluded_leakage": [
+    "payment_status",
+    "days_to_payment",
+    "late_fee_usd",
+    "total_billed_usd"
+  ],
+  "class_distribution": {
+    "recovered": 3266620,
+    "not_recovered": 133945,
+    "recovery_rate": 0.9606
+  },
+  "temporal_split": {
+    "train": "2025-07 to 2025-12",
+    "validation": "2026-01 to 2026-03",
+    "test": "2026-04 to 2026-05"
+  },
+  "entity_leakage": "Nearly 100% subscriber overlap across splits \u2014 expected for temporal split",
+  "provenance_status": "UNKNOWN"
+}

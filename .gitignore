@@ -1,0 +1,71 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ---- Virtual environments ----
+venv/
+.venv/
+env/
+ENV/
+_verify_venv/
+
+# ---- Node / frontend build ----
+node_modules/
+frontend/dist/
+dist/
+build/
+
+# ---- Portable toolchains (downloaded, not source) ----
+node_extracted/
+
+# ---- Databases (runtime state, regenerated) ----
+*.db
+*.sqlite
+*.sqlite3
+
+# ---- ML artifacts (generated; reproducible via training scripts) ----
+ml/models/registry/
+backend/ml/models/registry/
+**/ml/models/registry/
+*.joblib
+
+# ---- Large / throwaway datasets (JSON metadata & manifests stay tracked) ----
+/dataset/
+backend/dataset/
+backend/evaluation/datasets/*.csv
+backend/*.csv
+# ...but keep the evaluation datasets the project actually uses:
+#   - ar_recovery_v1/v2.csv are small and committed as plain files
+#   - billing_recovery_v3.csv (the reference-model training set) is via Git LFS
+#   - billing_recovery_v1/v2.csv are superseded and stay excluded (size)
+!backend/evaluation/datasets/ar_recovery_v1.csv
+!backend/evaluation/datasets/ar_recovery_v2.csv
+!backend/evaluation/datasets/billing_recovery_v3.csv
+
+# ---- Secrets / local env (*.env.example stays tracked) ----
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# ---- Editor / OS ----
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+*.log
+
+# ---- Office lock files ----
+~$*.xlsx
+~$*.xls
+~$*.docx
+backend/evaluation/datasets/billing_recovery_v3.csv

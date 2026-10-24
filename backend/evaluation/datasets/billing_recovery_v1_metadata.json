@@ -1,0 +1,72 @@
+{
+  "dataset_version": "recoverchain-billing-recovery-v1",
+  "source_file": "dataset/billing.csv",
+  "provenance": "UNKNOWN \u2014 appears to be synthetic telecom subscription billing data. No verifiable real-world merchant source.",
+  "description": "Telecom subscription billing records with payment outcomes. Each row = one subscriber-month billing event.",
+  "training_unit": "subscriber-month billing obligation",
+  "unit_identifier": "subscriber_id + year_month",
+  "deduplication_rule": "Drop exact row duplicates, then keep highest total_billed_usd per subscriber-month",
+  "target_column": "target_recovered",
+  "target_definition": "1 = obligation was met (Paid On Time or Paid Late); 0 = obligation was NOT met (Failed or Unpaid)",
+  "positive_class": "1 (recovered)",
+  "negative_class": "0 (not recovered)",
+  "row_count": 3601892,
+  "feature_count": 16,
+  "features": [
+    "bill_amount_excl_late",
+    "base_charge_usd",
+    "data_overage_usd",
+    "intl_roaming_usd",
+    "tax_usd",
+    "has_overage",
+    "has_roaming",
+    "bill_seq",
+    "prior_failures",
+    "prior_unpaid",
+    "prior_late",
+    "prior_ontime",
+    "prior_nonrecovery_count",
+    "prior_nonrecovery_rate",
+    "prior_late_rate",
+    "prior_avg_amount"
+  ],
+  "excluded_leakage_columns": [
+    "payment_status (IS the target)",
+    "days_to_payment (only known after resolution)",
+    "late_fee_usd (may be applied after resolution)",
+    "total_billed_usd (includes late_fee)"
+  ],
+  "timestamp_range": {
+    "min": "2025-07",
+    "max": "2026-05",
+    "missing": [
+      "2026-02"
+    ]
+  },
+  "temporal_split": {
+    "train": "2025-07 to 2025-12",
+    "validation": "2026-01 to 2026-03",
+    "test": "2026-04 to 2026-05"
+  },
+  "class_distribution": {
+    "recovered": 3430107,
+    "not_recovered": 171785,
+    "recovery_rate": 0.9523
+  },
+  "preprocessing": [
+    "Dropped exact duplicate rows",
+    "Kept highest total_billed_usd per subscriber-month for near-duplicates",
+    "Computed bill_amount_excl_late = base + overage + roaming + tax",
+    "Constructed temporal history features using strictly prior rows",
+    "Filled NaN history features with -1 for first-observation rows"
+  ],
+  "limitations": [
+    "Provenance UNKNOWN \u2014 likely synthetic data",
+    "2026-02 is missing from the time series",
+    "94.7% recovery rate = significant class imbalance",
+    "No failure reason codes available",
+    "No payment method information",
+    "Individual financial features show near-zero correlation with target"
+  ],
+  "provenance_status": "UNKNOWN"
+}

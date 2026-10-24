@@ -1,0 +1,82 @@
+﻿================================================================================
+BILLING_RECOVERY_V2 VERIFICATION
+================================================================================
+Total rows (line count): 3400565
+  [PASS] Row count matches manifest ù actual=3400565, manifest=3400565
+
+Columns: ['subscriber_id', 'year_month', 'bill_amount_excl_late', 'base_charge_usd', 'data_overage_usd', 'intl_roaming_usd', 'tax_usd', 'has_overage', 'has_roaming', 'bill_seq', 'prior_failures', 'prior_unpaid', 'prior_late', 'prior_ontime', 'prior_nonrecovery_count', 'prior_nonrecovery_rate', 'prior_late_rate', 'prior_avg_amount', 'target_recovered', 'split']
+  [PASS] Leakage column 'payment_status' absent
+  [PASS] Leakage column 'days_to_payment' absent
+  [PASS] Leakage column 'late_fee_usd' absent
+  [PASS] Leakage column 'total_billed_usd' absent
+  [PASS] target_recovered exists
+  [PASS] target_recovered is binary
+  [PASS] split column exists
+  [PASS] split values valid
+  [PASS] No nulls (sample)
+  [PASS] No duplicate subscriber-months (sample) ù found=0
+  [PASS] First obs: prior_failures == 0
+  [PASS] First obs: prior_nonrecovery_rate == -1
+  [PASS] History features verified for sample subscriber
+  [PASS] bill_amount_excl_late correct
+  [PASS] No negative base_charge
+  [PASS] No negative data_overage
+  [PASS] prior_nonrecovery_rate in [-1, 1]
+
+Class distribution (sample):
+  Recovered: 480230 (96.05%)
+  Not recovered: 19770 (3.95%)
+  [PASS] Class distribution close to manifest
+
+Split stats (sample):
+             count    mean
+split                     
+test        120624  0.9711
+train       275291  0.9519
+validation  104085  0.9707
+
+Entity overlap:
+  Train subs: 51804, Test subs: 72787
+  Train-Test overlap: 51803 (100.0%)
+  [WARN] Entity leakage: ~100% subscriber overlap ù Expected for temporal split on subscription data
+
+================================================================================
+AR_RECOVERY_V2 VERIFICATION
+================================================================================
+Rows: 2466
+Columns: ['customerID', 'invoiceNumber', 'InvoiceDate', 'DueDate', 'InvoiceAmount', 'countryCode', 'is_disputed', 'invoice_seq', 'prior_late_count', 'prior_invoice_count', 'prior_late_rate', 'prior_avg_amount', 'prior_disputes', 'is_paperless', 'target_late', 'split']
+  [PASS] AR row count matches manifest
+  [PASS] payment_window_days removed
+  [PASS] Leakage column 'DaysToSettle' absent
+  [PASS] Leakage column 'DaysLate' absent
+  [PASS] Leakage column 'SettledDate' absent
+  [PASS] target_late exists
+  [PASS] target_late is binary
+  [PASS] No nulls
+  [PASS] invoiceNumber unique
+  [PASS] split exists
+
+AR class distribution:
+  Late: 877 (35.6%)
+  On-time: 1589 (64.4%)
+  [PASS] Late rate close to manifest
+  [WARN] is_disputed has ambiguous temporal availability ù Documented in manifest
+  [PASS] AR history features verified for sample customer
+
+AR split stats:
+            count    mean
+split                    
+test          429  0.2774
+train        1594  0.3858
+validation    443  0.3228
+  [WARN] AR distribution shift ù Late rate: train=0.386 -> test=0.277
+
+================================================================================
+SOURCE FILE INTEGRITY
+================================================================================
+  [PASS] billing.csv size unchanged ù actual=273574298
+  [PASS] WA_Fn SHA256 matches manifest
+
+================================================================================
+VERIFICATION SUMMARY: 33 passed, 0 failed, 3 warnings
+================================================================================

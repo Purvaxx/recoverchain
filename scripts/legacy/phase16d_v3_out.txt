@@ -1,0 +1,35 @@
+﻿================================================================================
+BILLING_RECOVERY_V3 CONSTRUCTION
+================================================================================
+Raw rows: 4424748
+After exact dedup: 4019776 (dropped 404972)
+After subscriber-month dedup: 3601892
+
+Target distribution:
+target_recovered
+1    3392884
+0     209008
+Name: count, dtype: int64
+target_recovered
+1    0.942
+0    0.058
+Name: proportion, dtype: float64
+
+Final billing v3 shape: (3601892, 20)
+
+Temporal split stats:
+              count    mean
+split                      
+test         930267  0.9302
+train       1872859  0.9522
+validation   798766  0.9318
+
+Nulls: 0
+Duplicate subscriber-months: 0
+
+History temporal correctness: PASSED
+
+Saved billing_recovery_v3.csv (3601892 rows)
+Metadata written.
+
+DONE ù No models trained.

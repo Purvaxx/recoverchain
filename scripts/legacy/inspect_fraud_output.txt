@@ -1,0 +1,50 @@
+﻿Shape: (6126, 21)
+
+--- Can we build retry chains? ---
+Unique razorpay_payment_id: 6126
+Total rows: 6126
+
+--- attempt_count ---
+count    6126.000000
+mean       51.447111
+std        66.906017
+min         1.000000
+25%         7.000000
+50%        25.000000
+75%        65.000000
+max       316.000000
+Name: attempt_count, dtype: float64
+attempt_count
+1     250
+2     238
+3     238
+4     238
+5     228
+6     223
+7     215
+8     211
+9     210
+10    209
+11    202
+12     46
+13     46
+14     46
+15     45
+Name: count, dtype: int64
+
+--- Is there any customer/account identifier? ---
+Columns: ['id', 'razorpay_payment_id', 'timestamp', 'agent_type', 'amount', 'currency', 'payment_method', 'upi_app', 'bank', 'status', 'error_code', 'device_fingerprint', 'ip_address', 'fraud_score', 'is_suspicious', 'fraud_reasons', 'amount_slab', 'hour_of_day', 'is_night_transaction', 'is_weekend', 'attempt_count']
+
+--- error_code vs status ---
+error_code  BAD_REQUEST_ERROR  DEBIT_FAILED  ...  none   All
+status                                       ...            
+failed                    354           334  ...     0  2052
+success                     0             0  ...  4074  4074
+All                       354           334  ...  4074  6126
+
+[3 rows x 8 columns]
+
+CONCLUSION: fraud_data CANNOT be used for recovery probability training.
+Reason: No obligation identifier, no repeated observation per obligation,
+no temporal recovery window. Each row is an independent payment event.
+RECLASSIFIED FROM TIER-2 TO TIER-3 (reference only for this task).

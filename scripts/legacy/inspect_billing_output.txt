@@ -1,0 +1,49 @@
+﻿================================================================================
+BILLING.CSV ù FULL DATASET ANALYSIS (chunked)
+================================================================================
+Total rows: 4424748
+Unique subscribers: 500000
+
+Payment Status Distribution:
+  Paid On Time: 3798683 (85.85%)
+  Paid Late: 414928 (9.38%)
+  Failed: 130898 (2.96%)
+  Unpaid: 80239 (1.81%)
+
+Year-Month Distribution:
+  2025-07: 274603
+  2025-08: 288622
+  2025-09: 303245
+  2025-10: 318832
+  2025-11: 335204
+  2025-12: 352353
+  2026-01: 759949
+  2026-03: 409307
+  2026-04: 430267
+  2026-05: 952366
+
+Duplicate analysis (first 500k):
+  Exact duplicates: 45498
+  Subscriber+YearMonth duplicates: 93056
+  Max rows per subscriber-month: 2
+  Subscriber-months with >1 row: 93056
+  Distribution of rows per subscriber-month:
+1    313888
+2     93056
+Name: count, dtype: int64
+
+Sample subscriber SUB0000001:
+  subscriber_id year_month  base_charge_usd  data_overage_usd  intl_roaming_usd  tax_usd  late_fee_usd  total_billed_usd payment_status  days_to_payment
+7    SUB0000001    2025-11            61.99               0.0               0.0     5.27             0             67.26   Paid On Time                0
+6    SUB0000001    2025-12            61.99               0.0               0.0     5.27             0             67.26   Paid On Time                0
+4    SUB0000001    2026-01            61.99               0.0               0.0     5.27             0             67.26   Paid On Time                0
+5    SUB0000001    2026-01            61.99               0.0               0.0     5.27             0             67.26   Paid On Time                0
+3    SUB0000001    2026-03            61.99               0.0               0.0     5.27             0             67.26   Paid On Time                0
+2    SUB0000001    2026-04            61.99               0.0               0.0     5.27             0             67.26   Paid On Time                0
+0    SUB0000001    2026-05            61.99               0.0               0.0     5.27            15             82.26   Paid On Time                0
+1    SUB0000001    2026-05            61.99               0.0               0.0     5.27             0             67.26   Paid On Time                0
+
+  Subscriber+YearMonth+BaseCharge duplicates: 93056
+
+
+DONE

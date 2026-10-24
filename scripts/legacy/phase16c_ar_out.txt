@@ -1,0 +1,81 @@
+﻿================================================================================
+PHASE 16C: WA_Fn AR DATASET DEEP VALIDATION
+================================================================================
+Original file SHA256: 651bc4225708bf33148a0e177c9221afdf697d3a4de10333725a4af3dd022fcf
+Original shape: (2466, 12)
+Constructed shape: (2466, 17)
+
+--- TARGET VALIDATION ---
+Target mismatches: 0
+Target correctly derived from DaysLate: YES
+
+--- DAYSLATE TEMPORAL ANALYSIS ---
+DaysLate matches (SettledDate - DueDate).clip(0): 2466 / 2466
+CONFIRMED: DaysLate = max(0, SettledDate - DueDate)
+CONFIRMED: DaysLate is POST-OUTCOME information (requires SettledDate)
+
+--- SETTLEMENT COMPLETENESS ---
+SettledDate null count: 0
+ALL INVOICES SETTLED: YES
+DaysToSettle null count: 0
+Min DaysToSettle: 0
+DaysToSettle == 0: 4
+
+--- FEATURE AVAILABILITY AT INVOICE TIME ---
+Checking each constructed feature:
+Constructed columns: ['customerID', 'invoiceNumber', 'InvoiceDate', 'DueDate', 'InvoiceAmount', 'countryCode', 'is_disputed', 'payment_window_days', 'invoice_seq', 'prior_late_count', 'prior_invoice_count', 'prior_late_rate', 'prior_avg_amount', 'prior_disputes', 'is_paperless', 'target_late', 'split']
+
+--- DISPUTED FIELD TEMPORAL CHECK ---
+Disputed vs Late:
+          On Time %  Late %
+Disputed                   
+No            0.741   0.259
+Yes           0.317   0.683
+
+Disputed=Yes AND DaysLate=0: 178
+Disputed=Yes AND DaysLate>0: 383
+
+WARNING: 'Disputed' has ambiguous temporal availability.
+It could be a cause or consequence of late payment.
+CLASSIFICATION: AMBIGUOUS ù should be tested with and without.
+
+--- ENTITY LEAKAGE CHECK ---
+Unique customers: 100
+Total invoices: 2466
+Invoices per customer: min=15, max=36, mean=24.7
+
+Customers in train: 100
+Customers in validation: 99
+Customers in test: 98
+Overlap train-test: 98
+Overlap train-val: 99
+
+--- HISTORY FEATURE VERIFICATION ---
+
+Customer 0187-ERLSR:
+    invoiceNumber InvoiceDate  invoice_seq  prior_late_count  prior_invoice_count  prior_late_rate  target_late
+13     5219455796  10/17/2013           13                 0                   13              0.0            0
+14     5759027335  11/11/2013           14                 0                   14              0.0            0
+15     6279951505  11/25/2013           15                 0                   15              0.0            0
+6      4910161169   12/6/2012            6                 0                    6              0.0            0
+7      4160638076   2/16/2013            7                 0                    7              0.0            0
+9      8350497297   3/16/2013            9                 0                    9              0.0            0
+10     4814212537   3/22/2013           10                 0                   10              0.0            0
+0      4037644863   3/29/2012            0                 0                    0             -1.0            0
+8      5995302563    3/4/2013            8                 0                    8              0.0            0
+1      9471530987   5/15/2012            1                 0                    1              0.0            0
+  seq=13: prior_late_count=0 OK
+  seq=14: prior_late_count=0 OK
+  seq=15: prior_late_count=0 OK
+  seq=6: prior_late_count=0 OK
+  seq=7: prior_late_count=0 OK
+  seq=9: prior_late_count=0 OK
+
+--- VALUE RANGE CHECK ---
+InvoiceAmount range: [5.26, 128.28]
+Negative InvoiceAmount: 0
+Zero InvoiceAmount: 0
+payment_window_days range: [30, 30]
+Negative payment_window: 0
+
+DONE

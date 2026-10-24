@@ -1,0 +1,511 @@
+<title>RecoverChain Project Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --paper: #faf8f3;
+    --ink: #1b1915;
+    --muted: #58524a;
+    --faint: #8b8579;
+    --line: #ddd6c8;
+    --rule: #b7ac97;
+    --accent: #7c3030;
+    --code-bg: #f0ebdf;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14130e;
+      --ink: #ece6d9;
+      --muted: #a59d8c;
+      --faint: #6f6857;
+      --line: #2c2920;
+      --rule: #4a4433;
+      --accent: #cf9086;
+      --code-bg: #1e1b14;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14130e;
+    --ink: #ece6d9;
+    --muted: #a59d8c;
+    --faint: #6f6857;
+    --line: #2c2920;
+    --rule: #4a4433;
+    --accent: #cf9086;
+    --code-bg: #1e1b14;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Newsreader", Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    font-optical-sizing: auto;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+    animation: fade .5s ease both;
+  }
+  @media (prefers-reduced-motion: reduce) { body { animation: none; } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  .paper {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 4.5rem 1.5rem 6rem;
+  }
+
+  /* ---------- title block ---------- */
+  .titleblock {
+    text-align: center;
+    padding-bottom: 1.6rem;
+    border-bottom: 2px solid var(--rule);
+    margin-bottom: 2.4rem;
+  }
+  .doctype {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .72rem;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1.4rem;
+  }
+  h1 {
+    font-weight: 500;
+    font-size: clamp(1.9rem, 4.6vw, 2.6rem);
+    line-height: 1.16;
+    letter-spacing: -.006em;
+    text-wrap: balance;
+    margin: 0 0 1rem;
+  }
+  .byline {
+    font-size: .95rem;
+    color: var(--muted);
+    font-style: italic;
+    margin: 0;
+  }
+  .idline {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .74rem;
+    color: var(--faint);
+    margin: .55rem 0 0;
+    font-style: normal;
+  }
+
+  /* ---------- abstract ---------- */
+  .abstract {
+    margin: 0 auto 2.6rem;
+    padding: 0 1.6rem;
+    font-size: .96rem;
+    line-height: 1.62;
+    color: var(--muted);
+  }
+  .abstract .lbl {
+    display: block;
+    text-align: center;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .7rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: .7rem;
+  }
+  .abstract p { text-indent: 0; margin: 0 0 .7rem; }
+  .abstract p:last-child { margin-bottom: 0; }
+
+  /* ---------- contents ---------- */
+  .toc {
+    margin: 0 auto 3rem;
+    padding: 1rem 1.4rem;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--code-bg) 55%, transparent);
+    font-size: .9rem;
+    columns: 2;
+    column-gap: 2rem;
+  }
+  .toc ol { margin: 0; padding: 0 0 0 1.6rem; }
+  .toc li { margin: .18rem 0; break-inside: avoid; }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { color: var(--accent); text-decoration: underline; }
+  @media (max-width: 520px) { .toc { columns: 1; } }
+
+  /* ---------- body ---------- */
+  section { margin-top: 2.6rem; scroll-margin-top: 1.5rem; }
+  h2 {
+    font-weight: 600;
+    font-size: 1.32rem;
+    letter-spacing: -.004em;
+    margin: 0 0 .9rem;
+    padding-bottom: .35rem;
+    border-bottom: 1px solid var(--line);
+    text-wrap: balance;
+  }
+  h3 {
+    font-weight: 600;
+    font-size: 1.04rem;
+    margin: 1.7rem 0 .5rem;
+    color: var(--ink);
+  }
+  h2 .s, h3 .s { color: var(--accent); font-weight: 500; margin-right: .5ch; font-variant-numeric: tabular-nums; }
+
+  p { margin: 0 0 .55rem; text-indent: 1.5em; }
+  p.lead, h2 + p, h3 + p, li p, .note p { text-indent: 0; }
+  section > p:first-of-type { text-indent: 0; }
+
+  a { color: var(--accent); text-underline-offset: 2px; text-decoration-thickness: .5px; }
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+
+  code, .mono {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .82em;
+  }
+  code {
+    background: var(--code-bg);
+    padding: .08em .35em;
+    border-radius: 3px;
+  }
+
+  ul, ol.body { margin: .3rem 0 .9rem; padding-left: 1.4rem; }
+  ul li, ol.body li { margin: .32rem 0; text-indent: 0; }
+  li::marker { color: var(--faint); }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .78rem;
+    line-height: 1.7;
+    margin: .6rem 0 1rem;
+  }
+  pre .c { color: var(--faint); }
+
+  /* ---------- tables (booktabs) ---------- */
+  figure { margin: 1.4rem 0; }
+  figcaption {
+    font-size: .84rem;
+    color: var(--muted);
+    margin-bottom: .5rem;
+    font-style: italic;
+  }
+  figcaption b { font-style: normal; font-weight: 600; color: var(--ink); }
+  .tbl-scroll { overflow-x: auto; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: .86rem;
+    line-height: 1.5;
+    min-width: 30rem;
+  }
+  thead th {
+    text-align: left;
+    font-weight: 600;
+    padding: .4rem .7rem;
+    border-top: 1.5px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  tbody td {
+    padding: .42rem .7rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: 1.5px solid var(--ink); }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .st { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .82em; white-space: nowrap; color: color-mix(in srgb, var(--ink) 78%, var(--accent)); }
+  .st b { font-weight: 500; }
+
+  .note {
+    margin: .9rem 0;
+    padding: .2rem 0 .2rem 1rem;
+    border-left: 2px solid var(--rule);
+    color: var(--muted);
+    font-size: .92rem;
+  }
+
+  .hist { list-style: none; padding: 0; margin: .4rem 0 1rem; }
+  .hist li { margin: 0; padding: .4rem 0; border-bottom: 1px solid var(--line); font-size: .9rem; text-indent: 0; }
+  .hist li:last-child { border-bottom: none; }
+  .hist .sha {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .78rem;
+    color: var(--accent);
+    margin-right: .7rem;
+  }
+
+  footer {
+    margin-top: 3.5rem;
+    padding-top: 1.2rem;
+    border-top: 2px solid var(--rule);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .72rem;
+    color: var(--faint);
+    text-align: center;
+    line-height: 1.9;
+  }
+
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  @media print {
+    :root {
+      --paper: #ffffff; --ink: #17150f; --muted: #45403a; --faint: #6d6659;
+      --line: #cfc7b5; --rule: #9a8f78; --accent: #6f2a2a; --code-bg: #f2eee3;
+    }
+    @page { margin: 18mm 16mm; }
+    html, body { background: #fff; }
+    body { font-size: 10.5pt; line-height: 1.55; animation: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .paper { max-width: none; padding: 0; }
+    .toc { break-inside: avoid; }
+    section { margin-top: 20pt; }
+    h2, h3 { break-after: avoid; }
+    figure, pre, .hist li, tr { break-inside: avoid; }
+    thead { display: table-header-group; }
+    .titleblock { break-after: avoid; }
+    a { color: var(--ink); text-decoration: none; }
+    footer { break-before: avoid; }
+  }
+</style>
+
+<article class="paper">
+
+  <div class="titleblock">
+    <p class="doctype">Engineering Report</p>
+    <h1>RecoverChain: architecture and delivered capabilities</h1>
+    <p class="byline">RecoverChain engineering &middot; internal snapshot</p>
+    <p class="idline">2026-08-31 &nbsp;·&nbsp; branch master @ 6fff8c3 &nbsp;·&nbsp; 23 commits &nbsp;·&nbsp; 205 backend tests passing</p>
+  </div>
+
+  <div class="abstract">
+    <span class="lbl">Abstract</span>
+    <p>RecoverChain is a revenue-recovery decisioning engine. Failure events &mdash; failed payments, overdue invoices, abandoned checkouts &mdash; are correlated into <em>cases</em>, and every case runs one fixed deterministic lifecycle: assess risk, diagnose cause, predict recovery, recommend an action with an expected recoverable value, pass a policy and safety gate, execute against an adapter, verify independently against settlement, and audit. A second subsystem, the Dataset Lab, ingests tabular files, maps columns to canonical fields, checks machine-learning readiness, trains per-dataset models, and replays rows back through the pipeline.</p>
+    <p>This report describes what has been built: a ten-step guided workflow paired with a gated Insights report; a policy engine that is the sole execution authority, backed by a real attempt ledger; machine learning that trains on and scores real uploaded data as advisory telemetry; a fully offline-capable stack in Indian rupees; and a case-generation path whose predictor is now loaded once per request rather than once per row, cutting initialisations from 78 to 1 and endpoint time from 3.23&nbsp;s to 2.65&nbsp;s on the reference run.</p>
+  </div>
+
+  <nav class="toc" aria-label="Contents">
+    <ol>
+      <li><a href="#s1">System overview</a></li>
+      <li><a href="#s2">Stack</a></li>
+      <li><a href="#s3">Architecture</a></li>
+      <li><a href="#s4">The guided workflow</a></li>
+      <li><a href="#s5">Design invariants</a></li>
+      <li><a href="#s6">Capabilities</a></li>
+      <li><a href="#s7">Machine learning</a></li>
+      <li><a href="#s8">Development history</a></li>
+      <li><a href="#s9">Performance improvement</a></li>
+      <li><a href="#s10">Current state</a></li>
+      <li><a href="#sa">Appendix A. Commands and configuration</a></li>
+    </ol>
+  </nav>
+
+  <section id="s1">
+    <h2><span class="s">1</span>System overview</h2>
+    <p>Failure events are correlated into <strong>cases</strong>. Each case runs the fixed lifecycle end to end &mdash; there is no branching and no discretion outside the policy gate:</p>
+    <pre>ingest &rarr; assess-risk &rarr; diagnose &rarr; predict-recovery &rarr; recommend-action (+ERV)
+       &rarr; policy / safety gate &rarr; agent execution &rarr; verify &rarr; audit</pre>
+    <p>The Dataset Lab is the second subsystem. It ingests CSV, Parquet, and XLSX; maps columns to canonical fields; runs quality and leakage checks against a minimum-information contract; trains per-dataset models; and replays dataset rows through the same pipeline to produce real cases.</p>
+    <p>The product surface is two &ldquo;models&rdquo;. The first, <strong>RecoverChain</strong> (route <code>/</code>), is a ten-step guided workflow in which one step fills the screen at a time, navigation is a single <code>Proceed &rarr;</code>, and every screen is explicit about how each figure was produced. The second, <strong>Insights</strong> (route <code>/insights</code>), is a plain-language report aggregating every recovery run; it unlocks once the workflow has been completed.</p>
+  </section>
+
+  <section id="s2">
+    <h2><span class="s">2</span>Stack</h2>
+    <ul>
+      <li><strong>Backend.</strong> FastAPI, SQLAlchemy 2.0, Alembic, Pydantic v2, <code>Decimal</code> money. SQLite is the offline default; Postgres is supported, with its schema owned by migrations.</li>
+      <li><strong>Frontend.</strong> React&nbsp;18, Vite&nbsp;5, react-router v6, Tailwind v3, with a lazy-loaded Three.js / React-Three-Fiber / <code>@react-spring/three</code> / GSAP motion backdrop that is toggleable and <code>prefers-reduced-motion</code>-safe.</li>
+      <li><strong>Machine learning.</strong> scikit-learn and XGBoost, running as advisory telemetry.</li>
+      <li><strong>Offline-first.</strong> No CDN, no runtime web fonts, Redis optional, all dependencies bundled. The application runs with no network.</li>
+    </ul>
+  </section>
+
+  <section id="s3">
+    <h2><span class="s">3</span>Architecture</h2>
+    <p>The backend is cleanly layered.</p>
+    <h3><span class="s">3.1</span>domain/</h3>
+    <p>Pydantic models: the <code>RecoveryCase</code> aggregate and seven stage sub-objects, <code>CaseState</code>, and <code>Money</code> (a <code>Decimal</code>). Also <code>lifecycle.py</code>, <code>interfaces.py</code>, <code>llm_schemas.py</code>.</p>
+    <h3><span class="s">3.2</span>application/</h3>
+    <p>One engine per stage: <code>risk_detector</code>, <code>diagnosis_engine</code>, <code>recovery_predictor</code> (deterministic baseline) and <code>recovery_predictor_ml</code> (per-dataset model), <code>action_evaluator</code>, <code>policy_engine</code>, <code>agents</code>, <code>verification_engine</code>. <code>case_pipeline.py</code> (<code>CasePipelineService</code>) runs assess, diagnose, predict, recommend, and policy in one call and is the shared path for <code>/events/batch</code>, <code>/cases/{id}/advance</code>, and <code>/datasets/{id}/generate-cases</code>. The Dataset Lab lives here too: <code>dataset_lab</code>, <code>dataset_intelligence</code>, <code>ml_readiness</code>, <code>ml_training</code>.</p>
+    <h3><span class="s">3.3</span>infrastructure/</h3>
+    <p><code>orm.py</code> and <code>dataset_orm.py</code>: lifecycle sub-objects are stored as JSON columns on <code>recovery_cases</code>, alongside the <code>execution_attempts</code> ledger and <code>idempotency_keys</code>. <code>repositories.py</code> maps ORM to domain and back and provides <code>record_execution_attempt</code> and <code>get_policy_context</code>. Also <code>redis_client.py</code> and <code>adapters.py</code>.</p>
+    <h3><span class="s">3.4</span>api/</h3>
+    <p><code>auth.py</code> (<code>verify_api_key</code>); <code>main.py</code> (the case pipeline, <code>/events/batch</code>, <code>/cases/{id}/advance</code> and <code>/stop</code>, request-id middleware); <code>dataset_router.py</code> (<code>/datasets/*</code>); <code>system_router.py</code> (<code>/system/*</code>, read-only observability).</p>
+  </section>
+
+  <section id="s4">
+    <h2><span class="s">4</span>The guided workflow</h2>
+    <p>The workflow was consolidated from eleven steps to ten by merging the decision and policy screens. Each step is driven entirely by live data.</p>
+    <figure>
+      <figcaption><b>Table 1.</b> The ten workflow steps and their data sources.</figcaption>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th class="n">#</th><th>Step</th><th>What it shows</th></tr></thead>
+        <tbody>
+          <tr><td class="n">01</td><td>Upload data</td><td>Dropzone or bundled sample; the formats the backend accepts.</td></tr>
+          <tr><td class="n">02</td><td>Data review</td><td>Real filename, record count, columns, detected canonical fields.</td></tr>
+          <tr><td class="n">03</td><td>Data quality</td><td><code>data_quality_report</code> score and breakdown, completeness, leakage check.</td></tr>
+          <tr><td class="n">04</td><td>Data mapping</td><td>The four roles &mdash; Customer, Amount, Date, Result &mdash; pre-filled from detection; low-confidence guesses flagged.</td></tr>
+          <tr><td class="n">05</td><td>Data connection</td><td>How the file is wired into the pipeline: canonical inputs, model features versus held-out columns with reasons, split strategy, class balance, readiness verdict.</td></tr>
+          <tr><td class="n">06</td><td>Revenue risk detection</td><td>Runs <code>generate-cases</code>; shows real counters for rows accepted and skipped, with reasons.</td></tr>
+          <tr><td class="n">07</td><td>AI analysis</td><td>The highest-value case: risk cause and confidence, recovery probability, expected recoverable value. Rule-based and model contributions are labelled.</td></tr>
+          <tr><td class="n">08</td><td>Decision &amp; policy</td><td>Merged. The rules-engine proposal and the policy engine&rsquo;s rule-by-rule verdict on one screen.</td></tr>
+          <tr><td class="n">09</td><td>Recovery</td><td>If permitted, executed; if escalated, an explicit approve-and-execute; if blocked, the reason.</td></tr>
+          <tr><td class="n">10</td><td>Verified result</td><td>Outcome verified independently against the settlement source; actual amount recovered.</td></tr>
+        </tbody>
+      </table></div>
+    </figure>
+    <p class="note">Reaching step 10 sets a <code>rc-workflow-done</code> flag in local storage, which unlocks the Insights report.</p>
+  </section>
+
+  <section id="s5">
+    <h2><span class="s">5</span>Design invariants</h2>
+    <p>These properties are enforced in code and covered by tests.</p>
+    <ul>
+      <li><strong>The policy engine is the sole execution authority.</strong> <code>DeterministicPolicyEngine</code> decides; no model value feeds a <code>PolicyDecision</code>. When no per-dataset model applies, prediction falls back to <code>DeterministicBaselinePredictor</code> &mdash; a real estimate, never a silent <code>0.0</code>.</li>
+      <li><strong>Execution is gated.</strong> <code>AgentOrchestrator.execute</code> requires a persisted <code>PolicyDecision.status == PERMITTED</code>, a matching action, a fresh decision, and a capable agent.</li>
+      <li><strong>Policy uses real history.</strong> <code>PolicyContext</code> is built from the <code>execution_attempts</code> ledger, so retry, cooldown, and contact limits count real attempts. It also enforces <code>StopRule</code> and <code>ConsentCheck</code>.</li>
+      <li><strong>Financials are exact.</strong> <code>Money</code> is a <code>Decimal</code>; the ORM column is <code>Numeric(18,4)</code>; the default currency is INR. The recovered amount comes only from <code>RecoveryOutcome</code>, clamped to <code>[0, amount]</code>.</li>
+      <li><strong>Leakage and dataset&ndash;model isolation.</strong> <code>DatasetValidator.detect_leakage</code>, the minimum-information contract, and a predictor that loads only a model whose metadata <code>dataset_id</code> matches exactly.</li>
+      <li><strong>Migrations own the Postgres schema.</strong> <code>create_all</code> runs only for SQLite.</li>
+      <li><strong>Authentication.</strong> <code>verify_api_key</code> guards every mutating route.</li>
+    </ul>
+  </section>
+
+  <section id="s6">
+    <h2><span class="s">6</span>Capabilities</h2>
+    <figure>
+      <figcaption><b>Table 2.</b> What the system does today.</figcaption>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>Area</th><th>Delivered</th></tr></thead>
+        <tbody>
+          <tr><td>Case correlation, lifecycle, state machine</td><td><span class="st"><b>yes</b></span></td></tr>
+          <tr><td>Risk, diagnosis, recommendation, ERV engines</td><td><span class="st"><b>yes</b> &mdash; deterministic rules</span></td></tr>
+          <tr><td>Policy engine, safety gate, ledger-backed context</td><td><span class="st"><b>yes</b></span></td></tr>
+          <tr><td>Independent settlement verification</td><td><span class="st"><b>yes</b></span></td></tr>
+          <tr><td>Audit trail (<code>audit_records</code>)</td><td><span class="st"><b>yes</b></span></td></tr>
+          <tr><td>Dataset ingest, mapping, quality and leakage checks, readiness</td><td><span class="st"><b>yes</b></span></td></tr>
+          <tr><td>Per-dataset model training and scoring on real data</td><td><span class="st"><b>yes</b> &mdash; advisory telemetry</span></td></tr>
+          <tr><td>Ten-step guided workflow</td><td><span class="st"><b>yes</b></span></td></tr>
+          <tr><td>Gated Insights aggregation report</td><td><span class="st"><b>yes</b></span></td></tr>
+          <tr><td>Fully offline operation, Indian rupees</td><td><span class="st"><b>yes</b></span></td></tr>
+          <tr><td>Docker Compose, CI, request-id logging</td><td><span class="st"><b>yes</b></span></td></tr>
+        </tbody>
+      </table></div>
+    </figure>
+  </section>
+
+  <section id="s7">
+    <h2><span class="s">7</span>Machine learning</h2>
+    <p>The machine-learning subsystem trains on real uploaded data and runs as advisory telemetry.</p>
+    <ul>
+      <li><strong>Readiness gate</strong> (<code>ml_readiness.py</code>). Derives the target, the feature columns, and the excluded columns &mdash; identifier, constant, post-outcome leak, high cardinality &mdash; along with the temporal split strategy and class balance from the mapped dataset.</li>
+      <li><strong>Training</strong> (<code>ml_training.py</code>). A scikit-learn <code>Pipeline</code>. A <code>_coerce_frame</code> step turns number-like and date-like text columns into numeric and epoch values <em>at fit and predict time</em>, so a real file transforms identically when served. Then impute, scale, and one-hot with <code>handle_unknown="ignore"</code>; logistic-regression and XGBoost candidates, calibrated on the validation fold; a chronological split on the real date column, with a stratified fallback &mdash; flagged in metadata &mdash; when there is no usable date.</li>
+      <li><strong>Quality gate.</strong> ROC-AUC &ge; 0.55 always applies, falling back to validation ROC when the test fold is single-class. <code>ML_ADAPTIVE_GATE</code> (default on) scales the row floor down to 15 for smaller real datasets. A model that clears the bar is served; one that does not stays registered for inspection while the pipeline uses the deterministic baseline.</li>
+      <li><strong>Auto-train.</strong> <code>generate-cases</code> trains a per-dataset model &mdash; rows &ge; 20, readiness ready, a strict 0.55 bar &mdash; before replaying rows, and feeds the predictor the actual source row and real timestamp.</li>
+      <li><strong>Serving.</strong> Recovery probability is <code>1 &minus; failure_risk</code>; it feeds the ERV and ranking.</li>
+    </ul>
+    <p class="note">Observed: a 140-row engineered dataset auto-trains an XGBoost model (ROC &asymp; 1.0) that then scores its cases from the trained model, while noisier small datasets are served by the deterministic baseline.</p>
+  </section>
+
+  <section id="s8">
+    <h2><span class="s">8</span>Development history</h2>
+    <p>Twenty-three commits, in three phases.</p>
+
+    <h3><span class="s">8.1</span>Foundations</h3>
+    <ul class="hist">
+      <li><span class="sha">87e0464</span>baseline after fixing the dependency manifests</li>
+      <li><span class="sha">3c48888</span>Alembic builds the schema from an empty database</li>
+      <li><span class="sha">a2a9aec</span>isolated pytest database; fixed a <code>/system/policy</code> crash</li>
+      <li><span class="sha">8c0a4a5</span>made the live case loop flow end to end</li>
+      <li><span class="sha">1da686f</span>ledger-backed policy, real idempotency, honest verification</li>
+      <li><span class="sha">be94ade</span>ML training quality gate and model card</li>
+      <li><span class="sha">283f079</span>auth on the pipeline, request logging, N+1 fix, Docker, CI</li>
+    </ul>
+
+    <h3><span class="s">8.2</span>Product and UX</h3>
+    <ul class="hist">
+      <li><span class="sha">6ec8cd0</span>real styling and a corrected case-detail data contract</li>
+      <li><span class="sha">5dbc74e</span>remove every runtime external dependency &mdash; fully offline</li>
+      <li><span class="sha">25aad21</span>fix dataset upload for repeated filenames</li>
+      <li><span class="sha">8431066</span>restructure the frontend as one plain-language flow; make the wizard work</li>
+      <li><span class="sha">d581a5b</span>redesign as a single-step guided workflow</li>
+      <li><span class="sha">19569c2</span>3D and GSAP motion layer</li>
+      <li><span class="sha">9d93e82</span>two models &mdash; guided workflow and a gated Insights report</li>
+      <li><span class="sha">1cfc922</span>reconstruct Step 05 into a real pipeline-wiring view</li>
+    </ul>
+
+    <h3><span class="s">8.3</span>This iteration</h3>
+    <ul class="hist">
+      <li><span class="sha">c87c158</span>rupee (INR) currency throughout &mdash; <code>Money</code>, ORM, schema, and pipeline defaults, plus <code>en-IN</code> grouping and &#8377; on the frontend</li>
+      <li><span class="sha">c87c158</span>merge the Recovery-decision and Policy-check steps into one &ldquo;Decision &amp; policy&rdquo; step; relabel &ldquo;Send to a person to decide&rdquo; as &ldquo;Needs human review&rdquo;</li>
+      <li><span class="sha">c87c158</span>machine learning that trains on and scores real uploaded data: text and date coercion in the served pipeline, a stratified split fallback, an adaptive quality gate, auto-train in <code>generate-cases</code>, real row features to the model</li>
+      <li><span class="sha">6fff8c3</span>build the model predictor once per <code>generate-cases</code> request; give Step 06 an honest processing state</li>
+    </ul>
+  </section>
+
+  <section id="s9">
+    <h2><span class="s">9</span>Performance improvement</h2>
+    <p>Case generation constructed a fresh predictor on every row of <code>generate-cases</code>, each construction scanning the model registry and loading the pipeline from disk.</p>
+    <p><code>predict_recovery_for_case(case, dataset_id=None, predictor=None)</code> now takes an optional pre-built predictor; <code>CasePipelineService.predict</code> and <code>.advance</code> thread it through; <code>generate_cases</code> builds <strong>one</strong> predictor and reuses it for every row. The public API is unchanged &mdash; all new parameters are optional. Step 06 now shows an honest <code>&ldquo;Generating recovery cases&hellip;&rdquo;</code> processing state.</p>
+    <figure>
+      <figcaption><b>Table 3.</b> Before and after, on a 77-case run against the real 380-model registry.</figcaption>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th></th><th class="n">Predictor initialisations</th><th class="n">Endpoint time</th></tr></thead>
+        <tbody>
+          <tr><td>Before</td><td class="n">78</td><td class="n">3.23 s</td></tr>
+          <tr><td>After</td><td class="n">1</td><td class="n">2.65 s</td></tr>
+        </tbody>
+      </table></div>
+    </figure>
+    <p>The per-row model load &mdash; roughly 130&nbsp;ms each when a model exists &mdash; is now paid once, and the saving scales with row count and registry size. A new regression test, <code>test_generate_cases_predictor_reuse.py</code>, asserts one predictor construction per request and no duplicate cases.</p>
+  </section>
+
+  <section id="s10">
+    <h2><span class="s">10</span>Current state</h2>
+    <ul>
+      <li><strong>Backend.</strong> 205 tests pass. Run from <code>backend/</code> with <code>PYTHONPATH=.</code> on <code>backend/venv</code>.</li>
+      <li><strong>Frontend.</strong> <code>npm run build</code> is clean: the main bundle is about 307&nbsp;kB (102&nbsp;kB gzipped); the Three.js <code>Backdrop</code> chunk is about 858&nbsp;kB (236&nbsp;kB gzipped) and is lazy-loaded.</li>
+      <li><strong>Demo data</strong> (<code>backend/demo.db</code>). 33 datasets, roughly 684 cases, INR throughout, with trained models wherever a signal clears ROC 0.55.</li>
+      <li><strong>System health.</strong> <code>ml_subsystem: SHADOW_ONLY / ADVISORY_TELEMETRY_ONLY</code>; <code>policy_engine: DETERMINISTIC_AUTHORITY / gate ENFORCED</code>; <code>execution_engine: MockExecutionAdapter</code>.</li>
+    </ul>
+  </section>
+
+  <section id="sa">
+    <h2>Appendix A.&nbsp; Commands and configuration</h2>
+<pre><span class="c"># full stack &mdash; backend :8000 + frontend :5173 (SQLite)</span>
+python run.py
+
+<span class="c"># backend</span>
+cd backend &amp;&amp; PYTHONPATH=. uvicorn api.main:app --reload
+cd backend &amp;&amp; PYTHONPATH=. pytest                <span class="c"># 205 tests</span>
+cd backend &amp;&amp; PYTHONPATH=. alembic upgrade head   <span class="c"># Postgres only</span>
+
+<span class="c"># frontend</span>
+cd frontend &amp;&amp; npm install &amp;&amp; npm run dev
+cd frontend &amp;&amp; npm run build
+
+<span class="c"># containers</span>
+docker-compose up --build</pre>
+    <figure>
+      <figcaption><b>Table 4.</b> Environment variables.</figcaption>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>Variable</th><th>Default</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>DATABASE_URL</code></td><td><code>postgresql://&hellip;</code></td><td><code>sqlite:///./x.db</code> for local</td></tr>
+          <tr><td><code>API_KEY</code></td><td><code>test-api-key</code></td><td><code>X-API-Key</code> on mutating routes</td></tr>
+          <tr><td><code>ML_MIN_ROC_AUC</code> / <code>ML_MIN_TEST_ROWS</code></td><td><code>0.55</code> / <code>200</code></td><td>training quality gate; <code>0</code> disables</td></tr>
+          <tr><td><code>ML_ADAPTIVE_GATE</code></td><td><code>1</code></td><td>scale the row floor down for small datasets</td></tr>
+          <tr><td><code>REDIS_URL</code></td><td><code>redis://localhost:6379/0</code></td><td>only <code>/health</code> uses it; optional</td></tr>
+        </tbody>
+      </table></div>
+    </figure>
+  </section>
+
+  <footer>
+    C:\Users\kalyaanasundar.a\Downloads\Recovery Chain<br>
+    master @ 6fff8c3 &nbsp;·&nbsp; report generated 2026-08-31
+  </footer>
+
+</article>

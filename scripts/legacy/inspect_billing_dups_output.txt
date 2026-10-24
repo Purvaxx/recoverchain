@@ -1,0 +1,51 @@
+﻿Sample duplicated subscriber-months:
+
+--- SUB0000001, 2026-01 ---
+  subscriber_id year_month  base_charge_usd  data_overage_usd  intl_roaming_usd  tax_usd  late_fee_usd  total_billed_usd payment_status  days_to_payment
+4    SUB0000001    2026-01            61.99               0.0               0.0     5.27             0             67.26   Paid On Time                0
+5    SUB0000001    2026-01            61.99               0.0               0.0     5.27             0             67.26   Paid On Time                0
+  Exact duplicate: True
+
+--- SUB0000001, 2026-05 ---
+  subscriber_id year_month  base_charge_usd  data_overage_usd  intl_roaming_usd  tax_usd  late_fee_usd  total_billed_usd payment_status  days_to_payment
+0    SUB0000001    2026-05            61.99               0.0               0.0     5.27            15             82.26   Paid On Time                0
+1    SUB0000001    2026-05            61.99               0.0               0.0     5.27             0             67.26   Paid On Time                0
+  Exact duplicate: False
+  Differs on: late_fee_usd -> 15 vs 0
+  Differs on: total_billed_usd -> 82.26 vs 67.26
+
+--- SUB0000002, 2026-05 ---
+  subscriber_id year_month  base_charge_usd  data_overage_usd  intl_roaming_usd  tax_usd  late_fee_usd  total_billed_usd payment_status  days_to_payment
+8    SUB0000002    2026-05            26.91               0.0               0.0     2.29             0              29.2   Paid On Time                0
+9    SUB0000002    2026-05            26.91               0.0               0.0     2.29             0              29.2   Paid On Time                0
+  Exact duplicate: True
+
+--- SUB0000003, 2026-01 ---
+   subscriber_id year_month  base_charge_usd  data_overage_usd  intl_roaming_usd  tax_usd  late_fee_usd  total_billed_usd payment_status  days_to_payment
+16    SUB0000003    2026-01            51.43               0.0              0.00     4.37             0             55.80   Paid On Time                0
+17    SUB0000003    2026-01            51.43               0.0             19.76     4.37             0             75.56   Paid On Time                0
+  Exact duplicate: False
+  Differs on: intl_roaming_usd -> 0.0 vs 19.76
+  Differs on: total_billed_usd -> 55.8 vs 75.56
+
+--- SUB0000003, 2026-05 ---
+   subscriber_id year_month  base_charge_usd  data_overage_usd  intl_roaming_usd  tax_usd  late_fee_usd  total_billed_usd payment_status  days_to_payment
+12    SUB0000003    2026-05            51.43               0.0               0.0     4.37             0              55.8   Paid On Time                0
+13    SUB0000003    2026-05            51.43               0.0               0.0     4.37             0              55.8   Paid On Time                0
+  Exact duplicate: True
+
+
+Exact row duplicates in first 500k: 90996
+Rows that are first occurrence of a duplicate: 45498
+
+
+Checking if duplicates have different payment statuses:
+  SUB0000001 2026-05: statuses=['Paid On Time', 'Paid On Time'], late_fees=[15, 0], totals=[82.26, 67.26]
+  SUB0000007 2026-05: statuses=['Paid On Time', 'Paid On Time'], late_fees=[15, 0], totals=[86.41, 71.41]
+  SUB0000011 2026-05: statuses=['Failed', 'Paid On Time'], late_fees=[0, 0], totals=[102.49, 102.49]
+
+
+Year-month values present:
+['2025-07', '2025-08', '2025-09', '2025-10', '2025-11', '2025-12', '2026-01', '2026-03', '2026-04', '2026-05']
+
+DONE

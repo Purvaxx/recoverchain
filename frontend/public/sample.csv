@@ -1,0 +1,16 @@
+customer_id,amount,invoice_date,status,reason
+acme_co,240.00,2026-08-20,failed,insufficient_funds
+globex,9800.00,2026-08-21,failed,network_error
+initech,1500.00,2026-08-22,failed,insufficient_funds
+umbrella,49.00,2026-08-23,failed,expired_card
+hooli,320.00,2026-08-24,failed,network_error
+wonka,760.00,2026-08-25,failed,insufficient_funds
+stark_industries,4200.00,2026-08-26,failed,expired_card
+soylent,180.00,2026-08-26,paid,
+massive_dynamic,2600.00,2026-08-27,failed,network_error
+cyberdyne,88.50,2026-08-27,failed,insufficient_funds
+tyrell,15000.00,2026-08-28,failed,insufficient_funds
+oscorp,540.00,2026-08-28,paid,
+wayne_enter,3300.00,2026-08-29,failed,network_error
+gekko_co,410.00,2026-08-29,failed,insufficient_funds
+duff_beer,72.00,2026-08-30,failed,expired_card

@@ -1,0 +1,46 @@
+{
+  "dataset_version": "recoverchain-ar-recovery-v2",
+  "source_file": "dataset/WA_Fn-UseC_-Accounts-Receivable.csv",
+  "source_sha256": "651bc4225708bf33148a0e177c9221afdf697d3a4de10333725a4af3dd022fcf",
+  "provenance": "UNKNOWN \u2014 IBM Watson Analytics sample dataset",
+  "training_unit": "invoice",
+  "unit_identifier": "invoiceNumber",
+  "target_column": "target_late",
+  "target_definition": "1 = DaysLate > 0; 0 = DaysLate == 0",
+  "target_caveat": "ALL invoices settled. Models late-settlement RISK, not non-recovery.",
+  "row_count": 2466,
+  "features": [
+    "InvoiceAmount",
+    "countryCode",
+    "is_disputed",
+    "invoice_seq",
+    "prior_late_count",
+    "prior_invoice_count",
+    "prior_late_rate",
+    "prior_avg_amount",
+    "prior_disputes",
+    "is_paperless"
+  ],
+  "dropped_features_v2": {
+    "payment_window_days": "Constant (30) \u2014 zero variance"
+  },
+  "ambiguous_features": {
+    "is_disputed": "May be filed after late payment \u2014 cannot determine causal direction"
+  },
+  "excluded_leakage": [
+    "DaysToSettle",
+    "DaysLate",
+    "SettledDate"
+  ],
+  "class_distribution": {
+    "late": 877,
+    "on_time": 1589,
+    "late_rate": 0.3556
+  },
+  "temporal_split": {
+    "train": "2012-01-03 to 2013-03-31",
+    "validation": "2013-04-01 to 2013-07-31",
+    "test": "2013-08-01 to 2013-12-02"
+  },
+  "provenance_status": "UNKNOWN"
+}

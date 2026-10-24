@@ -1,0 +1,65 @@
+{
+  "dataset_version": "recoverchain-ar-recovery-v1",
+  "source_file": "dataset/WA_Fn-UseC_-Accounts-Receivable.csv",
+  "provenance": "UNKNOWN \u2014 IBM Watson Analytics sample dataset. Widely used for educational purposes. Not verified as real merchant data.",
+  "description": "Enterprise accounts receivable invoices with settlement information. Each row = one invoice.",
+  "training_unit": "invoice",
+  "unit_identifier": "invoiceNumber",
+  "deduplication_rule": "invoiceNumber is unique (verified: 2466 unique values, 2466 rows). No deduplication needed.",
+  "target_column": "target_late",
+  "target_definition": "1 = invoice was settled LATE (DaysLate > 0); 0 = invoice was settled ON TIME (DaysLate == 0)",
+  "target_caveat": "ALL invoices in this dataset were eventually settled. There are ZERO write-offs or permanent non-payments. The target represents LATE settlement risk, NOT absolute non-recovery.",
+  "positive_class": "1 (late settlement = at-risk)",
+  "negative_class": "0 (on-time settlement = not at risk)",
+  "row_count": 2466,
+  "feature_count": 11,
+  "features": [
+    "InvoiceAmount",
+    "countryCode",
+    "is_disputed",
+    "payment_window_days",
+    "invoice_seq",
+    "prior_late_count",
+    "prior_invoice_count",
+    "prior_late_rate",
+    "prior_avg_amount",
+    "prior_disputes",
+    "is_paperless"
+  ],
+  "excluded_leakage_columns": [
+    "DaysToSettle (only known after settlement)",
+    "DaysLate (used to define target, not a feature)",
+    "SettledDate (only known after settlement)"
+  ],
+  "timestamp_range": {
+    "min": "2012-01-03",
+    "max": "2013-12-02"
+  },
+  "temporal_split": {
+    "train": "2012-01-03 to 2013-03-31",
+    "validation": "2013-04-01 to 2013-07-31",
+    "test": "2013-08-01 to 2013-12-02"
+  },
+  "class_distribution": {
+    "late": 877,
+    "on_time": 1589,
+    "late_rate": 0.3556
+  },
+  "preprocessing": [
+    "No deduplication needed (invoiceNumber is unique)",
+    "Parsed dates and computed payment_window_days",
+    "Encoded PaperlessBill as binary is_paperless",
+    "Encoded Disputed as binary is_disputed",
+    "Constructed temporal history features using strictly prior invoices",
+    "Filled NaN history features with -1 for first-invoice customers"
+  ],
+  "limitations": [
+    "Only 2,466 rows \u2014 very small for ML",
+    "Only 100 unique customers",
+    "ALL invoices settled \u2014 cannot model absolute non-recovery",
+    "Target is late-settlement proxy, not true recovery/non-recovery",
+    "Provenance UNKNOWN \u2014 IBM Watson sample, not verified real-world data",
+    "Date range is 2012-2013 \u2014 old data"
+  ],
+  "provenance_status": "UNKNOWN"
+}

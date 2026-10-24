@@ -1,0 +1,70 @@
+﻿python : C:\Users\kalyaanasundar.a\Downloads\Recovery Chain\backend\venv\Lib\site-packages\xgboost\callback.py:385: 
+UserWarning: [19:48:41] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:825: `booster=gblinear` is 
+deprecated and support will be removed in a future release.
+At line:1 char:34
++ .\backend\venv\Scripts\activate; python phase17_train.py 2>&1 | Out-F ...
++                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C:\Users\kalyaa...future release.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  self.starting_round = model.num_boosted_rounds()
+C:\Users\kalyaanasundar.a\Downloads\Recovery Chain\backend\venv\Lib\site-packages\xgboost\core.py:569: UserWarning: 
+[19:48:42] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:825: `booster=gblinear` is deprecated and 
+support will be removed in a future release.
+  return func(**kwargs)
+Loading dataset...
+
+Temporal Split Distribution (Target = Payment Failure Risk):
+TRAIN: 1872859 rows | Failures (pos): 89575 (4.78%) | Successes (neg): 1783284 (95.22%)
+VALIDATION: 798766 rows | Failures (pos): 54489 (6.82%) | Successes (neg): 744277 (93.18%)
+TEST: 930267 rows | Failures (pos): 64944 (6.98%) | Successes (neg): 865323 (93.02%)
+
+Training models...
+
+Using threshold 0.0538 for Confusion Matrix (Top 10% predicted risk on Test)
+
+Model Evaluation (Test Set):
+
+--- Majority Baseline ---
+PR-AUC:    0.0698
+ROC-AUC:   0.0000
+Brier:     0.0654
+
+--- Logistic Regression (gblinear) ---
+PR-AUC:    0.0837
+ROC-AUC:   0.5448
+Brier:     0.0653
+Precision: 0.0850
+Recall:    0.2157
+F1:        0.1219
+Confusion: TP=14006 FP=150770 TN=714553 FN=50938
+
+--- Tree Model (gbtree) ---
+PR-AUC:    0.0811
+ROC-AUC:   0.5464
+Brier:     0.0654
+Precision: 0.0890
+Recall:    0.1278
+F1:        0.1049
+Confusion: TP=8300 FP=84988 TN=780335 FN=56644
+
+Feature Importance (Tree Model):
+  prior_late: 70.83
+  prior_late_rate: 36.76
+  prior_nonrecovery_count: 14.44
+  prior_ontime: 14.43
+  prior_nonrecovery_rate: 13.51
+  bill_seq: 6.13
+  prior_failures: 5.46
+  prior_unpaid: 5.24
+  bill_amount_excl_late: 4.81
+  prior_avg_amount: 4.62
+  base_charge_usd: 4.60
+  intl_roaming_usd: 4.58
+  data_overage_usd: 4.55
+  tax_usd: 4.28
+  has_roaming: 4.07
+  has_overage: 3.58
+
+Saved model artifacts.
+DONE.

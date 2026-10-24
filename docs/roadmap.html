@@ -1,0 +1,461 @@
+<title>RecoverChain Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --bg: #f3f6f5;
+    --surface: #fbfcfc;
+    --surface-2: #e8eeec;
+    --ink: #16201e;
+    --muted: #55625e;
+    --faint: #86908a;
+    --line: #d7dfdc;
+    --accent: #1f7a74;
+    --accent-ink: #145f5a;
+    --accent-soft: #e3efee;
+    --track: #7a8f8a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1513;
+      --surface: #141d1a;
+      --surface-2: #1b2521;
+      --ink: #e6edea;
+      --muted: #9aa8a2;
+      --faint: #63716b;
+      --line: #26302c;
+      --accent: #4db3aa;
+      --accent-ink: #82d0c8;
+      --accent-soft: #17271f;
+      --track: #7e938d;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1513;
+    --surface: #141d1a;
+    --surface-2: #1b2521;
+    --ink: #e6edea;
+    --muted: #9aa8a2;
+    --faint: #63716b;
+    --line: #26302c;
+    --accent: #4db3aa;
+    --accent-ink: #82d0c8;
+    --accent-soft: #17271f;
+    --track: #7e938d;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 4rem 1.4rem 6rem;
+    animation: rise .45s ease both;
+  }
+  @media (prefers-reduced-motion: reduce) { .wrap { animation: none; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+
+  /* masthead */
+  header.top { border-bottom: 2px solid var(--ink); padding-bottom: 1.4rem; margin-bottom: 2.6rem; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 1rem;
+  }
+  h1 {
+    font-family: "Bricolage Grotesque", "IBM Plex Sans", sans-serif;
+    font-weight: 700; font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.05;
+    letter-spacing: -.02em; margin: 0 0 .7rem; text-wrap: balance;
+  }
+  .sub { color: var(--muted); max-width: 46ch; margin: 0 0 1.2rem; }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: .35rem 1.4rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .74rem; color: var(--faint);
+  }
+  .meta b { color: var(--muted); font-weight: 500; }
+
+  /* dependency line */
+  .deps {
+    margin: 2.4rem 0 0;
+    padding: .9rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .8rem;
+    color: var(--muted);
+    overflow-x: auto;
+  }
+  .deps .k { color: var(--accent-ink); font-weight: 500; }
+  .deps .lbl { color: var(--faint); }
+
+  /* recommended */
+  .rec {
+    margin: 1.4rem 0 0;
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    padding: .85rem 1.1rem;
+    border-radius: 0 8px 8px 0;
+    font-size: .93rem;
+  }
+  .rec b { color: var(--accent-ink); }
+
+  /* track band */
+  .track { margin-top: 3.2rem; }
+  .track-head {
+    display: flex; align-items: baseline; gap: .8rem;
+    padding-bottom: .5rem; border-bottom: 1px solid var(--line); margin-bottom: 1.4rem;
+  }
+  .track-head .n {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--track);
+  }
+  .track-head h2 {
+    font-family: "Bricolage Grotesque", "IBM Plex Sans", sans-serif;
+    font-weight: 600; font-size: 1.15rem; margin: 0; letter-spacing: -.01em;
+  }
+  .track-head .aside { margin-left: auto; font-size: .8rem; color: var(--faint); }
+
+  /* milestone card */
+  .ms {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    padding: 1.15rem 1.25rem 1.25rem;
+    margin-bottom: 1.1rem;
+  }
+  .ms-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .55rem .8rem; }
+  .ms-id {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-weight: 500; font-size: .82rem; color: var(--accent);
+    border: 1px solid var(--accent); border-radius: 5px; padding: .05rem .4rem;
+  }
+  .ms-title {
+    font-family: "Bricolage Grotesque", "IBM Plex Sans", sans-serif;
+    font-weight: 600; font-size: 1.12rem; letter-spacing: -.01em;
+  }
+  .chip {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .64rem; letter-spacing: .08em; text-transform: uppercase;
+    padding: .12rem .45rem; border-radius: 999px; border: 1px solid var(--line); color: var(--muted);
+  }
+  .chip.s { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+  .chip.m { background: color-mix(in srgb, var(--accent) 16%, transparent); border-color: color-mix(in srgb, var(--accent) 30%, var(--line)); }
+  .chip.l { background: color-mix(in srgb, var(--accent) 26%, transparent); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); color: var(--ink); }
+  .chip.flag { color: var(--accent-ink); border-color: var(--accent); }
+  .goal { margin: .55rem 0 .2rem; color: var(--muted); font-size: .92rem; }
+  .dep { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .74rem; color: var(--faint); margin-top: .3rem; }
+
+  ul.items { list-style: none; margin: .8rem 0 0; padding: 0; }
+  ul.items li {
+    display: grid; grid-template-columns: 1fr; gap: .1rem;
+    padding: .55rem 0; border-top: 1px solid var(--line); font-size: .9rem;
+  }
+  ul.items li:first-child { border-top: 0; }
+  .it-name { font-weight: 600; }
+  .it-name code {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .82em;
+    background: var(--surface-2); padding: .05em .35em; border-radius: 4px; font-weight: 400;
+  }
+  .it-why { color: var(--muted); }
+
+  footer {
+    margin-top: 3.4rem; padding-top: 1.2rem; border-top: 1px solid var(--line);
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .72rem;
+    color: var(--faint); text-align: center;
+  }
+  a { color: var(--accent-ink); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+  @media print {
+    :root {
+      --bg: #fff; --surface: #fff; --surface-2: #f1f4f3; --ink: #14201d;
+      --muted: #45514d; --faint: #6b756f; --line: #cdd6d3; --accent: #1a6560; --accent-ink: #124d49;
+    }
+    body { font-size: 10.5pt; line-height: 1.5; }
+    .wrap { max-width: none; padding: 0; animation: none; }
+    @page { margin: 16mm 15mm; }
+    .ms, .track, .deps, .rec { break-inside: avoid; }
+    .track-head h2, .ms-head { break-after: avoid; }
+    a { color: var(--ink); text-decoration: none; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <p class="eyebrow">Product Roadmap</p>
+    <h1>RecoverChain Roadmap</h1>
+    <p class="sub">Twenty improvements grouped into eight milestones across three tracks — from one-line fixes to a relational-model rework.</p>
+    <div class="meta">
+      <span><b>Snapshot</b> 2026-08-31</span>
+      <span><b>Milestones</b> 8</span>
+      <span><b>Tracks</b> near-term · structural · production</span>
+      <span><b>Baseline</b> master @ dac1317</span>
+    </div>
+
+    <div class="deps">
+      <span class="lbl">sequence&nbsp;&nbsp;</span>
+      <span class="k">M1</span> <span class="k">M2</span> <span class="k">M3</span> <span class="k">M4</span>
+      <span class="lbl">&nbsp;(any order)&nbsp;→&nbsp;</span> <span class="k">M5</span>
+      <span class="lbl">&nbsp;→&nbsp;</span> { <span class="k">M6</span> , <span class="k">M7</span> }
+      <span class="lbl">&nbsp;→&nbsp;</span> <span class="k">M8</span>
+    </div>
+
+    <p class="rec">
+      <b>Start here:</b> the first two items of <b>M1</b> — Excel model training and per-row risk category.
+      The smallest change that makes the ML and the pipeline actually respond to the data you upload,
+      rather than treating every file as a generic failed payment scored by the baseline.
+    </p>
+  </header>
+
+  <!-- TRACK A -->
+  <section class="track">
+    <div class="track-head">
+      <span class="n">Track A</span>
+      <h2>Near-term</h2>
+      <span class="aside">independent · days each</span>
+    </div>
+
+    <article class="ms">
+      <div class="ms-head">
+        <span class="ms-id">M1</span>
+        <span class="ms-title">Data fidelity</span>
+        <span class="chip m">size&nbsp;M</span>
+        <span class="chip flag">recommended first</span>
+      </div>
+      <p class="goal">Goal — an uploaded subscription / invoice / checkout file drives the matching logic, and the model trains whatever the file format.</p>
+      <ul class="items">
+        <li>
+          <span class="it-name">Excel model training</span>
+          <span class="it-why"><code>MLTrainingEngine</code> in <code>application/ml_training.py</code> hardcodes <code>pd.read_csv</code>. Branch on extension. Today every <code>.xlsx</code> dataset silently falls back to the deterministic baseline — no model ever trains.</span>
+        </li>
+        <li>
+          <span class="it-name">Per-row risk category</span>
+          <span class="it-why"><code>generate_cases</code> in <code>api/dataset_router.py</code> hardcodes <code>RiskCategory.FAILED_PAYMENT</code>. Read an event-type column. Unlocks the checkout / subscription / invoice branches that already exist in the risk, diagnosis, and recommendation engines but are never reached from data.</span>
+        </li>
+        <li>
+          <span class="it-name">raw_payload type sanitisation</span>
+          <span class="it-why">Coerce <code>Timestamp</code> / <code>Decimal</code> / numpy scalars to primitives before storing. A real datetime cell currently returns a 500 from <code>generate-cases</code>.</span>
+        </li>
+        <li>
+          <span class="it-name">Receivables diagnosis vocabulary</span>
+          <span class="it-why">Map <code>net_terms_pending</code>, <code>dispute</code>, <code>awaiting_approval</code>, <code>bank_rejected</code> onto the existing <code>MISSED_COMMITMENT</code> / <code>UNRESOLVED_DISPUTE</code> / <code>MANDATE_FAILURE</code> causes. Invoice datasets are ~65% "cause unclear" today.</span>
+        </li>
+        <li>
+          <span class="it-name">Configurable currency</span>
+          <span class="it-why">Replace the hardcoded <code>INR</code> — read from a <code>currency</code> column or an env var.</span>
+        </li>
+      </ul>
+    </article>
+
+    <article class="ms">
+      <div class="ms-head">
+        <span class="ms-id">M2</span>
+        <span class="ms-title">Trust &amp; explainability</span>
+        <span class="chip m">size&nbsp;M</span>
+      </div>
+      <p class="goal">Goal — a user can explain every result and take the output elsewhere.</p>
+      <ul class="items">
+        <li>
+          <span class="it-name">LLM narrator in the pipeline</span>
+          <span class="it-why">Behind <code>GEMINI_API_KEY</code>, off by default so the app stays offline. Today only <code>evaluation/</code> uses the LLM hook; the "plain words" lines on each step are deterministic templates.</span>
+        </li>
+        <li>
+          <span class="it-name">Export</span>
+          <span class="it-why">Download cases and outcomes as CSV / XLSX from the Insights report.</span>
+        </li>
+        <li>
+          <span class="it-name">Insights depth</span>
+          <span class="it-why">Per-dataset breakdown and a trend over time, not just an all-time roll-up.</span>
+        </li>
+      </ul>
+    </article>
+
+    <article class="ms">
+      <div class="ms-head">
+        <span class="ms-id">M3</span>
+        <span class="ms-title">Workflow robustness</span>
+        <span class="chip s">size&nbsp;S–M</span>
+      </div>
+      <p class="goal">Goal — the guided run survives a refresh, scales, and lets you explore.</p>
+      <ul class="items">
+        <li>
+          <span class="it-name">Persist run state</span>
+          <span class="it-why">Keep the workflow context across navigation and refresh. Today a refresh restarts at Step 1.</span>
+        </li>
+        <li>
+          <span class="it-name">Step 7 case picker</span>
+          <span class="it-why">Browse the other generated cases, not only the highest-value one.</span>
+        </li>
+        <li>
+          <span class="it-name">Background case generation</span>
+          <span class="it-why">Make <code>generate-cases</code> a tracked job with progress. Auto-train and commits are already batched; execute + verify still run inline per row.</span>
+        </li>
+        <li>
+          <span class="it-name">Registry housekeeping</span>
+          <span class="it-why">Sweep orphaned model files (test leftovers). The current prune covers datasets only.</span>
+        </li>
+      </ul>
+    </article>
+
+    <article class="ms">
+      <div class="ms-head">
+        <span class="ms-id">M4</span>
+        <span class="ms-title">Test &amp; quality coverage</span>
+        <span class="chip m">size&nbsp;M</span>
+      </div>
+      <p class="goal">Goal — the frontend stops being a blind spot.</p>
+      <ul class="items">
+        <li>
+          <span class="it-name">Frontend tests</span>
+          <span class="it-why">The 10-step workflow, the column-mapping logic, <code>computeInsights</code>. There are none today.</span>
+        </li>
+        <li>
+          <span class="it-name">Backend gaps</span>
+          <span class="it-why">Correlation edge cases, prune, the <code>.xlsx</code> read paths.</span>
+        </li>
+        <li>
+          <span class="it-name">CI runs both suites</span>
+          <span class="it-why">Frontend build + tests alongside the 205 backend tests.</span>
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- TRACK B -->
+  <section class="track">
+    <div class="track-head">
+      <span class="n">Track B</span>
+      <h2>Structural</h2>
+      <span class="aside">the "real system" work · multi-day</span>
+    </div>
+
+    <article class="ms">
+      <div class="ms-head">
+        <span class="ms-id">M5</span>
+        <span class="ms-title">First-class domain model</span>
+        <span class="chip l">size&nbsp;L</span>
+        <span class="chip flag">the milestone</span>
+      </div>
+      <p class="goal">Goal — a relational model instead of JSON blobs.</p>
+      <ul class="items">
+        <li>
+          <span class="it-name">Entities</span>
+          <span class="it-why">Customer, Transaction / Payment, Invoice, Subscription, CheckoutSession, PromiseToPay as modelled objects.</span>
+        </li>
+        <li>
+          <span class="it-name">Entity resolution + shared reference_id</span>
+          <span class="it-why">So related events correlate — a retry of the same invoice becomes one case, not two.</span>
+        </li>
+        <li>
+          <span class="it-name">Migrate queryable sub-objects out of JSON columns</span>
+          <span class="it-why">The lifecycle stages that need filtering / aggregation move into real tables.</span>
+        </li>
+      </ul>
+      <p class="dep">blocks → M6, M7</p>
+    </article>
+
+    <article class="ms">
+      <div class="ms-head">
+        <span class="ms-id">M6</span>
+        <span class="ms-title">Multi-file &amp; relationships</span>
+        <span class="chip l">size&nbsp;L</span>
+      </div>
+      <p class="goal">Goal — correlate across files, not one file per run.</p>
+      <ul class="items">
+        <li>
+          <span class="it-name">Dataset linking / joins</span>
+          <span class="it-why">Payments ↔ customers ↔ invoices on a shared key.</span>
+        </li>
+        <li>
+          <span class="it-name">Relationship detection in the Dataset Lab</span>
+          <span class="it-why">Suggest the join keys the way column mapping is suggested today.</span>
+        </li>
+        <li>
+          <span class="it-name">Step 5 becomes functional</span>
+          <span class="it-why">"Data connection" stops being a stated limitation.</span>
+        </li>
+      </ul>
+      <p class="dep">depends on → M5</p>
+    </article>
+  </section>
+
+  <!-- TRACK C -->
+  <section class="track">
+    <div class="track-head">
+      <span class="n">Track C</span>
+      <h2>Production</h2>
+      <span class="aside">engine → service</span>
+    </div>
+
+    <article class="ms">
+      <div class="ms-head">
+        <span class="ms-id">M7</span>
+        <span class="ms-title">Real execution</span>
+        <span class="chip l">size&nbsp;L</span>
+      </div>
+      <p class="goal">Goal — it recovers money instead of simulating it.</p>
+      <ul class="items">
+        <li>
+          <span class="it-name">Real payment adapter(s)</span>
+          <span class="it-why">Replace <code>MockExecutionAdapter</code> — e.g. Stripe, Razorpay — behind the same interface.</span>
+        </li>
+        <li>
+          <span class="it-name">Real comms adapter</span>
+          <span class="it-why">Email / SMS for the reminder and payment-link actions.</span>
+        </li>
+        <li>
+          <span class="it-name">Provider webhooks as settlement truth</span>
+          <span class="it-why">Replace the <code>SANDBOX_SIMULATION</code> verification source with real reconciliation.</span>
+        </li>
+      </ul>
+      <p class="dep">depends on → M5</p>
+    </article>
+
+    <article class="ms">
+      <div class="ms-head">
+        <span class="ms-id">M8</span>
+        <span class="ms-title">Multi-tenancy &amp; hardening</span>
+        <span class="chip l">size&nbsp;L</span>
+      </div>
+      <p class="goal">Goal — deployable as a service.</p>
+      <ul class="items">
+        <li>
+          <span class="it-name">Tenant isolation</span>
+          <span class="it-why">Data, models, and policy config separated per tenant.</span>
+        </li>
+        <li>
+          <span class="it-name">Per-tenant policy configuration</span>
+          <span class="it-why">Retry caps, cooldowns, thresholds, consent rules set per customer.</span>
+        </li>
+        <li>
+          <span class="it-name">Operational hardening</span>
+          <span class="it-why">Rate limiting, secrets management, production observability.</span>
+        </li>
+        <li>
+          <span class="it-name">Compliance</span>
+          <span class="it-why">Legal review, penetration test, billing.</span>
+        </li>
+      </ul>
+      <p class="dep">depends on → M5, M7</p>
+    </article>
+  </section>
+
+  <footer>
+    RecoverChain roadmap &nbsp;·&nbsp; 8 milestones &nbsp;·&nbsp; generated 2026-08-31
+  </footer>
+</div>
