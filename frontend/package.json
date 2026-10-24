@@ -12,7 +12,7 @@
     "format:check": "prettier --check src"
   },
   "dependencies": {
-    "@react-spring/three": "^9.7.5",
+    "@react-spring/three": "^10.1.2",
     "@react-three/fiber": "^8.17.10",
     "gsap": "^3.12.5",
     "lucide-react": "^1.38.0",
